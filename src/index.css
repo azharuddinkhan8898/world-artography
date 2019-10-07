@@ -1,0 +1,255 @@
+* {
+  border-radius: 0 !important;
+}
+input:focus {
+  outline: none;
+  box-shadow: none !important;
+}
+.btn-primary {
+  background: #4e73df;
+}
+.close-modal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 30px;
+}
+
+.close-modal:after,
+.close-modal:before {
+  content: "";
+  position: absolute;
+  border: 1px solid #cfcfcf;
+  height: 40px;
+  top: 10px;
+  right: 30px;
+}
+
+.close-modal:after {
+  transform: rotate(45deg);
+}
+
+.close-modal:before {
+  transform: rotate(-45deg);
+}
+body {
+  font-family: "Montserrat", sans-serif;
+  background-color: #111;
+}
+header {
+  padding: 0 15px;
+  border-bottom: 1px solid #fff;
+}
+nav.mb-1.navbar.navbar-expand-lg {
+  padding: 0;
+}
+.main-nav li {
+  display: block;
+  position: relative;
+}
+.main-nav li a {
+  color: #fff;
+  padding: 9px 20px;
+  text-transform: uppercase;
+  font-size: 12px;
+  display: block;
+  font-weight: 700;
+  background: url(/images/pixel-bg.jpg) 0 0 no-repeat;
+  margin: 0px 5px;
+  position: relative;
+  z-index: 999;
+  text-decoration: none;
+}
+.main-nav li a i {
+  font-size: 20px;
+}
+
+ul.main-nav li:nth-child(1) a {
+  background-position: 0 0;
+  padding: 8px 13px;
+}
+ul.main-nav li:nth-child(2) a {
+  background-position: 20% 0;
+}
+ul.main-nav li:nth-child(3) a {
+  background-position: 40% 0;
+}
+ul.main-nav li:nth-child(4) a {
+  background-position: 60% 0;
+}
+ul.main-nav li:nth-child(5) a {
+  background-position: 70% 0;
+}
+ul.main-nav li:nth-child(5) a {
+  background-position: 77% 0;
+}
+ul.main-nav li:nth-child(6) a {
+  background-position: right 0;
+}
+
+.img-thumb {
+  width: 67px;
+  height: 67px;
+  float: left;
+  background: url(/images/pixel-bg.jpg);
+  background-size: 860px;
+  border: 5px solid #111;
+  cursor: pointer;
+  display: block;
+}
+.register-text {
+  background: #4e73df url(/images/login-bg.jpg) center center no-repeat;
+  background-size: cover;
+  color: #fff;
+  padding-top: 50px;
+  height: 100%;
+  position: relative;
+}
+.register-creative {
+  background: #4e73df url(/images/register-bg.jpg) center center no-repeat;
+  background-size: cover;
+  color: #fff;
+  padding-top: 50px;
+  position: relative;
+}
+.register-text:after,
+.register-creative:after {
+  content: "";
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.register-text > *,
+.register-creative > * {
+  position: relative;
+  z-index: 9;
+}
+.register-text p {
+  line-height: 26px;
+}
+.modal h3 {
+  text-transform: uppercase;
+  font-size: 26px;
+  font-weight: 800;
+  margin: 40px 0 20px;
+}
+.modal-dialog {
+  position: absolute;
+  top: 50% !important;
+  transform: translate(0, -50%) !important;
+  -ms-transform: translate(0, -50%) !important;
+  -webkit-transform: translate(0, -50%) !important;
+  margin: auto 5%;
+  width: 90%;
+  height: 80%;
+}
+.modal-content {
+  min-height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.modal-body {
+  position: absolute;
+  top: 45px; /** height of header **/
+  bottom: 45px; /** height of footer **/
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+}
+.modal-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.modal .col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px;
+  height: 100%;
+}
+.btn {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 16px;
+  margin: 15px 0 30px;
+  padding: 15px 20px;
+}
+.form-control {
+  border-radius: 0 !important;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding-left: 0;
+  display: block;
+  box-shadow: none;
+}
+figcaption {
+  display: none;
+}
+.modal .form-group {
+  margin: 30px 0;
+}
+
+.client-list {
+  text-align: center;
+  list-style-type: none;
+  display: inline-block;
+}
+.client-list li {
+  display: inline-block;
+  margin: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 15px;
+}
+.info-lines {
+  padding: 10px 30px;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  color: #fff;
+  line-height: 18px;
+}
+.client {
+  border-top: 1px solid #fff;
+  padding-top: 10px;
+}
+.form-group {
+  position: relative;
+  margin: 40px 0 30px;
+}
+label {
+  font-weight: 500;
+}
+.form-control-placeholder {
+  position: absolute;
+  top: 0;
+  padding: 7px 0 0 0;
+  transition: all 200ms;
+  opacity: 0.5;
+}
+
+.form-control:focus + .form-control-placeholder,
+.form-control:valid + .form-control-placeholder {
+  font-size: 90%;
+  -webkit-transform: translate3d(0, -110%, 0);
+  transform: translate3d(0, -110%, 0);
+  opacity: 1;
+  font-weight: 700;
+}
+footer {
+  color: #fff;
+  border-top: 1px solid #fff;
+  padding: 11px 0;
+  font-size: 13px;
+}
+.modal-backdrop.in {
+  opacity: 0.8;
+}
