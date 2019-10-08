@@ -2,7 +2,7 @@ import React from 'react';
 import {Modal, Popover, Tooltip, Button, OverlayTrigger } from 'react-bootstrap'
 
 
-export default class Example extends React.Component {
+export default class Login extends React.Component {
     constructor(props, context) {
       super(props, context);
   
@@ -13,9 +13,17 @@ export default class Example extends React.Component {
         show: false
       };
     }
+
+    componentDidMount(){
+      console.log(this.props.show)
+      this.setState({
+        show:this.props.show
+      })
+    }
   
     handleClose() {
       this.setState({ show: false });
+      this.props.closeHandler();
     }
   
     handleShow() {
@@ -32,92 +40,41 @@ export default class Example extends React.Component {
   
       return (
         <div>
-          <p>Click to get the full Modal experience!</p>
-  
-          <Button bsStyle="primary" bsSize="large" onClick={this.handleShow}>
-            Launch demo modal
-          </Button>
+          
   
           <Modal show={this.state.show} onHide={this.handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>Modal heading</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <h4>Text in a modal</h4>
-              <p>
-                Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-              </p>
-  
-              <h4>Popover in a modal</h4>
-              <p>
-                there is a{' '}
-                <OverlayTrigger overlay={popover}>
-                  <a href="#popover">popover</a>
-                </OverlayTrigger>{' '}
-                here
-              </p>
-  
-              <h4>Tooltips in a modal</h4>
-              <p>
-                there is a{' '}
-                <OverlayTrigger overlay={tooltip}>
-                  <a href="#tooltip">tooltip</a>
-                </OverlayTrigger>{' '}
-                here
-              </p>
-  
-              <hr />
-  
-              <h4>Overflowing text to show scroll behavior</h4>
-              <p>
-                Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-                dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-                ac consectetur ac, vestibulum at eros.
-              </p>
-              <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur
-                et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor
-                auctor.
-              </p>
-              <p>
-                Aenean lacinia bibendum nulla sed consectetur. Praesent commodo
-                cursus magna, vel scelerisque nisl consectetur et. Donec sed odio
-                dui. Donec ullamcorper nulla non metus auctor fringilla.
-              </p>
-              <p>
-                Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-                dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-                ac consectetur ac, vestibulum at eros.
-              </p>
-              <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur
-                et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor
-                auctor.
-              </p>
-              <p>
-                Aenean lacinia bibendum nulla sed consectetur. Praesent commodo
-                cursus magna, vel scelerisque nisl consectetur et. Donec sed odio
-                dui. Donec ullamcorper nulla non metus auctor fringilla.
-              </p>
-              <p>
-                Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-                dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-                ac consectetur ac, vestibulum at eros.
-              </p>
-              <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur
-                et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor
-                auctor.
-              </p>
-              <p>
-                Aenean lacinia bibendum nulla sed consectetur. Praesent commodo
-                cursus magna, vel scelerisque nisl consectetur et. Donec sed odio
-                dui. Donec ullamcorper nulla non metus auctor fringilla.
-              </p>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button onClick={this.handleClose}>Close</Button>
-            </Modal.Footer>
+          
+          <div className="close-modal" data-dismiss="modal" onClick={() => this.handleClose()}></div>
+          <div className="col-md-6 col register-text">
+            <div className="cont text-center">
+              <h3>World Artography<br/>
+                Photography Contest</h3>
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+              <a href="#" className="btn btn-default" onClick={() => this.props.registerOpenHandler()} data-dismiss="modal" data-toggle="modal" data-target="#register">Register Now</a>
+            </div>
+          </div>
+          <div className="col-md-6 col login-form">
+              <div className="cont">
+              <h3>Login</h3>
+              <form autoComplete="off">
+                  <div className="form-group">
+                      <input type="text" id="email" className="form-control" required/>
+                      <label className="form-control-placeholder" htmlFor="email">Email</label>
+                  </div>
+                  <div className="form-group">
+                      <input type="password" id="password" className="form-control" required/>
+                      <label className="form-control-placeholder" htmlFor="password">Password</label>
+                  </div>
+                  <div className="form-group">
+                      <a href="#" className="btn btn-primary btn-block">Login</a>
+                  </div>
+                  <div className="form-group text-center">
+
+                      <a href="#" className="ForgetPwd" value="Login">Forget Password?</a>
+                  </div>
+              </form>
+              </div>
+          </div>
           </Modal>
         </div>
       );

@@ -1,9 +1,37 @@
 import React from "react";
-import {Link, NavLink} from "react-router-dom";
-import Login from './../../Auth/Login/Login'
+import {NavLink} from "react-router-dom";
+import Login from './../../Auth/Login/Login';
+import Register from './../../Auth/Register/Register';
 
 export default class Header extends React.Component {
+  state = {
+    loginShow:false,
+    registerShow:false
+  }
+  loginClickHandler(){
+    this.setState({
+      loginShow:true,
+      registerShow:false
+    })
+  }
+  closeHandler(){
+    this.setState({
+      loginShow:false
+    })
+  }
+  registerOpenHandler(){
+    this.setState({
+      registerShow:true,
+      loginShow:false
+    })
+  }
+  registerCloseHandler(){
+    this.setState({
+      registerShow:false
+    })
+  }
   render() {
+    console.log(this.props.location)
     return (
       <React.Fragment>
 
@@ -25,14 +53,23 @@ export default class Header extends React.Component {
                     <li><NavLink to="/how-to-by-pixels">How to Buy Pixels</NavLink></li>
                     <li><NavLink to="prizes">Prizes</NavLink></li>
                     <li><NavLink to="contact">Contact</NavLink></li>
-                    <li><NavLink to="/login">Login/Registration</NavLink></li>
+                    <li><a href="#" onClick={() => this.loginClickHandler()}>Login/Registration</a></li>
                   </ul>
               </div>
                 
               
             </nav>
           </header>
-          <Login/>
+          {this.state.loginShow ?
+            <Login show={this.state.loginShow} closeHandler = {() => this.closeHandler()} registerOpenHandler = {() => this.registerOpenHandler()} />
+            :
+            null
+          }
+          {this.state.registerShow ? 
+            <Register show={this.state.registerShow} closeHandler = {() => this.registerCloseHandler()} loginClickHandler={() => this.loginClickHandler()}/>
+            :
+            null
+          }
           </React.Fragment>
     )
   }
