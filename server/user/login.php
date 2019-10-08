@@ -1,9 +1,6 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-
-header('Access-Control-Allow-Methods: GET, POST');
-
-header("Access-Control-Allow-Headers: X-Requested-With");
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 // include database and object files
 include_once '../config/database.php';
 include_once '../objects/user.php';

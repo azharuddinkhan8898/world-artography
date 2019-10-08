@@ -1,6 +1,6 @@
 import React from 'react';
 import {Modal, Popover, Tooltip, Button, OverlayTrigger } from 'react-bootstrap'
-import axios from 'axios';
+import $ from 'jquery';
 
 export default class Register extends React.Component {
     constructor(props, context) {
@@ -10,12 +10,33 @@ export default class Register extends React.Component {
       this.handleClose = this.handleClose.bind(this);
   
       this.state = {
-        show: false
+        show: false,
+        name:'',
+        email:'',
+        password:'',
+        phone:'',
+        country:'',
+        facebook:'',
+        instagram:'',
+        website:''
       };
     }
 
     componentDidMount(){
-      console.log(axios)
+      //console.log(axios)
+     
+
+      //   axios.post(url,data, {
+      //     headers: {
+      //         'Content-Type': 'application/json',
+      //     }
+      // })
+      //     .then(function (response) {
+      //       console.log(response);
+      //     })
+      //     .catch(function (error) {
+      //       console.log(error);
+      //     });
       this.setState({
         show:this.props.show
       })
@@ -31,16 +52,23 @@ export default class Register extends React.Component {
     }
 
     signup() {
-        const url = 'http://localhost/prject/freelancing/word-photography/server/user/signup.php';
-        const data = {name:"azhar", username: 'example', email:"azhar2@azhar.com",password:"pass",phone:"123",country:"india",facebook:"test",instagram:"test",website:"google.com" };
-
-        axios.post(url, data)
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+      const url = 'http://localhost/prject/freelancing/word-photography/server/user/signup.php';
+      const data = {
+        name:"azhar", 
+        username: 'example', 
+        email:"azhar4@azhar.com",
+        password:"pass",
+        phone:"123",
+        country:"india",
+        facebook:"test",
+        instagram:"test",
+        website:"google.com" 
+      };
+      $.post(url,
+        data,
+        function(data,status){
+        console.log(data,status);
+        });
     }
   
     render() {
