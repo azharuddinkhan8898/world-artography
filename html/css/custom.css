@@ -81,7 +81,7 @@ nav.mb-1.navbar.navbar-expand-lg {
   font-size: 12px;
   display: block;
   font-weight: 700;
-  background: url(/images/pixel-bg.jpg) 0 0 no-repeat;
+  background: url(../images/pixel-bg.jpg) 0 0 no-repeat;
   margin: 0px 5px;
   position: relative;
   z-index: 999;
@@ -119,7 +119,7 @@ ul.main-nav li:nth-child(6) a {
 .img-thumb {
   width: 67px;
   height: 67px;
-  background: url(/images/pixel-bg.jpg);
+  background: url(../images/pixel-bg.jpg);
   background-size: 860px;
   border: 5px solid #111;
   cursor: pointer;
@@ -132,7 +132,7 @@ ul.main-nav li:nth-child(6) a {
   padding: 0;
 }
 .register-text {
-  background: #4e73df url(/images/login-bg.jpg) center center no-repeat;
+  background: #4e73df url(../images/login-bg.jpg) center center no-repeat;
   background-size: cover;
   color: #fff;
   padding-top: 50px;
@@ -140,7 +140,7 @@ ul.main-nav li:nth-child(6) a {
   position: relative;
 }
 .register-creative {
-  background: #4e73df url(/images/register-bg.jpg) center center no-repeat;
+  background: #4e73df url(../images/register-bg.jpg) center center no-repeat;
   background-size: cover;
   color: #fff;
   padding-top: 50px;
@@ -345,15 +345,4 @@ footer {
   .btn {
     padding: 10px 12px;
   }
-}
-
-
-
-/* Azhar CSS */
-
-.errorpass{
-  font-size: 14px;
-    color: #f00;
-    text-align: center;
-    margin-top: 16px;
 }

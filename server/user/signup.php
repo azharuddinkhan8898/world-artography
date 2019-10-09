@@ -12,7 +12,7 @@ $database = new Database();
 $db = $database->getConnection();
  
 $user = new User($db);
- 
+$length = 64;
 // set user property values
 $user->email = $_POST['email'];
 $user->password = $_POST['password'];
@@ -22,6 +22,7 @@ $user->country = $_POST['country'];
 $user->facebook = $_POST['facebook'];
 $user->instagram = $_POST['instagram'];
 $user->website = $_POST['website'];
+$user->token = bin2hex(random_bytes($length));
 $user->created = date('Y-m-d H:i:s');
  
 // create the user
@@ -30,7 +31,9 @@ if($user->signup()){
         "status" => true,
         "message" => "Successfully Signup!",
         "id" => $user->id,
-        "email" => $user->email
+        "email" => $user->email,
+        "token" => $user->token,
+        "name" => $user->name
     );
 }
 else{

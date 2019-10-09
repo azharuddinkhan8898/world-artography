@@ -32,7 +32,7 @@ class User{
         $query = "INSERT INTO
                     " . $this->table_name . "
                 SET
-                    email=:email,name=:name, password=:password, phone=:phone, country=:country, facebook=:facebook, instagram=:instagram, website=:website, created=:created";
+                    email=:email,name=:name, password=:password, phone=:phone, country=:country, facebook=:facebook, instagram=:instagram, website=:website, created=:created, token=:token";
         // prepare query
         $stmt = $this->conn->prepare($query);
         // sanitize
@@ -45,6 +45,7 @@ class User{
         $this->instagram=htmlspecialchars(strip_tags($this->instagram));
         $this->website=htmlspecialchars(strip_tags($this->website));
         $this->created=htmlspecialchars(strip_tags($this->created));
+        $this->token=htmlspecialchars(strip_tags($this->token));
         // bind values
         $stmt->bindParam(":email", $this->email);
         $stmt->bindParam(":name", $this->name);
@@ -55,6 +56,7 @@ class User{
         $stmt->bindParam(":instagram", $this->instagram);
         $stmt->bindParam(":website", $this->website);
         $stmt->bindParam(":created", $this->created);
+        $stmt->bindParam(":token", $this->token);
         // execute query
         if($stmt->execute()){
             $this->id = $this->conn->lastInsertId();
@@ -67,7 +69,7 @@ class User{
     function login(){
         // select all query
         $query = "SELECT
-                    `id`, `email`, `password`, `created`
+                    `id`, `email`, `password`, `created`, `name`, `token`
                 FROM
                     " . $this->table_name . " 
                 WHERE

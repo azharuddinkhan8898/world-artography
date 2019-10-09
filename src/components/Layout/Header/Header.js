@@ -6,7 +6,11 @@ import Register from './../../Auth/Register/Register';
 export default class Header extends React.Component {
   state = {
     loginShow:false,
-    registerShow:false
+    registerShow:false,
+    loggedIn:false,
+    name:'',
+    token:'',
+    email:''
   }
   loginClickHandler(){
     this.setState({
@@ -30,8 +34,43 @@ export default class Header extends React.Component {
       registerShow:false
     })
   }
+  loginHandler = (token, name, email) => {
+    console.log(token, name, email)
+    this.setState({
+      loggedIn:true,
+      name:name,
+      email:email,
+      token:token
+    })
+  }
+
+  logoutHandler = () => {
+    window.localStorage.setItem('loggedIn',false);
+    window.localStorage.setItem("name",'');
+    window.localStorage.setItem("email",'');
+    window.localStorage.setItem("token",'');
+    this.setState({
+      loggedIn:false,
+      name:'',
+      email:'',
+      token:''
+    })
+  }
+  componentDidMount(){
+    var loggedIn = window.localStorage.getItem("loggedIn");
+    var name = window.localStorage.getItem("name");
+    var email = window.localStorage.getItem("email");
+    var token = window.localStorage.getItem("token");
+    if(loggedIn && loggedIn === 'true'){
+      this.setState({
+        loggedIn:true,
+        name:name,
+        email:email,
+        token:token
+      })
+    }
+  }
   render() {
-    console.log(this.props.location)
     return (
       <React.Fragment>
 
@@ -43,17 +82,18 @@ export default class Header extends React.Component {
               </a>
               
               <div className="navbar-nav pull-right">
-                  <div className="pull-right" style={{margin:"5px 10px"}}>
-                    <span style={{color:"#fff"}}>10,00,000 Pixels - 1₹ Per Pixel - The World's Best Photographers/Images</span>  
-                    <img src="images/payment-icons.png" width="150" style={{margin:"0 5px"}}/><img src="images/social-icon.png" width="100"/></div>
-                <div className="clearfix"></div>
                   <ul className="navbar-nav ml-auto main-nav" id="">
                     <li><NavLink to="/"><i className="fas fa-home"></i></NavLink></li>
                     <li><NavLink to="/about">About</NavLink></li>
                     <li><NavLink to="/how-to-by-pixels">How to Buy Pixels</NavLink></li>
                     <li><NavLink to="prizes">Prizes</NavLink></li>
                     <li><NavLink to="contact">Contact</NavLink></li>
-                    <li><a href="#" onClick={() => this.loginClickHandler()}>Login/Registration</a></li>
+                    {this.state.loggedIn ? 
+                      <li><a href="#" onClick={() => this.logoutHandler()}>{this.state.name} (Logout)</a></li>
+                    :
+                      <li><a href="#" onClick={() => this.loginClickHandler()}>Login/Registration</a></li>
+                    }
+                    
                   </ul>
               </div>
                 
@@ -61,12 +101,12 @@ export default class Header extends React.Component {
             </nav>
           </header>
           {this.state.loginShow ?
-            <Login show={this.state.loginShow} closeHandler = {() => this.closeHandler()} registerOpenHandler = {() => this.registerOpenHandler()} />
+            <Login show={this.state.loginShow} loginHandler = {this.loginHandler} closeHandler = {() => this.closeHandler()} registerOpenHandler = {() => this.registerOpenHandler()} />
             :
             null
           }
           {this.state.registerShow ? 
-            <Register show={this.state.registerShow} closeHandler = {() => this.registerCloseHandler()} loginClickHandler={() => this.loginClickHandler()}/>
+            <Register show={this.state.registerShow} loginHandler = {this.loginHandler} closeHandler = {() => this.registerCloseHandler()} loginClickHandler={() => this.loginClickHandler()}/>
             :
             null
           }

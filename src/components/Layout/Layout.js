@@ -8,17 +8,30 @@ import {BrowserRouter} from "react-router-dom";
 import ScrollToTop from 'react-router-scroll-top';
 
 
-const Layout = (props) => {
-    
-    return(
+export default class Layout extends React.Component{
+
+    state = {
+        loginOpen: false
+    }
+
+    handleLoginOpen(){
+        console.log("szkjghdfkk")
+        this.setState({
+            loginOpen:true
+        })
+        
+    }
+
+    render(){
+        return(
 
             
             <BrowserRouter>
             <React.Fragment>
                 
-                <Header/>
+                <Header loginOpen = {this.state.loginOpen}/>
                 
-                <Container/>
+                <Container handleLoginOpen = {() => this.handleLoginOpen()}/>
                 
                 <Footer/>
                 <ScrollToTop/>
@@ -26,8 +39,10 @@ const Layout = (props) => {
             </BrowserRouter>
             
             
-
+    
     )
-}
+    }
+    
+} 
 
-export default Layout;
+

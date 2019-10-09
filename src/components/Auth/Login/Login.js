@@ -1,6 +1,6 @@
 import React from 'react';
-import {Modal, Popover, Tooltip, Button, OverlayTrigger } from 'react-bootstrap'
-
+import {Modal} from 'react-bootstrap'
+import $ from 'jquery';
 
 export default class Login extends React.Component {
     constructor(props, context) {
@@ -10,7 +10,11 @@ export default class Login extends React.Component {
       this.handleClose = this.handleClose.bind(this);
   
       this.state = {
-        show: false
+        show: false,
+        email:'',
+        password:'',
+        passwordError: false,
+        emailError:false,
       };
     }
 
@@ -29,14 +33,67 @@ export default class Login extends React.Component {
     handleShow() {
       this.setState({ show: true });
     }
+
+    signin = () => { 
+      var isEverythingCorrect = 2;
+      if(!this.state.email){
+        this.setState({
+          emailError:true
+        })
+      }else{
+        isEverythingCorrect--;
+      }
+
+      if(!this.state.password){
+        this.setState({
+          passwordError:true
+        })
+      }else{
+        isEverythingCorrect--;
+      }
+
+      if(isEverythingCorrect === 0){
+        const url = 'http://localhost:8888/Self/Project/world%20artography/code/react-app/server/user/login.php?email='+this.state.email+'&password='+this.state.password;
+        console.log(url)
+        const data = {
+          email:this.state.email,
+          password:this.state.password,
+        };
+        console.log(data)
+        $.get(url,
+          (data,status) => {
+            console.log(data)
+            if(data.status){
+            window.localStorage.setItem("token",data.token);
+            window.localStorage.setItem("name",data.name);
+            window.localStorage.setItem("email",data.email);
+            window.localStorage.setItem("loggedIn",true);
+            this.props.loginHandler(data.token, data.name, data.email)
+            this.handleClose();
+            }
+            else{
+              this.setState({
+                errorPass:"Invalid Email ID or Password!"
+              })
+            }
+            
+          });
+      }
+
+    }
+
+    inputHandler = (e) => {
+
+      console.log(e.target.getAttribute("name"))
+      var key = e.target.getAttribute("name");
+      this.setState({
+        errorPass:"",
+        [key]: e.target.value,
+        [key+"Error"]:false
+      })
+    }
   
     render() {
-      const popover = (
-        <Popover id="modal-popover" title="popover">
-          very popover. such engagement
-        </Popover>
-      );
-      const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
   
       return (
         <div>
@@ -58,15 +115,31 @@ export default class Login extends React.Component {
               <h3>Login</h3>
               <form autoComplete="off">
                   <div className="form-group">
-                      <input type="text" id="email" className="form-control" required/>
+                      <input type="text" id="email" name="email" className="form-control" onChange= {this.inputHandler} required/>
                       <label className="form-control-placeholder" htmlFor="email">Email</label>
+                      {this.state.emailError ? 
+                        <span className="error">Please enter your Email ID</span>
+                        :
+                        null
+                      }
                   </div>
                   <div className="form-group">
-                      <input type="password" id="password" className="form-control" required/>
+                      <input type="password" id="password" name="password" className="form-control" required onChange= {this.inputHandler}/>
                       <label className="form-control-placeholder" htmlFor="password">Password</label>
+                      {this.state.passwordError ? 
+                        <span className="error">Please enter your password</span>
+                        :
+                        null
+                      }
                   </div>
                   <div className="form-group">
-                      <a href="#" className="btn btn-primary btn-block">Login</a>
+                      <a href="#" className="btn btn-primary btn-block" onClick = {() => this.signin()}>Login</a>
+                      {
+                        this.state.errorPass ? <p className="errorpass">{this.state.errorPass}</p>
+                        :
+                        null
+                      }
+                      
                   </div>
                   <div className="form-group text-center">
 

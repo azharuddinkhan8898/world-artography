@@ -1,5 +1,5 @@
 import React from 'react';
-import {Modal, Popover, Tooltip, Button, OverlayTrigger } from 'react-bootstrap'
+import {Modal } from 'react-bootstrap'
 import $ from 'jquery';
 
 export default class Register extends React.Component {
@@ -13,30 +13,25 @@ export default class Register extends React.Component {
         show: false,
         name:'',
         email:'',
+        password1:'',
         password:'',
         phone:'',
         country:'',
         facebook:'',
         instagram:'',
-        website:''
+        website:'',
+        nameError: false,
+        emailError:false,
+        phoneError:false,
+        countryError:false,
+        facebookError:false,
+        instagramError:false,
+        websiteError:false,
+        passwordError:false
       };
     }
 
     componentDidMount(){
-      //console.log(axios)
-     
-
-      //   axios.post(url,data, {
-      //     headers: {
-      //         'Content-Type': 'application/json',
-      //     }
-      // })
-      //     .then(function (response) {
-      //       console.log(response);
-      //     })
-      //     .catch(function (error) {
-      //       console.log(error);
-      //     });
       this.setState({
         show:this.props.show
       })
@@ -52,32 +47,112 @@ export default class Register extends React.Component {
     }
 
     signup() {
-      const url = 'http://localhost/prject/freelancing/word-photography/server/user/signup.php';
-      const data = {
-        name:"azhar", 
-        username: 'example', 
-        email:"azhar4@azhar.com",
-        password:"pass",
-        phone:"123",
-        country:"india",
-        facebook:"test",
-        instagram:"test",
-        website:"google.com" 
-      };
-      $.post(url,
-        data,
-        function(data,status){
-        console.log(data,status);
-        });
+      var isEverythingCorrect = 8;
+      if(!this.state.name){
+        this.setState({
+          nameError:true
+        })
+      }else{
+        isEverythingCorrect--;
+      }
+
+      if(!this.state.email){
+        this.setState({
+          emailError:true
+        })
+      }else{
+        isEverythingCorrect--;
+      }
+      if(!this.state.phone){
+        this.setState({
+          phoneError:true
+        })
+      }else{
+        isEverythingCorrect--;
+      }
+      if(!this.state.country){
+        this.setState({
+          countryError:true
+        })
+      }else{
+        isEverythingCorrect--;
+      }
+      if(!this.state.facebook){
+        this.setState({
+          facebookError:true
+        })
+      }else{
+        isEverythingCorrect--;
+      }
+      if(!this.state.instagram){
+        this.setState({
+          instagramError:true
+        })
+      }else{
+        isEverythingCorrect--;
+      }
+      if(!this.state.website){
+        this.setState({
+          websiteError:true
+        })
+      }else{
+        isEverythingCorrect--;
+      }
+      console.log(!this.state.password1, !(this.state.password === this.state.password1))
+      if(!this.state.password1 || !(this.state.password === this.state.password1)){
+        this.setState({
+          passwordError:true
+        })
+      }
+      else{
+        isEverythingCorrect--;
+      }
+
+      if(isEverythingCorrect === 0){
+        const url = 'http://localhost:8888/Self/Project/world%20artography/code/react-app/server/user/signup.php';
+        const data = {
+          name:this.state.name,
+          email:this.state.email,
+          password:this.state.password,
+          phone:this.state.phone,
+          country:this.state.country,
+          facebook:this.state.facebook,
+          instagram:this.state.instagram,
+          website:this.state.website
+        };
+        console.log(data)
+        $.post(url,
+          data,
+          (data,status) => {
+            console.log(data)
+            window.localStorage.setItem("token",data.token);
+            window.localStorage.setItem("name",data.name);
+            window.localStorage.setItem("email",data.email);
+            window.localStorage.setItem("loggedIn",true);
+            this.props.loginHandler(data.token, data.name, data.email)
+            this.handleClose();
+          });
+      }
+      
+    }
+
+
+    inputHandler = (e) => {
+      console.log(e.target.getAttribute("name"))
+      var key = e.target.getAttribute("name");
+      this.setState({
+        [key]: e.target.value,
+        [key+"Error"]:false
+      })
+    }
+    inputBlurHander = (e) => {
+      console.log(e.target.getAttribute("name") + "Blured")
+      this.setState({
+        [e.target.getAttribute("name") + "Blured"]: true
+      })
     }
   
     render() {
-      const popover = (
-        <Popover id="modal-popover" title="popover">
-          very popover. such engagement
-        </Popover>
-      );
-      const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
   
       return (
         <div>
@@ -100,28 +175,43 @@ export default class Register extends React.Component {
               <div className="col-md-4 col-sm-6 col-xs-12">
                 <div className="form-group">
                   
-                  <input type="text" id="name" className="form-control" required/>
+                  <input type="text" id="name" name="name" className="form-control" required onChange= {this.inputHandler}/>
                   <label className="form-control-placeholder" htmlFor="name">Name</label>
+                  {this.state.nameError ? 
+                    <span className="error">Please enter your name</span>
+                    :
+                    null
+                  }
+                  
                 </div>
               </div>
               <div className="col-md-4 col-sm-6 col-xs-12">
                 <div className="form-group">
                   
-                  <input type="text" id="email" className="form-control" required/>
+                  <input type="text" id="email" name="email" className="form-control" required onChange= {this.inputHandler}/>
                   <label className="form-control-placeholder" htmlFor="email">Email</label>
+                  {this.state.emailError ? 
+                  <span className="error">Please enter your Email ID</span>
+                  :
+                  null
+                  }
                 </div>
               </div>
               <div className="col-md-4 col-sm-6 col-xs-12">
                 <div className="form-group">
                   
-                  <input type="text" id="phone" className="form-control" required/>
+                  <input type="text" id="phone" name="phone" className="form-control" required onChange= {this.inputHandler}/>
                   <label className="form-control-placeholder" htmlFor="phone">Phone</label>
+                  {this.state.phoneError ? 
+                  <span className="error">Please enter your Phone</span>
+                  :
+                  null}
                 </div>
               </div>
               <div className="col-md-4 col-sm-6 col-xs-12">
                 <div className="form-group">
                 <label className="form-control-placeholder">Country</label>
-                  <select required="" className="form-control">
+                  <select required="" name="country" className="form-control" onChange= {this.inputHandler}>
                     
                       <option value="">- Select Country -</option>
                       <option value="AF">Afghanistan</option>
@@ -366,33 +456,50 @@ export default class Register extends React.Component {
                       <option value="ZM">Zambia</option>
                       <option value="ZW">Zimbabwe</option>
                    </select>
+                   {this.state.countryError ? 
+                   <span className="error">Please select your Country</span>
+                   :
+                   null}
                 </div>
               </div>
                   <div className="col-md-4 col-sm-6 col-xs-12">
                       <div className="form-group">
                         
-                        <input type="text" id="instagram" className="form-control" required/>
+                        <input type="text" name="instagram" id="instagram" className="form-control" required onChange= {this.inputHandler}/>
                         <label className="form-control-placeholder" htmlFor="instagram">Instagam Profile</label>
+                        {this.state.instagramError ? 
+                        <span className="error">Please enter your Instagam Profile</span>
+                        :
+                        null}
                       </div>
                     </div>
                     <div className="col-md-4 col-sm-6 col-xs-12">
                       <div className="form-group">
-                        <input type="text" id="facebook" className="form-control" required/>
+                        <input type="text" id="facebook" name="facebook" className="form-control" required onChange= {this.inputHandler}/>
                         <label className="form-control-placeholder" htmlFor="facebook">Facebook Profile</label>
+                        {this.state.facebookError ? 
+                        <span className="error">Please enter your Facebook Profile</span>
+                        :
+                        null
+                        }
                       </div>
                     </div>
                     <div className="col-md-4 col-sm-6 col-xs-12">
                       <div className="form-group">
                         
-                        <input type="text" id="website" className="form-control" required/>
+                        <input type="text" id="website" name="website" className="form-control" required onChange= {this.inputHandler}/>
                         <label className="form-control-placeholder" htmlFor="website">Website URL</label>
+                        {this.state.websiteError ?
+                        <span className="error">Please enter your Website URL</span>
+                        :
+                        null}
                       </div>
                     </div>
 
                     <div className="col-md-4 col-sm-6 col-xs-12">
                       <div className="form-group">
                     
-                        <input type="password" id="create-password" className="form-control" required/>
+                        <input type="password" id="create-password" name="password1" className="form-control" required onChange= {this.inputHandler}/>
                         <label className="form-control-placeholder" htmlFor="create-password">Password</label>
                       </div>
                     </div>
@@ -400,13 +507,18 @@ export default class Register extends React.Component {
                     <div className="col-md-4 col-sm-6 col-xs-12">
                       <div className="form-group">
                     
-                        <input type="password" id="confirm-password" className="form-control" required/>
+                        <input type="password" id="confirm-password" name="password" className="form-control" required onChange= {this.inputHandler}/>
                         <label className="form-control-placeholder" htmlFor="confirm-password">Confirm Password</label>
+                        {this.state.passwordError ?
+                        <span className="error">This should match to Password</span>
+                        :
+                        null
+                        }
                       </div>
                     </div>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" className="btn btn-default" data-dismiss="modal" onClick={ () => this.handleClose()}>Close</button>
                 <button type="button" className="btn btn-primary" onClick={() => this.signup()}>Register</button>
               </div>
               
