@@ -1,79 +1,12 @@
 * {
   border-radius: 0 !important;
 }
-
-h3 {
-  margin: 0;
-}
-[hidden] {
-  display: none !important;
-}
 input:focus {
   outline: none;
   box-shadow: none !important;
 }
-html,
-body {
-  height: 100%;
-  margin: 0;
-}
-#wrapper {
-  min-height: 100%;
-
-  /* Equal to height of footer */
-  /* But also accounting for potential margin-bottom of last child */
-  margin-bottom: -100px;
-}
-footer,
-.push {
-  height: 100px;
-}
-i.fas.fa-heart {
-  color: #cacaca;
-  /* border: 1px solid #cacaca; */
-  padding: 5px;
-  font-size: 17px;
-  line-height: 0;
-  position: relative;
-  top: 2px;
-}
-.alert.fixed {
-  position: fixed;
-  top: -120px;
-  left: 50%;
-  transform: translateX(-50%);
-  transition: all 0.3s ease-in-out;
-  z-index: 9999;
-}
-.alert.active.fixed {
-  top: 100px;
-}
-.like {
-  border: 1px solid #ccc;
-  display: inline-block;
-  padding: 5px 12px 5px 20px;
-  border-radius: 30px !important;
-  line-height: 24px;
-  cursor: pointer;
-}
-.like.active {
-  border: 1px solid #f00;
-  color: #f00;
-}
-.like.active .fas.fa-heart {
-  color: #f00;
-}
 form {
   padding-top: 5px;
-}
-.flex {
-  display: flex;
-}
-.pad30 {
-  padding: 30px;
-}
-.border-left {
-  border-left: 1px solid #ccc;
 }
 .white-bg {
   background: #fff;
@@ -88,8 +21,7 @@ form {
   font-size: 11px;
   color: #f00;
 }
-.close-modal,
-.close-ico {
+.close-modal {
   position: absolute;
   top: 0;
   right: 0;
@@ -99,9 +31,7 @@ form {
 }
 
 .close-modal:after,
-.close-ico:after,
-.close-modal:before,
-.close-ico:before {
+.close-modal:before {
   content: "";
   position: absolute;
   border: 1px solid #cfcfcf;
@@ -110,13 +40,11 @@ form {
   right: 30px;
 }
 
-.close-modal:after,
-.close-ico:after {
+.close-modal:after {
   transform: rotate(45deg);
 }
 
-.close-modal:before,
-.close-ico:before {
+.close-modal:before {
   transform: rotate(-45deg);
 }
 body {
@@ -241,7 +169,7 @@ ul.main-nav li:nth-child(6) a {
   text-transform: uppercase;
   font-size: 26px;
   font-weight: 800;
-  margin: 20px 0;
+  margin-bottom: 20px;
 }
 
 .btn {
@@ -262,8 +190,8 @@ figcaption {
   display: none;
 }
 .modal .form-group {
-  margin: 30px 0 10px;
-  min-height: 55px;
+  margin: 30px 0;
+  min-height: 70px;
 }
 
 .client-list {
@@ -326,95 +254,6 @@ footer {
 .mob-btn {
   display: none;
 }
-
-#payment-info {
-  max-width: 600px;
-}
-#payment-info td {
-  border: none;
-  border-bottom: 1px solid #eee;
-  padding: 10px;
-}
-#payment-info h4 {
-  color: #4e73df;
-  text-transform: uppercase;
-}
-
-#payment-info ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-#payment-info ul li span {
-  float: right;
-}
-
-#payment-info li {
-  padding: 20px 0;
-  color: #969696;
-  border-bottom: 1px solid #333;
-}
-#paypal-container .panel li:last-child {
-  color: #fff;
-}
-#paypal-container .panel.panel-default {
-  border-color: #3a3a3a;
-}
-
-#paypal-container .panel-heading {
-  background: #111;
-  color: #fff;
-  border-color: #444;
-  text-transform: uppercase;
-}
-.btn.image-preview-input {
-  padding: 8px;
-  font-size: 12px;
-  text-transform: initial;
-}
-.btn.image-preview-clear {
-  padding: 7px;
-  height: 35px;
-}
-
-input.image-preview-filename {
-  font-size: 12px;
-}
-
-h3.popover-title {
-  font-size: 14px;
-  margin: 0;
-}
-input.image-preview-filename {
-  border: 1px solid #ccc;
-}
-.btn.image-preview-clear {
-  padding: 7px;
-  height: 35px;
-}
-.image-preview-input {
-  position: relative;
-  overflow: hidden;
-  margin: 0px;
-  color: #333;
-  background-color: #fff;
-  border-color: #ccc;
-}
-.image-preview-input input[type="file"] {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 0;
-  padding: 0;
-  font-size: 20px;
-  cursor: pointer;
-  opacity: 0;
-  filter: alpha(opacity=0);
-}
-.image-preview-input-title {
-  margin-left: 2px;
-}
 @media screen and (min-width: 960px) {
   .modal-dialog {
     position: absolute;
@@ -475,9 +314,6 @@ input.image-preview-filename {
     margin: 10px;
     cursor: pointer;
   }
-  .modal .form-group {
-    margin-bottom: 20px;
-  }
   .mob-menu {
     position: fixed;
     top: 0;
@@ -486,10 +322,7 @@ input.image-preview-filename {
     height: 100vh;
     background: rgba(0, 0, 0, 0.9);
   }
-  .close-ico:after,
-  .close-ico:before {
-    right: 45px;
-  }
+
   .mob-menu li a {
     background: none;
     text-align: center;

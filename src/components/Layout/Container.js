@@ -16,7 +16,7 @@ class Container extends React.Component{
         return(
 
             <section className="route-section">
-                <Route path="/" exact component={() => <Homepage handleLoginOpen={this.props.handleLoginOpen}/>}/>
+                <Route path="/" exact component={Homepage}/>
                 <Route path="/login" exact component={Homepage}/>
                 <Route path="/register" exact component={Homepage}/>
             </section>

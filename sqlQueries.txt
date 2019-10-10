@@ -25,3 +25,9 @@ RewriteRule ^(.*)$ /$1?%1%2 [R=301,L]
 Header add Access-Control-Allow-Origin "*"
 Header add Access-Control-Allow-Headers "origin, x-requested-with, content-type"
 Header add Access-Control-Allow-Methods "PUT, GET, POST, DELETE, OPTIONS"
+
+
+ALTER TABLE images ADD url VARCHAR( 255 ) after email
+
+
+$query = "UPDATE images SET email=:email,name=:name, category=:category, title=:title, camera=:camera, lens=:lens, aperture=:aperture, shutter=:shutter, iso=:iso, other=:other, created=:created, url=:url WHERE id=:id";

@@ -14,13 +14,13 @@ export default class Layout extends React.Component{
         loginOpen: false
     }
 
-    handleLoginOpen(){
-        console.log("szkjghdfkk")
-        this.setState({
-            loginOpen:true
-        })
+    // handleLoginOpen(){
+    //     console.log("szkjghdfkk")
+    //     this.setState({
+    //         loginOpen:true
+    //     })
         
-    }
+    // }
 
     render(){
         return(

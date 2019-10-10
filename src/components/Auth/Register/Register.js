@@ -49,6 +49,7 @@ export default class Register extends React.Component {
     signup() {
       var isEverythingCorrect = 8;
       if(!this.state.name){
+        
         this.setState({
           nameError:true
         })

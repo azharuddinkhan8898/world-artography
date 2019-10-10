@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>World Artography</title>
+
+    <!-- Custom fonts for this template-->
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700,800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.css"
+    />
+    <link rel="stylesheet" href="css/custom.css" />
+    <!-- Custom styles for this template-->
+  </head>
+
+  <body>
+    <style></style>
+    <script src="https://www.paypal.com/sdk/js?client-id=AQW5aL-tDu2N-3Pu6ieRl5Tcgvb9wgCgVMx8QxXqGYzl2VnUWMg06ciBOjiDkO6FGBHGLpGZb_1vo0wp&amp;currency=GBP"></script>
+    <div id="wrapper">
+      <!-- Main Content -->
+      <div id="content">
+        <header>
+          <nav class="navbar info-color clearfix">
+            <a class="navbar-brand" href="#">
+              <img src="images/logo.svg" width="220px" />
+            </a>
+            <div class="mob-btn"></div>
+            <div class="mob-menu pull-right">
+              <ul class="navbar-nav ml-auto main-nav" id="">
+                <li>
+                  <a href="#"><i class="fas fa-home"></i></a>
+                </li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">How to Buy Pixels</a></li>
+                <li><a href="#">Prizes</a></li>
+                <li><a href="#">Contact</a></li>
+                <li>
+                  <a href="#" data-toggle="modal" data-target="#login"
+                    >Login/Registration</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </header>
+        <div class="container">
+          <br /><br /><br />
+          <div id="paypal-container">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4>Payments</h4>
+              </div>
+              <div class="panel-body" style="padding:0 15px">
+                <div class="row clearfix flex">
+                  <div
+                    class="col-md-4 pad30"
+                    id="payment-info"
+                    style="background:#000000"
+                  >
+                    <h4>Payment Informations</h4>
+                    <ul>
+                      <li>
+                        Images Uploaded (<count id="uploaded-img">2</count
+                        >x6700) <span id="amt">13400</span>
+                      </li>
+                      <li>GST (18%) <span id="gst-amt">2412</span></li>
+                      <li>Total Cost <span id="total-amt">2412</span></li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4 pad30">
+                    <div id="paypal-button-container">
+                      &nbsp;
+                    </div>
+                  </div>
+                  <div class="col-md-4 pad30 border-left">
+                    <p>
+                      <a
+                        href="https://www.dcpexpeditions.com/package.php"
+                        target="_blank"
+                        >Click here</a
+                      >
+                      to buy discounted package from DCP Expeditions
+                    </p>
+                    <div class="form-group">
+                      <label>DCP Coupon Code</label>
+                      <input type="text" class="form-control" />
+                    </div>
+                    <small
+                      >Your entries have been accepted, however will be subject
+                      to succesful vaidation of code. Succesful entries will be
+                      uploaded within 24 hrs. Email notification will be
+                      sent.</small
+                    >
+                    <br /><br />
+                    <a href="#" class="btn btn-primary">Submit</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="push"></div>
+      </div>
+      <!-- Footer -->
+      <footer class="sticky-footer">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span
+              >World Artography &copy; 2019. All Rights Reserved. We are not
+              responsible for the content of external sites. <br />World
+              Artography is NOT responsible for Images featured on homepage are
+              copyright of their respective owners.</span
+            >
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/8eab6cc604.js"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      paypal
+        .Buttons({
+          // Set up the transaction
+          createOrder: function(data, actions) {
+            return actions.order.create({
+              purchase_units: [
+                {
+                  amount: {
+                    value: 1
+                  }
+                }
+              ]
+            });
+          },
+
+          // Finalize the transaction
+          onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+              // Show a success message to the buyer
+              alert("Transaction completed");
+            });
+          }
+        })
+        .render("#paypal-button-container");
+    </script>
+  </body>
+</html>
