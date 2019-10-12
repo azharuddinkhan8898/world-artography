@@ -46,7 +46,7 @@ $length = 32;
 // set user property values
 
 
-$data = $_POST['imgData'];
+$data = $_POST['url'];
 list($type, $data) = explode(';', $data);
 list(, $data)      = explode(',', $data);
 $decodedData = base64_decode($data);
@@ -71,6 +71,9 @@ $user->aperture = $_POST['aperture'];
 $user->shutter = $_POST['shutter'];
 $user->iso = $_POST['iso'];
 $user->other = $_POST['other'];
+$user->approved = $_POST['approved'];
+$user->dcpcoupon = $_POST['dcpcoupon'];
+$user->paypalTranId = $_POST['paypalTranId'];
 $user->created = date('Y-m-d H:i:s');
 
 $user->url = 'uploads/a' . $code . '.jpg';

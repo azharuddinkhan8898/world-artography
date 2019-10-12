@@ -1,5 +1,5 @@
 <?php
-// ini_set("display_errors",1);
+ini_set("display_errors",1);
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 header('Content-Type: application/json');
@@ -14,25 +14,19 @@ $db = $database->getConnection();
 // prepare user object
 $user = new User($db);
 // set ID property of user to be edited
-
+$user->email = isset($_GET['email']) ? $_GET['email'] : die();
 // read the details of user to be edited
-$stmt = $user->getimages();
+$stmt = $user->countImages();
 if($stmt->rowCount() > 0){
-    // get retrieved row
-    $rows = array();
-    // create array
-    while($r = $stmt->fetch(PDO::FETCH_ASSOC)){
-        $rows[] = $r;
-    }
     $user_arr=array(
         "status" => true,
-        "data" => $rows
+        "data" => $stmt->rowCount()
     );
 }
 else{
     $user_arr=array(
-        "status" => false,
-        "message" => "Invalid email or Password!",
+        "status" => true,
+        "data" => 0,
     );
 }
 // make it json format

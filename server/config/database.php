@@ -4,10 +4,10 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 class Database{
  
     // specify your own database credentials
-    private $host = "localhost:8889";
-    private $db_name = "test";
-    private $username = "root";
-    private $password = "root";
+    private $host = "sql300.0fees.us";
+    private $db_name = "0fe_17583977_art";
+    private $username = "0fe_17583977";
+    private $password = "panzertools";
     public $conn;
  
     // get the database connection

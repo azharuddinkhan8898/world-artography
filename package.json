@@ -9,6 +9,7 @@
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.10.2",
     "react-helmet": "^5.2.1",
+    "react-paypal-button-v2": "^2.4.1",
     "react-router-dom": "^5.1.2",
     "react-router-scroll-top": "^0.2.1",
     "react-scripts": "3.2.0",

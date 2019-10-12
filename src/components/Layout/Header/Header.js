@@ -2,6 +2,7 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 import Login from './../../Auth/Login/Login';
 import Register from './../../Auth/Register/Register';
+import RegisterConfirm from './../../Auth/Register/RegisterConfirm';
 
 export default class Header extends React.Component {
   state = {
@@ -10,7 +11,9 @@ export default class Header extends React.Component {
     loggedIn:false,
     name:'',
     token:'',
-    email:''
+    email:'',
+    RegisterConfirmShow:false,
+    showMobileMenu: true
   }
   loginClickHandler(){
     this.setState({
@@ -34,6 +37,23 @@ export default class Header extends React.Component {
       registerShow:false
     })
   }
+
+  registerConfirmShowHandler(){
+    console.log("open")
+    this.setState({
+      RegisterConfirmShow:true
+    })
+  }
+
+ 
+
+  registerConfirmCloseHandler(){
+    console.log("closed")
+    this.setState({
+      RegisterConfirmShow:false
+    })
+  }
+
   loginHandler = (token, name, email) => {
     console.log(token, name, email)
     this.setState({
@@ -43,6 +63,8 @@ export default class Header extends React.Component {
       token:token
     })
   }
+
+
 
   logoutHandler = () => {
     window.localStorage.setItem('loggedIn',false);
@@ -55,12 +77,30 @@ export default class Header extends React.Component {
       email:'',
       token:''
     })
+    window.localStorage.setItem("totalImages",0);
+    window.location.reload();
+  }
+
+  showMobileMenuHandler(){
+    this.setState({
+      showMobileMenu:true
+    })
+  }
+  HideMobileMenuHandler(){
+    this.setState({
+      showMobileMenu:false
+    })
   }
   componentDidMount(){
     var loggedIn = window.localStorage.getItem("loggedIn");
     var name = window.localStorage.getItem("name");
     var email = window.localStorage.getItem("email");
     var token = window.localStorage.getItem("token");
+    if(window.innerWidth <= 1024){
+      this.setState({
+        showMobileMenu:false
+      })
+    }
     if(loggedIn && loggedIn === 'true'){
       this.setState({
         loggedIn:true,
@@ -78,10 +118,13 @@ export default class Header extends React.Component {
       <header>
           <nav className="navbar info-color">
               <a className="navbar-brand" href="#">
-                <img src="images/logo.svg" width="220px"/>
+                <img src={"/images/logo.svg"} width="220px"/>
               </a>
+
+              <div class="mob-btn" onClick={() => this.showMobileMenuHandler()}><i class="fas fa-bars"></i></div>
               
-              <div className="navbar-nav pull-right">
+              <div className="mob-menu pull-right" style={{display: this.state.showMobileMenu ?  'block' : 'none' }}>
+              <div class="close-ico" onClick={() => this.HideMobileMenuHandler()}></div>
                   <ul className="navbar-nav ml-auto main-nav" id="">
                     <li><NavLink to="/"><i className="fas fa-home"></i></NavLink></li>
                     <li><NavLink to="/about">About</NavLink></li>
@@ -106,10 +149,17 @@ export default class Header extends React.Component {
             null
           }
           {this.state.registerShow ? 
-            <Register show={this.state.registerShow} loginHandler = {this.loginHandler} closeHandler = {() => this.registerCloseHandler()} loginClickHandler={() => this.loginClickHandler()}/>
+            <Register show={this.state.registerShow} registerConfirmShowHandler = {() => this.registerConfirmShowHandler()}  loginHandler = {this.loginHandler} closeHandler = {() => this.registerCloseHandler()} loginClickHandler={() => this.loginClickHandler()}/>
             :
             null
           }
+
+          {this.state.RegisterConfirmShow ? 
+            <RegisterConfirm registerConfirmCloseHandler = {this.registerConfirmCloseHandler} show={this.state.RegisterConfirmShow} />
+            :
+            null
+          }
+
           </React.Fragment>
     )
   }

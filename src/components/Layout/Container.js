@@ -1,7 +1,12 @@
 import React from "react";
-import {  Route, withRouter } from "react-router-dom";
+import {  Route, Router, withRouter, Switch, BrowserRouter, HashRouter } from "react-router-dom";
 import Homepage from "../Homepage/Homepage";
-// import { TransitionGroup, CSSTransition } from "react-transition-group";
+import Payment from "../Payment/Payment";
+import Activate from '../Auth/Activate/Activate';
+import About from './About';
+import Prize from './Prize';
+import TnC from './TnC'
+// import { TransitionGroup, CSSTransition  from "react-transition-group";
 
 class Container extends React.Component{
     componentDidUpdate(prevProps) {
@@ -14,12 +19,11 @@ class Container extends React.Component{
 
     render(){
         return(
-
+    <Router history={HashRouter}>
             <section className="route-section">
-                <Route path="/" exact component={Homepage}/>
-                <Route path="/login" exact component={Homepage}/>
-                <Route path="/register" exact component={Homepage}/>
+                
             </section>
+            </Router>
 
         )
     }

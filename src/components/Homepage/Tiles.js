@@ -40,17 +40,24 @@ export default class Homepage extends Component {
         if(this.props.imagesData.length > 0){
             console.log(this.props.imagesData)
             for(var i=1; i<=5000; i++){
+                
                 if(this.props.imagesData[i - 1].email != null){
-                    images.push(
-                    <a key={i - 1} className="img-thumb" id={this.props.imagesData[i - 1].id} href={'http://localhost:8888/Self/Project/world%20artography/code/react-app/server/images/'+this.props.imagesData[i - 1].url} data-fancybox="gallery" style={{background:`url(${'http://localhost:8888/Self/Project/world%20artography/code/react-app/server/images/'+this.props.imagesData[i - 1].url}) center center no-repeat`,backgroundSize:`cover`}}>
-                    <figcaption>
-                        <div id={this.props.imagesData[i - 1].id} className="like">Like <i className="fas fa-heart"></i></div>
-                        <h6>{this.props.imagesData[i - 1].title}</h6>
-                        <p>Photo by {this.props.imagesData[i - 1].name}</p>
+                    var capHtml = "<div class='like'>Like <i class='fas fa-heart' aria-hidden='true'></i></div><h6>"+this.props.imagesData[i - 1].title+"</h6><p>Photo by "+this.props.imagesData[i - 1].name+"</p>"
+                    if(this.props.imagesData[i - 1].url.search('blob') !== -1){
+                        images.push(<div key={i - 1}  className="img-thumb" id={i}  style={{background:`url(${ this.props.imagesData[i - 1].url}) center center no-repeat`,backgroundSize:`cover`}}><div onClick={(e) => this.props.removeTileHandler(e)} id={this.props.imagesData[i - 1].id} className="btn-remove">X</div></div>)
+                    }
+                    else{
+                        images.push(
+                            <a key={i - 1} className="img-thumb" id={this.props.imagesData[i - 1].id} rel={this.props.imagesData[i - 1].email} href={ this.props.imagesData[i - 1].url.search('blob') == -1 ? "/server/images/"+this.props.imagesData[i - 1].url : this.props.imagesData[i - 1].url} title="title" data-fancybox="gallery" data-caption={capHtml} style={{background:`url(${ this.props.imagesData[i - 1].url.search('blob') == -1 ? "/server/images/"+this.props.imagesData[i - 1].url : this.props.imagesData[i - 1].url}) center center no-repeat`,backgroundSize:`cover`}}>
+                            
+                            <figcaption>
+                                <div id={this.props.imagesData[i - 1].id} className="like">Like <i className="fas fa-heart"></i></div><h6>{this.props.imagesData[i - 1].title}</h6><p>Photo by {this.props.imagesData[i - 1].name}</p>
+                            
+                            </figcaption>
+                            </a>
+                            )
+                    }
                     
-                    </figcaption>
-                    </a>
-                    )
                 }
                 else{
                     var bp = -i*53+"px 0"

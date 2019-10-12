@@ -1,5 +1,6 @@
 import React from 'react';
 import {Modal} from 'react-bootstrap'
+import {getDataUri} from './../utils/codeSnippet'
 import $ from 'jquery';
 
 export default class ImageUpload extends React.Component {
@@ -15,7 +16,7 @@ export default class ImageUpload extends React.Component {
         password:'',
         passwordError: false,
         emailError:false,
-        imgData:'',
+        url:'',
         category:'',
         title:'',
         camera:'',
@@ -24,7 +25,7 @@ export default class ImageUpload extends React.Component {
         shutter:'',
         iso:'',
         other:'',
-        imgDataError:false,
+        urlError:false,
         categoryError:false,
         titleError:false,
         cameraError:false,
@@ -44,7 +45,10 @@ export default class ImageUpload extends React.Component {
     }
 
     componentDidMount(){
-      console.log(this.props.show)
+      console.log(this.props.editingTileId)
+      if(this.props.editingTileId !== ''){
+        
+      }
       this.setState({
         show:this.props.show
       })
@@ -59,11 +63,11 @@ export default class ImageUpload extends React.Component {
       this.setState({ show: true });
     }
 
-    uploadImage = () => { 
+    uploadImage = () => {
       var isEverythingCorrect = 9;
-      if(!this.state.imgData){
+      if(!this.state.url){
         this.setState({
-            imgDataError:true
+            urlError:true
         })
       }else{
         isEverythingCorrect--;
@@ -147,18 +151,28 @@ export default class ImageUpload extends React.Component {
           shutter:this.state.shutter,
           iso:this.state.iso,
           other:this.state.other,
-          imgData:this.state.imgData
+          url:this.state.url
         };
 
-        console.log(data)
         var imagesCopy = [...this.state.images]
         imagesCopy.push(data)
-        console.log(imagesCopy)
+        //console.log(imagesCopy)
         this.setState({
             images:imagesCopy
         })
-        console.log(this.state.images)
-        window.localStorage.setItem("images", JSON.stringify(this.state.images))
+        this.props.storeImagesHandler(imagesCopy)
+        console.log(imagesCopy)
+        
+        var localImages = JSON.parse(window.localStorage.getItem("images"));
+        if(localImages && localImages.length){
+            localImages.push(imagesCopy[0])
+            window.localStorage.setItem("images", JSON.stringify(localImages))
+        }
+        else{
+            window.localStorage.setItem("images", JSON.stringify(imagesCopy))
+        }
+
+        this.handleClose()
         // $.post(url,
         //     data,
         //     (data,status) => {
@@ -175,25 +189,7 @@ export default class ImageUpload extends React.Component {
     }
 
 
-    getDataUri(url, callback) {
-        var image = new Image();
     
-        image.onload = function () {
-            var canvas = document.createElement('canvas');
-            canvas.width = this.naturalWidth; // or 'width' if you want a special/scaled size
-            canvas.height = this.naturalHeight; // or 'height' if you want a special/scaled size
-    
-            canvas.getContext('2d').drawImage(this, 0, 0);
-    
-            // Get raw image data
-            callback(canvas.toDataURL('image/png').replace(/^data:image\/(png|jpg);base64,/, ''));
-    
-            // ... or get as Data URI
-            callback(canvas.toDataURL('image/png'));
-        };
-    
-        image.src = url;
-    }
 
     imgFileChangeHandler = (e) => {
         e.persist()
@@ -220,13 +216,17 @@ export default class ImageUpload extends React.Component {
                 alert( "not a valid file: " + file.type);
             };
             img.src = _URL.createObjectURL(file);
+            //console.log(img.src)
         }
-        this.getDataUri(URL.createObjectURL(e.target.files[0]), (dataUri) => {
-            this.setState({
-                imageName:e.target.files[0].name,
-                imgData:dataUri
-            })
-        });
+        // console.log(URL.createObjectURL(e.target.files[0]))
+        // getDataUri(URL.createObjectURL(e.target.files[0]), (dataUri) => {
+        //   console.log(dataUri)
+        // })
+        this.setState({
+            imageName:e.target.files[0].name,
+            url:URL.createObjectURL(e.target.files[0])
+        })
+        //});
     }
 
 
@@ -248,7 +248,7 @@ export default class ImageUpload extends React.Component {
         <div>
           
   
-          <Modal show={this.state.show} onHide={this.handleClose}>
+          <Modal show={this.state.show} onHide={this.handleClose} className="home-modal">
           
           <div className="close-modal" data-dismiss="modal" onClick={() => this.handleClose()}></div>
           <div className="col-md-3 col register-creative">
@@ -273,12 +273,12 @@ export default class ImageUpload extends React.Component {
                         <div className="btn btn-default image-preview-input">
                           <span className="glyphicon glyphicon-folder-open"></span>
                           <span className="image-preview-input-title">Browse</span>
-                          <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview" name="imgData" onChange = {this.imgFileChangeHandler} />
+                          <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview" name="url" onChange = {this.imgFileChangeHandler} />
                         </div>
                       </span>
                     </div>
                     {
-                          this.state.imgDataError ? 
+                          this.state.urlError ? 
                           <span className="error">{this.state.errorText}</span>
                           :
                           null
@@ -294,6 +294,7 @@ export default class ImageUpload extends React.Component {
                 <div className="col-md-4 col-sm-6 col-xs-12">
                     <div className="form-group">
                         <select className="form-control" name="category" onChange={this.inputHandler}>
+                        <option>Select</option>
                           <option>Wildlife & Nature</option>
                           <option>Landscape</option>
                           <option>Travel & Street</option>
@@ -388,7 +389,7 @@ export default class ImageUpload extends React.Component {
                       <div className="col-md-4 col-sm-6 col-xs-12">
                         <div className="form-group">
                       
-                          <input type="password" id="remark" className="form-control" onChange={this.inputHandler} name="other" required/>
+                          <input type="text" id="remark" className="form-control" onChange={this.inputHandler} name="other" required/>
                           <label className="form-control-placeholder" htmlFor="remark">Other remarks:</label>
                           {
                             this.state.otherError ? 

@@ -2,6 +2,7 @@ import React from 'react';
 import {Modal } from 'react-bootstrap'
 import $ from 'jquery';
 
+
 export default class Register extends React.Component {
     constructor(props, context) {
       super(props, context);
@@ -27,7 +28,11 @@ export default class Register extends React.Component {
         facebookError:false,
         instagramError:false,
         websiteError:false,
-        passwordError:false
+        passwordError:false,
+        emailRegistredError:false,
+        registerDisable:false,
+        passwordPatError:false,
+        emailInvalidError:false
       };
     }
 
@@ -47,7 +52,7 @@ export default class Register extends React.Component {
     }
 
     signup() {
-      var isEverythingCorrect = 8;
+      var isEverythingCorrect = 10;
       if(!this.state.name){
         
         this.setState({
@@ -57,6 +62,8 @@ export default class Register extends React.Component {
         isEverythingCorrect--;
       }
 
+      
+
       if(!this.state.email){
         this.setState({
           emailError:true
@@ -64,6 +71,15 @@ export default class Register extends React.Component {
       }else{
         isEverythingCorrect--;
       }
+
+      if(!(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(this.state.email))){
+        this.setState({
+          emailInvalidError:true
+        })
+      }else{
+        isEverythingCorrect--;
+      }
+
       if(!this.state.phone){
         this.setState({
           phoneError:true
@@ -109,8 +125,20 @@ export default class Register extends React.Component {
         isEverythingCorrect--;
       }
 
+      if(!(this.state.password.match(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/))){
+        this.setState({
+          passwordPatError:true,
+          passwordError:false
+        })
+      }else{
+        isEverythingCorrect--;
+      }
+
       if(isEverythingCorrect === 0){
-        const url = 'http://localhost:8888/Self/Project/world%20artography/code/react-app/server/user/signup.php';
+        this.setState({
+          registerDisable:true
+        })
+        const url = '/server/user/signup.php';
         const data = {
           name:this.state.name,
           email:this.state.email,
@@ -125,13 +153,25 @@ export default class Register extends React.Component {
         $.post(url,
           data,
           (data,status) => {
+            this.setState({
+              registerDisable:false
+            })
             console.log(data)
-            window.localStorage.setItem("token",data.token);
-            window.localStorage.setItem("name",data.name);
-            window.localStorage.setItem("email",data.email);
-            window.localStorage.setItem("loggedIn",true);
-            this.props.loginHandler(data.token, data.name, data.email)
-            this.handleClose();
+            if(data.message === 'email already exists!'){
+              this.setState({
+                emailRegistredError:true
+              })
+            }
+            else{
+              // window.localStorage.setItem("token",data.token);
+              // window.localStorage.setItem("name",data.name);
+              // window.localStorage.setItem("email",data.email);
+              // window.localStorage.setItem("loggedIn",true);
+              // this.props.loginHandler(data.token, data.name, data.email)
+              this.handleClose();
+              this.props.registerConfirmShowHandler()
+            }
+            
           });
       }
       
@@ -143,7 +183,10 @@ export default class Register extends React.Component {
       var key = e.target.getAttribute("name");
       this.setState({
         [key]: e.target.value,
-        [key+"Error"]:false
+        [key+"Error"]:false,
+        emailRegistredError:false,
+        passwordPatError:false,
+        [key+"InvalidError"]:false,
       })
     }
     inputBlurHander = (e) => {
@@ -159,7 +202,7 @@ export default class Register extends React.Component {
         <div>
           
   
-          <Modal show={this.state.show} onHide={this.handleClose}>
+          <Modal show={this.state.show} onHide={this.handleClose} className="home-modal">
           
           <div className="close-modal" data-dismiss="modal" onClick={() => this.handleClose()}></div>
           
@@ -196,6 +239,16 @@ export default class Register extends React.Component {
                   :
                   null
                   }
+                  {this.state.emailRegistredError ? 
+                  <span className="error">This Email ID is already registered</span>
+                  :
+                  null
+                  }
+                  {this.state.emailInvalidError ? 
+                  <span className="error">This Email ID is Not valid</span>
+                  :
+                  null
+                  }
                 </div>
               </div>
               <div className="col-md-4 col-sm-6 col-xs-12">
@@ -211,7 +264,7 @@ export default class Register extends React.Component {
               </div>
               <div className="col-md-4 col-sm-6 col-xs-12">
                 <div className="form-group">
-                <label className="form-control-placeholder">Country</label>
+                
                   <select required="" name="country" className="form-control" onChange= {this.inputHandler}>
                     
                       <option value="">- Select Country -</option>
@@ -515,12 +568,17 @@ export default class Register extends React.Component {
                         :
                         null
                         }
+                        {this.state.passwordPatError ? 
+                        <span className="error">Password should contain at least one numeric digit and a special character</span>
+                        :
+                        null
+                        }
                       </div>
                     </div>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" data-dismiss="modal" onClick={ () => this.handleClose()}>Close</button>
-                <button type="button" className="btn btn-primary" onClick={() => this.signup()}>Register</button>
+                <button type="button" className= {this.state.registerDisable ? 'btn btn-primary disabled' : 'btn btn-primary' }  onClick={() => this.signup()}>Register</button>
               </div>
               
             </form>

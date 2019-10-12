@@ -59,6 +59,7 @@ class User{
         $stmt->bindParam(":token", $this->token);
         // execute query
         if($stmt->execute()){
+
             $this->id = $this->conn->lastInsertId();
             return true;
         }
@@ -69,7 +70,7 @@ class User{
     function login(){
         // select all query
         $query = "SELECT
-                    `id`, `email`, `password`, `created`, `name`, `token`
+                    `id`, `email`, `password`, `created`, `name`, `token`, `active`
                 FROM
                     " . $this->table_name . " 
                 WHERE
@@ -95,7 +96,7 @@ class User{
 
 
     function uploadImage(){
-        $query = "UPDATE images SET email=:email,name=:name, category=:category, title=:title, camera=:camera, lens=:lens, aperture=:aperture, shutter=:shutter, iso=:iso, other=:other, created=:created, url=:url WHERE id=:id";
+        $query = "UPDATE images SET email=:email,name=:name, category=:category, title=:title, camera=:camera, lens=:lens, aperture=:aperture, shutter=:shutter, iso=:iso, other=:other, created=:created, url=:url, approved=:approved, dcpcoupon=:dcpcoupon, paypalTranId=:paypalTranId WHERE id=:id";
         // prepare query
         $stmt = $this->conn->prepare($query);
         // sanitize
@@ -113,6 +114,11 @@ class User{
         $this->id=htmlspecialchars(strip_tags($this->id));
         $this->url=htmlspecialchars(strip_tags($this->url));
 
+        $this->dcpcoupon=htmlspecialchars(strip_tags($this->dcpcoupon));
+        $this->paypalTranId=htmlspecialchars(strip_tags($this->paypalTranId));
+        $this->approved=htmlspecialchars(strip_tags($this->approved));
+
+
         // bind values
         $stmt->bindParam(":email", $this->email);
         $stmt->bindParam(":name", $this->name);
@@ -127,6 +133,9 @@ class User{
         $stmt->bindParam(":created", $this->created);
         $stmt->bindParam(":id", $this->id);
         $stmt->bindParam(":url", $this->url);
+        $stmt->bindParam(":approved", $this->approved);
+        $stmt->bindParam(":dcpcoupon", $this->dcpcoupon);
+        $stmt->bindParam(":paypalTranId", $this->paypalTranId);
 
         // $stmt->bindParam(":email", $this->email);
         // $stmt->bindParam(":name", $this->name);
@@ -146,6 +155,59 @@ class User{
         }
         return false;
     }
+
+
+    function countImages(){
+        $query = "SELECT * FROM images WHERE email='".$this->email."'";
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+        // execute query
+        $stmt->execute();
+        if($stmt){
+            return $stmt;
+        }
+        
+    }
+
+
+
+
+    function activate(){
+        $query = "UPDATE users SET active='active' WHERE token=:token";
+        // prepare query
+        $stmt = $this->conn->prepare($query);
+        // sanitize
+        $this->token=htmlspecialchars(strip_tags($this->token));
+        
+
+
+        // bind values
+        $stmt->bindParam(":token", $this->token);
+        
+
+        // $stmt->bindParam(":email", $this->email);
+        // $stmt->bindParam(":name", $this->name);
+        // $stmt->bindParam(":password", $this->password);
+        // $stmt->bindParam(":phone", $this->phone);
+        // $stmt->bindParam(":country", $this->country);
+        // $stmt->bindParam(":facebook", $this->facebook);
+        // $stmt->bindParam(":instagram", $this->instagram);
+        // $stmt->bindParam(":website", $this->website);
+        // $stmt->bindParam(":created", $this->created);
+        // $stmt->bindParam(":token", $this->token);
+        // execute query
+        
+        if($stmt->execute()){
+            $this->id = $this->conn->lastInsertId();
+            return true;
+        }
+        return false;
+    }
+
+
+
+
+
     
     // a function to check if email already exists
     function isAlreadyExist(){

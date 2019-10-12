@@ -53,7 +53,7 @@ export default class Login extends React.Component {
       }
 
       if(isEverythingCorrect === 0){
-        const url = 'http://localhost:8888/Self/Project/world%20artography/code/react-app/server/user/login.php?email='+this.state.email+'&password='+this.state.password;
+        const url = '/server/user/login.php?email='+this.state.email+'&password='+this.state.password;
         console.log(url)
         const data = {
           email:this.state.email,
@@ -69,7 +69,19 @@ export default class Login extends React.Component {
             window.localStorage.setItem("email",data.email);
             window.localStorage.setItem("loggedIn",true);
             this.props.loginHandler(data.token, data.name, data.email)
-            this.handleClose();
+
+            const url = '/server/images/countimages.php?email='+ data.email;
+            $.get(url,
+              (data1) => {
+                if(data1.status){
+                    console.log(data1.data)
+                    window.localStorage.setItem("totalImages",data1.data)
+                    this.handleClose();
+                }
+                
+              });
+
+            
             }
             else{
               this.setState({
@@ -78,6 +90,9 @@ export default class Login extends React.Component {
             }
             
           });
+
+
+
       }
 
     }
@@ -96,10 +111,10 @@ export default class Login extends React.Component {
     render() {
   
       return (
-        <div>
+        <div className="azhar">
           
   
-          <Modal show={this.state.show} onHide={this.handleClose}>
+          <Modal show={this.state.show} onHide={this.handleClose} className="home-modal">
           
           <div className="close-modal" data-dismiss="modal" onClick={() => this.handleClose()}></div>
           <div className="col-md-6 col register-text">

@@ -21,14 +21,24 @@ if($stmt->rowCount() > 0){
     // get retrieved row
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     // create array
-    $user_arr=array(
-        "status" => true,
-        "message" => "Successfully Login!",
-        "id" => $row['id'],
-        "email" => $row['email'],
-        "name" => $row['name'],
-        "token" => $row['token']
-    );
+
+    if($row['active'] == 'active'){
+        $user_arr=array(
+            "status" => true,
+            "message" => "Successfully Login!",
+            "id" => $row['id'],
+            "email" => $row['email'],
+            "name" => $row['name'],
+            "token" => $row['token']
+        );
+    }
+    else{
+        $user_arr=array(
+            "status" => false,
+            "message" => "Not active"
+        );
+    }
+    
 }
 else{
     $user_arr=array(
