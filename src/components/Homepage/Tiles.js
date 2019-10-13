@@ -1,9 +1,31 @@
 import React, { Component } from 'react'
+import $ from "jquery";
+import "@fancyapps/fancybox/dist/jquery.fancybox.min.css";
+window.jQuery = $;
+require("@fancyapps/fancybox/dist/jquery.fancybox.js");
 
-export default class Homepage extends Component {
+
+export default class Tiles extends Component {
     state = {
         
     }
+
+    componentDidMount = () => {
+        $('[data-fancybox]').fancybox({
+          buttons: ["slideShow", "share", "zoom", "fullScreen", "close"],
+          thumbs: {
+            autoStart: true
+          },
+          share:  {
+            url: function (instance, item) {
+              return window.location.href;
+            }
+        }
+        });
+
+    }
+
+
 
     tileClickHandler = (id) => {
         var idn = id.target.id;
@@ -47,15 +69,21 @@ export default class Homepage extends Component {
                         images.push(<div key={i - 1}  className="img-thumb" id={i}  style={{background:`url(${ this.props.imagesData[i - 1].url}) center center no-repeat`,backgroundSize:`cover`}}><div onClick={(e) => this.props.removeTileHandler(e)} id={this.props.imagesData[i - 1].id} className="btn-remove">X</div></div>)
                     }
                     else{
-                        images.push(
-                            <a key={i - 1} className="img-thumb" id={this.props.imagesData[i - 1].id} rel={this.props.imagesData[i - 1].email} href={ this.props.imagesData[i - 1].url.search('blob') == -1 ? "/server/images/"+this.props.imagesData[i - 1].url : this.props.imagesData[i - 1].url} title="title" data-fancybox="gallery" data-caption={capHtml} style={{background:`url(${ this.props.imagesData[i - 1].url.search('blob') == -1 ? "/server/images/"+this.props.imagesData[i - 1].url : this.props.imagesData[i - 1].url}) center center no-repeat`,backgroundSize:`cover`}}>
-                            
-                            <figcaption>
-                                <div id={this.props.imagesData[i - 1].id} className="like">Like <i className="fas fa-heart"></i></div><h6>{this.props.imagesData[i - 1].title}</h6><p>Photo by {this.props.imagesData[i - 1].name}</p>
-                            
-                            </figcaption>
-                            </a>
+                        if(this.props.imagesData[i - 1].approved === 'true' || this.props.imagesData[i - 1].approved === true){
+                            images.push(
+                                <a key={i - 1} className="img-thumb" id={this.props.imagesData[i - 1].id} rel={this.props.imagesData[i - 1].email} href={ this.props.imagesData[i - 1].url.search('blob') == -1 ? "/server/images/"+this.props.imagesData[i - 1].url : this.props.imagesData[i - 1].url} title="title" data-fancybox={this.props.imagesData[i - 1].email} data-caption={capHtml} style={{background:`url(${ this.props.imagesData[i - 1].url.search('blob') == -1 ? "/server/images/"+this.props.imagesData[i - 1].url : this.props.imagesData[i - 1].url}) center center no-repeat`,backgroundSize:`cover`}}>
+                                
+                                <figcaption>
+                                    <div id={this.props.imagesData[i - 1].id} className="like">Like <i className="fas fa-heart"></i></div><h6>{this.props.imagesData[i - 1].title}</h6><p>Photo by {this.props.imagesData[i - 1].name}</p>
+                                
+                                </figcaption>
+                                </a>
                             )
+                        }
+                        else{
+                           images.push(<div key={i - 1} className="img-thumb" id={i} style={{background:`url(${ this.props.imagesData[i - 1].url.search('blob') == -1 ? "/server/images/"+this.props.imagesData[i - 1].url : this.props.imagesData[i - 1].url}) center center no-repeat`,backgroundSize:`cover`}}></div>)
+                        }
+                        
                     }
                     
                 }

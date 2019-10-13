@@ -32,7 +32,7 @@ export default class Layout extends React.Component{
         return(
 
             
-            <HashRouter>
+            <BrowserRouter>
             <React.Fragment>
                 
                 <Header loginOpen = {this.state.loginOpen}/>
@@ -55,7 +55,7 @@ export default class Layout extends React.Component{
                 <Footer/>
                 <ScrollToTop/>
             </React.Fragment>
-            </HashRouter>
+            </BrowserRouter>
             
             
     

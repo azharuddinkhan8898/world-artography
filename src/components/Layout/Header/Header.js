@@ -121,10 +121,10 @@ export default class Header extends React.Component {
                 <img src={"/images/logo.svg"} width="220px"/>
               </a>
 
-              <div class="mob-btn" onClick={() => this.showMobileMenuHandler()}><i class="fas fa-bars"></i></div>
+              <div className="mob-btn" onClick={() => this.showMobileMenuHandler()}><i className="fas fa-bars"></i></div>
               
               <div className="mob-menu pull-right" style={{display: this.state.showMobileMenu ?  'block' : 'none' }}>
-              <div class="close-ico" onClick={() => this.HideMobileMenuHandler()}></div>
+              <div className="close-ico" onClick={() => this.HideMobileMenuHandler()}></div>
                   <ul className="navbar-nav ml-auto main-nav" id="">
                     <li><NavLink to="/"><i className="fas fa-home"></i></NavLink></li>
                     <li><NavLink to="/about">About</NavLink></li>

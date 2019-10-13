@@ -15,6 +15,7 @@ export default class Login extends React.Component {
         password:'',
         passwordError: false,
         emailError:false,
+        loginDisabled: false
       };
     }
 
@@ -55,6 +56,9 @@ export default class Login extends React.Component {
       if(isEverythingCorrect === 0){
         const url = '/server/user/login.php?email='+this.state.email+'&password='+this.state.password;
         console.log(url)
+        this.setState({
+          loginDisabled:true
+        })
         const data = {
           email:this.state.email,
           password:this.state.password,
@@ -69,7 +73,9 @@ export default class Login extends React.Component {
             window.localStorage.setItem("email",data.email);
             window.localStorage.setItem("loggedIn",true);
             this.props.loginHandler(data.token, data.name, data.email)
-
+            this.setState({
+              loginDisabled:false
+            })
             const url = '/server/images/countimages.php?email='+ data.email;
             $.get(url,
               (data1) => {
@@ -85,7 +91,8 @@ export default class Login extends React.Component {
             }
             else{
               this.setState({
-                errorPass:"Invalid Email ID or Password!"
+                errorPass:"Invalid Email ID or Password!",
+                loginDisabled:false
               })
             }
             
@@ -148,7 +155,7 @@ export default class Login extends React.Component {
                       }
                   </div>
                   <div className="form-group">
-                      <a href="#" className="btn btn-primary btn-block" onClick = {() => this.signin()}>Login</a>
+                      <button className={this.state.loginDisabled ? 'btn btn-primary btn-block disabled' : 'btn btn-primary btn-block'} onClick = {() => this.signin()}>Login</button>
                       {
                         this.state.errorPass ? <p className="errorpass">{this.state.errorPass}</p>
                         :

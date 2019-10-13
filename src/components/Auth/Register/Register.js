@@ -52,7 +52,7 @@ export default class Register extends React.Component {
     }
 
     signup() {
-      var isEverythingCorrect = 10;
+      var isEverythingCorrect = 7;
       if(!this.state.name){
         
         this.setState({
@@ -94,27 +94,27 @@ export default class Register extends React.Component {
       }else{
         isEverythingCorrect--;
       }
-      if(!this.state.facebook){
-        this.setState({
-          facebookError:true
-        })
-      }else{
-        isEverythingCorrect--;
-      }
-      if(!this.state.instagram){
-        this.setState({
-          instagramError:true
-        })
-      }else{
-        isEverythingCorrect--;
-      }
-      if(!this.state.website){
-        this.setState({
-          websiteError:true
-        })
-      }else{
-        isEverythingCorrect--;
-      }
+      // if(!this.state.facebook){
+      //   this.setState({
+      //     facebookError:true
+      //   })
+      // }else{
+      //   isEverythingCorrect--;
+      // }
+      // if(!this.state.instagram){
+      //   this.setState({
+      //     instagramError:true
+      //   })
+      // }else{
+      //   isEverythingCorrect--;
+      // }
+      // if(!this.state.website){
+      //   this.setState({
+      //     websiteError:true
+      //   })
+      // }else{
+      //   isEverythingCorrect--;
+      // }
       console.log(!this.state.password1, !(this.state.password === this.state.password1))
       if(!this.state.password1 || !(this.state.password === this.state.password1)){
         this.setState({

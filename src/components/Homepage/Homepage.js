@@ -19,7 +19,8 @@ export default class Homepage extends Component {
         alreadyUploadedImages:0,
         MaxImagePopupShow:false,
         editingTileId:'',
-        PaymentConfirmationShow:false
+        PaymentConfirmationShow:false,
+        imagesLoaded:false
     }
 
     tileClickHandler = (id) => {
@@ -224,7 +225,8 @@ export default class Homepage extends Component {
                 var imagesCopy = data.data;
                 this.setState({
                     images:imagesCopy,
-                    tilesLoadingError:""
+                    tilesLoadingError:"",
+                    imagesLoaded:true
                 })
 
             }
@@ -277,7 +279,11 @@ export default class Homepage extends Component {
               </div>
                 <h1 className="h3 mb-4 text-gray-800"></h1>
                 <div id="grid-wrapper" className="clearfix  text-center">
-                    <Tiles removeTileHandler = {(e) => this.removeTileHandler(e)}  tileClickHandler = { (i) => this.tileClickHandler(i)} imagesData = {this.state.images}/>
+                    {this.state.imagesLoaded ? 
+                        <Tiles removeTileHandler = {(e) => this.removeTileHandler(e)}  tileClickHandler = { (i) => this.tileClickHandler(i)} imagesData = {this.state.images}/>
+                        :
+                        null
+                    }
                 </div>
                     <ErrorAlert msg = {this.state.errorLogin}/>
                     {this.state.localImages.length ? 
