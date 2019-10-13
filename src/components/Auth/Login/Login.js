@@ -155,7 +155,7 @@ export default class Login extends React.Component {
                       }
                   </div>
                   <div className="form-group">
-                      <button className={this.state.loginDisabled ? 'btn btn-primary btn-block disabled' : 'btn btn-primary btn-block'} onClick = {() => this.signin()}>Login</button>
+                      <a className={this.state.loginDisabled ? 'btn btn-primary btn-block disabled' : 'btn btn-primary btn-block'} onClick = {() => this.signin()}>Login</a>
                       {
                         this.state.errorPass ? <p className="errorpass">{this.state.errorPass}</p>
                         :
