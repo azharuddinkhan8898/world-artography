@@ -66,19 +66,24 @@ export default class Register extends React.Component {
 
       if(!this.state.email){
         this.setState({
-          emailError:true
+          emailError:true,
+          emailInvalidError:false
         })
       }else{
+
+        if(!(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(this.state.email))){
+          this.setState({
+            emailInvalidError:true
+          })
+        }else{
+          isEverythingCorrect--;
+        }
+
+
         isEverythingCorrect--;
       }
 
-      if(!(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(this.state.email))){
-        this.setState({
-          emailInvalidError:true
-        })
-      }else{
-        isEverythingCorrect--;
-      }
+      
 
       if(!this.state.phone){
         this.setState({
@@ -116,23 +121,24 @@ export default class Register extends React.Component {
       //   isEverythingCorrect--;
       // }
       console.log(!this.state.password1, !(this.state.password === this.state.password1))
-      if(!this.state.password1 || !(this.state.password === this.state.password1)){
+      if(!(this.state.password === this.state.password1)){
         this.setState({
           passwordError:true
         })
       }
       else{
         isEverythingCorrect--;
+        if(!(this.state.password.match(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/))){
+          this.setState({
+            passwordPatError:true,
+            passwordError:false
+          })
+        }else{
+          isEverythingCorrect--;
+        }
       }
 
-      if(!(this.state.password.match(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/))){
-        this.setState({
-          passwordPatError:true,
-          passwordError:false
-        })
-      }else{
-        isEverythingCorrect--;
-      }
+      
 
       if(isEverythingCorrect === 0){
         this.setState({
@@ -569,7 +575,7 @@ export default class Register extends React.Component {
                         null
                         }
                         {this.state.passwordPatError ? 
-                        <span className="error">Password should contain at least one numeric digit and a special character</span>
+                        <span className="error">Password should be atleast 7 letters long and contain at least one numeric digit and a special character </span>
                         :
                         null
                         }

@@ -43,15 +43,101 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-    
+    <div  class='alert alert-danger fixed likeLogin' style="display:none; z-index: 99999999" role="alert">Please Login to Like</div>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script> -->
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js"></script> -->
   <script src="https://kit.fontawesome.com/8eab6cc604.js" crossorigin="anonymous"></script>
   <script>
-  //   $(window).bind('beforeunload', function() {
-  //   return 'It will close the current chat';
-  // });
+    $(function(){
+      $(".likeLogin").show()
+      function setCookie(cname, cvalue, exdays = 30, callback) {
+          var d = new Date();
+          d.setTime(d.getTime() + (exdays*24*60*60*1000));
+          var expires = "expires="+ d.toUTCString();
+          document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+          callback(true);
+      }
+
+      function getCookie(cname, callback) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            callback(c.substring(name.length, c.length));
+          }
+          else{
+          callback("");
+          }
+        }
+        
+      }
+
+
+      $('body').on('click', '.like', function() {
+          var id = $(this).attr('id');
+          // if(getCookie)
+          getCookie("liked", (liked) => {
+            if(liked.split(" ").indexOf(id) !== -1){
+              $(".img-thumb#" + id).find("like").addClass('active')
+              $(".img-thumb#" + id).find("like").addClass('disabled')
+            }
+            else{
+              const url1 = '/server/images/updateLikes.php';
+          const data = {
+              id:parseInt(id)
+          }
+          $.post(url1,data,
+          (data) => {
+            if(data.status){
+                console.log(data)
+                getCookie("liked", (gl) => {
+                  console.log((gl + " " + id))
+                  setCookie('liked', (gl + " " + id) , 30, (e) => {
+                    console.log(e)
+                    $(this).addClass('active')
+                    $(this).addClass('disabled')
+                    $(".img-thumb#" + id).find("like").addClass('active')
+                    $(".img-thumb#" + id).find("like").addClass('disabled')
+                  })
+                })
+                
+            }
+            else{
+                console.log(data)
+            }
+          });
+            }
+          })
+          //if(window.localStorage.getItem("email") && window.localStorage.getItem("email") != ""){
+            
+          //}
+          // else{
+          //   $(".likeLogin").addClass("active");
+          //   setTimeout(function(){
+          //     $(".likeLogin").removeClass("active");
+          //   }, 3000)
+          // }
+          
+        
+      });
+
+      $("body").on("click", '.img-thumb', function(){
+        var id = $(this).attr("id");
+        getCookie("liked", (liked) => {
+            if(liked.split(" ").indexOf(id) !== -1){
+              $(".fancybox-caption__body").find(".like#"+ id).addClass('active')
+              $(".fancybox-caption__body").find(".like#"+ id).addClass('disabled')
+            }
+          })
+      })
+    })
+ 
   </script>
   </body>
 </html>

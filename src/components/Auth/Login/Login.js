@@ -83,6 +83,7 @@ export default class Login extends React.Component {
                     console.log(data1.data)
                     window.localStorage.setItem("totalImages",data1.data)
                     this.handleClose();
+                    window.location.reload();
                 }
                 
               });

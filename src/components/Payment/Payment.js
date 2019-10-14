@@ -5,7 +5,6 @@ import $ from 'jquery';
 import {getDataUri} from './../utils/codeSnippet';
 import PaymentSuccessPopup from './PaymentSuccessPopup';
 import PaymentFailedPopup from  './PaymentFailedPopup';
-import {Link} from "react-router-dom";
 
 export default class Homepage extends Component {
     state = {

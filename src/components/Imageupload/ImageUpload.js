@@ -54,9 +54,22 @@ export default class ImageUpload extends React.Component {
       })
     }
   
-    handleClose() {
+    handleClose(sub) {
+      console.log(sub)
       this.setState({ show: false });
       this.props.ImageUploadCloseHandler();
+      if(sub !== 'submit'){
+        const url = '/server/images/removeActiveImage.php';
+        const data = {
+            id:this.state.currentId
+        }
+        $.post(url, data, (data,status) => {
+            console.log(data,status )
+            if(data.status){
+            }
+        });
+      }
+      
     }
   
     handleShow() {
@@ -137,7 +150,7 @@ export default class ImageUpload extends React.Component {
       }
 
       if(isEverythingCorrect === 0){
-        // const url = 'http://localhost:8888/Self/Project/world%20artography/code/react-app/server/images/uploadData.php';
+        // const url = 'http://10.140.160.53:8888/Self/Project/world%20artography/code/react-app/server/images/uploadData.php';
         // console.log(url)
         const data = {
           id:this.state.currentId,
@@ -172,7 +185,7 @@ export default class ImageUpload extends React.Component {
             window.localStorage.setItem("images", JSON.stringify(imagesCopy))
         }
 
-        this.handleClose()
+        this.handleClose('submit');
         // $.post(url,
         //     data,
         //     (data,status) => {

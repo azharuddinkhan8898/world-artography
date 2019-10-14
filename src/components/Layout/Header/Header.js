@@ -13,7 +13,8 @@ export default class Header extends React.Component {
     token:'',
     email:'',
     RegisterConfirmShow:false,
-    showMobileMenu: true
+    showMobileMenu: true,
+    showMobileMenuButton:false
   }
   loginClickHandler(){
     this.setState({
@@ -98,7 +99,8 @@ export default class Header extends React.Component {
     var token = window.localStorage.getItem("token");
     if(window.innerWidth <= 1024){
       this.setState({
-        showMobileMenu:false
+        showMobileMenu:false,
+        showMobileMenuButton: true
       })
     }
     if(loggedIn && loggedIn === 'true'){
@@ -121,7 +123,13 @@ export default class Header extends React.Component {
                 <img src={"/images/logo.svg"} width="220px"/>
               </a>
 
-              <div className="mob-btn" onClick={() => this.showMobileMenuHandler()}><i className="fas fa-bars"></i></div>
+
+              {this.state.showMobileMenuButton ? 
+                <div className="mob-btn" onClick={() => this.showMobileMenuHandler()}><i className="fas fa-bars"></i></div>
+              :
+                null
+              }
+              
               
               <div className="mob-menu pull-right" style={{display: this.state.showMobileMenu ?  'block' : 'none' }}>
               <div className="close-ico" onClick={() => this.HideMobileMenuHandler()}></div>
@@ -132,9 +140,9 @@ export default class Header extends React.Component {
                     <li><NavLink to="prizes">Prizes</NavLink></li>
                     <li><NavLink to="contact">Contact</NavLink></li>
                     {this.state.loggedIn ? 
-                      <li><a href="#" onClick={() => this.logoutHandler()}>{this.state.name} (Logout)</a></li>
+                      <li><a onClick={() => this.logoutHandler()}>{this.state.name} (Logout)</a></li>
                     :
-                      <li><a href="#" onClick={() => this.loginClickHandler()}>Login/Registration</a></li>
+                      <li><a onClick={() => this.loginClickHandler()}>Login/Registration</a></li>
                     }
                     
                   </ul>
@@ -155,7 +163,7 @@ export default class Header extends React.Component {
           }
 
           {this.state.RegisterConfirmShow ? 
-            <RegisterConfirm registerConfirmCloseHandler = {this.registerConfirmCloseHandler} show={this.state.RegisterConfirmShow} />
+            <RegisterConfirm registerConfirmCloseHandler = {() => this.registerConfirmCloseHandler()} show={this.state.RegisterConfirmShow} />
             :
             null
           }

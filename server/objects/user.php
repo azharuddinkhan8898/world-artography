@@ -94,6 +94,16 @@ class User{
         
     }
 
+    function getActiveImage(){
+        // select all query
+        $query = "SELECT `id`, `activeCreated`, `active` FROM images WHERE id='".$this->id."'";
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+        // execute query
+        $stmt->execute();
+        return $stmt;
+    }
+
 
     function uploadImage(){
         $query = "UPDATE images SET email=:email,name=:name, category=:category, title=:title, camera=:camera, lens=:lens, aperture=:aperture, shutter=:shutter, iso=:iso, other=:other, created=:created, url=:url, approved=:approved, dcpcoupon=:dcpcoupon, paypalTranId=:paypalTranId WHERE id=:id";
@@ -148,6 +158,81 @@ class User{
         // $stmt->bindParam(":created", $this->created);
         // $stmt->bindParam(":token", $this->token);
         // execute query
+        
+        if($stmt->execute()){
+            $this->id = $this->conn->lastInsertId();
+            return true;
+        }
+        return false;
+    }
+
+
+
+    function updateLikes(){
+        $query = "UPDATE images SET likes=likes+1 WHERE id=:id";
+        // prepare query
+        $stmt = $this->conn->prepare($query);
+        // sanitize
+
+        $this->id=htmlspecialchars(strip_tags($this->id));
+
+
+        // bind values
+        $stmt->bindParam(":id", $this->id);
+
+        // $stmt->bindParam(":email", $this->email);
+        // $stmt->bindParam(":name", $this->name);
+        // $stmt->bindParam(":password", $this->password);
+        // $stmt->bindParam(":phone", $this->phone);
+        // $stmt->bindParam(":country", $this->country);
+        // $stmt->bindParam(":facebook", $this->facebook);
+        // $stmt->bindParam(":instagram", $this->instagram);
+        // $stmt->bindParam(":website", $this->website);
+        // $stmt->bindParam(":created", $this->created);
+        // $stmt->bindParam(":token", $this->token);
+        // execute query
+        
+        if($stmt->execute()){
+            $this->id = $this->conn->lastInsertId();
+            return true;
+        }
+        return false;
+    }
+
+
+    function activeImage(){
+        $query = "UPDATE images SET active='active', activeCreated=:activeCreated WHERE id=:id";
+        // prepare query
+        $stmt = $this->conn->prepare($query);
+        // sanitize
+
+        $this->id=htmlspecialchars(strip_tags($this->id));
+        $this->activeCreated=htmlspecialchars(strip_tags($this->activeCreated));
+
+        // bind values
+        $stmt->bindParam(":id", $this->id);
+        $stmt->bindParam(":activeCreated", $this->activeCreated);
+        
+        if($stmt->execute()){
+            $this->id = $this->conn->lastInsertId();
+            return true;
+        }
+        return false;
+    }
+
+
+    function removeActiveImage(){
+        $query = "UPDATE images SET active=null, activeCreated=:activeCreated WHERE id=:id";
+        // prepare query
+        $stmt = $this->conn->prepare($query);
+        // sanitize
+
+        $this->id=htmlspecialchars(strip_tags($this->id));
+        $this->activeCreated=htmlspecialchars(strip_tags($this->activeCreated));
+
+        // bind values
+        $stmt->bindParam(":id", $this->id);
+        $stmt->bindParam(":activeCreated", $this->activeCreated);
         
         if($stmt->execute()){
             $this->id = $this->conn->lastInsertId();

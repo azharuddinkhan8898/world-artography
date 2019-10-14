@@ -25,10 +25,15 @@ export default class Homepage extends Component {
 
     tileClickHandler = (id) => {
         var idn = id.target.id;
+
+        //var idn = id.target.id;
+        
+
+
         this.setState({
             editingTileId:''
         })
-        // const url = 'http://localhost:8888/Self/Project/world%20artography/code/react-app/server/images/getimages.php?id='+ idn;
+        // const url = 'http://10.140.160.53:8888/Self/Project/world%20artography/code/react-app/server/images/getimages.php?id='+ idn;
         // $.get(url,
         //   (data) => {
         //     if(data.status){
@@ -49,10 +54,64 @@ export default class Homepage extends Component {
         if(window.localStorage.getItem("totalImages") < 5){
             if(window.localStorage.getItem("loggedIn") === 'true' || window.localStorage.getItem("loggedIn") === true){
                 console.log(idn)
-                this.setState({
-                    ImageUploadShow:true,
-                    currentId:idn
-                })
+
+                const url = '/server/images/getActiveImage.php?id='+ idn;
+                console.log(url)
+                $.get(url,
+                (data) => {
+                    console.log(data)
+                    if(data.status){
+                    if(data.message <= 30){
+                        this.setState({
+                            errorLogin:"This tile is been used by someone, please another tile."
+                        })
+                        setTimeout(() => {
+                            this.setState({
+                                errorLogin:"",
+                                
+                            })
+                        }, 3000)
+                    }
+                    else{
+                        const url = '/server/images/activeImage.php';
+                        const data = {
+                            id:idn
+                        }
+                        $.post(url, data, (data,status) => {
+                            console.log(data,status )
+                            if(data.status){
+                                this.setState({
+                                    ImageUploadShow:true,
+                                    currentId:idn
+                                })
+                            }
+                        });
+                    }
+                    
+                        
+                    }
+                    else{
+
+                        const url = '/server/images/activeImage.php';
+                        const data = {
+                            id:idn
+                        }
+                        $.post(url, data, (data,status) => {
+                            console.log(data,status )
+                            if(data.status){
+                                this.setState({
+                                    ImageUploadShow:true,
+                                    currentId:idn
+                                })
+                            }
+                        });
+                        
+                    }
+                    
+                });
+
+
+                
             }
             else{
                 this.setState({
@@ -154,6 +213,15 @@ export default class Homepage extends Component {
         console.log(copycopyLocalImages, this.state.totalImages - 1)
         window.localStorage.setItem('totalImages',parseInt(window.localStorage.getItem('totalImages')) - 1)
         window.localStorage.setItem("images", JSON.stringify(copycopyLocalImages))
+        const url = '/server/images/removeActiveImage.php';
+        const data = {
+            id:e.target.id
+        }
+        $.post(url, data, (data,status) => {
+            console.log(data,status )
+            if(data.status){
+            }
+        });
       }
 
 
@@ -177,7 +245,7 @@ export default class Homepage extends Component {
 
     //     imageUploadHandler = () => {
     //         console.log(this.state.localImages)
-    //         const url = 'http://localhost:8888/Self/Project/world%20artography/code/react-app/server/images/uploadData.php';
+    //         const url = 'http://10.140.160.53:8888/Self/Project/world%20artography/code/react-app/server/images/uploadData.php';
     //         var data = this.state.localImages;
     //         if(this.imagesUploaded <data.length){
     //             console.log(this.imagesUploaded)
@@ -238,6 +306,11 @@ export default class Homepage extends Component {
             }
             
           });
+
+        
+
+
+          
 
 
           if(window.localStorage.getItem("email") !== null && window.localStorage.getItem("email") !== ""){
