@@ -156,7 +156,7 @@ export default class Header extends React.Component {
 
                   <div className="clearfix"></div>
             
-            <div style={{textTransform:"uppercase",fontSize: "13px",letterSpacing: ".5px"}} className="color-white"><strong>3 Easy Steps: </strong><i style={{
+            <div style={{textTransform:"uppercase",fontSize: "13px",letterSpacing: ".5px"}} className="color-white mob-hide"><strong>3 Easy Steps: </strong><i style={{
                 color: "#ff321d"}}>1.Click the empty mutli pixel box to upload your image(s)</i><i onClick={() => this.loginClickHandler()} style={{color: "#fff224",
                 cursor: "pointer"}}>- 2.Login/Registration</i>
             <i style={{color: "#307eff"}}>-3.Checkout</i>

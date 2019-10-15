@@ -190,7 +190,7 @@ export default class Homepage extends Component {
                       {/* <li>GST (18%) <span id="gst-amt">2412</span></li> */}
                       <li>
                         
-                      <h5 className="color-white">For DCP Expeditions:<span id="total-amt">₹{this.state.dcpTotalPrice}</span></h5>
+                      <h5 className="color-white">For DCP Expeditions Members:<span id="total-amt">₹{this.state.dcpTotalPrice}</span></h5>
                        </li>
                     </ul>
                   </div>

@@ -27,6 +27,32 @@ export default class Tiles extends Component {
             }
         }
         });
+        var array = document.location.hash.split("-");
+        var selector = array[0].replace("#", "");
+        var number = 0;
+        if (array.length > 1) {
+            var number = parseInt(array[array.length - 1]);
+        }
+        console.log(selector, number);
+        $("[data-fancybox='" + selector + "']").eq(parseInt(number - 1)).trigger("click");
+        // $.fancybox.open(
+        //     $("[data-fancybox='" + selector + "']").eq(parseInt(number - 1)),
+        //     {
+        //         caption: function (instance, item) {
+        //             return $(this).find('figcaption').html();
+        //         },
+        //         buttons: ["slideShow", "share", "zoom", "fullScreen", "close"],
+        //         thumbs: {
+        //             autoStart: true
+        //         },
+        //         share:  {
+        //             url: function (instance, item) {
+        //             return window.location.href;
+        //         }
+        //     }
+        //     }
+        // );
+
         getCookie('liked', (e) => {
             console.log(e)
             this.setState({
@@ -94,7 +120,7 @@ export default class Tiles extends Component {
                     else{
                         if(this.props.imagesData[i - 1].approved === 'true' || this.props.imagesData[i - 1].approved === true){
                             images.push(
-                                <a key={i - 1} className="img-thumb" id={this.props.imagesData[i - 1].id} rel={this.props.imagesData[i - 1].id} href={ this.props.imagesData[i - 1].url.search('blob') == -1 ? "/server/images/"+this.props.imagesData[i - 1].url : this.props.imagesData[i - 1].url} title="title" data-fancybox={this.props.imagesData[i - 1].id} style={{background:`url(${ this.props.imagesData[i - 1].url.search('blob') == -1 ? "/server/images/"+this.props.imagesData[i - 1].url : this.props.imagesData[i - 1].url}) center center no-repeat`,backgroundSize:`cover`}}>
+                                <a key={i - 1} className="img-thumb" id={this.props.imagesData[i - 1].id} rel={this.props.imagesData[i - 1].email} href={ this.props.imagesData[i - 1].url.search('blob') == -1 ? "/server/images/"+this.props.imagesData[i - 1].url : this.props.imagesData[i - 1].url} title="title" data-fancybox={this.props.imagesData[i - 1].email} style={{background:`url(${ this.props.imagesData[i - 1].url.search('blob') == -1 ? "/server/images/"+this.props.imagesData[i - 1].url : this.props.imagesData[i - 1].url}) center center no-repeat`,backgroundSize:`cover`}}>
                                 
                                 <figcaption>
                                     <div id={this.props.imagesData[i - 1].id} className={this.state.likedImages.indexOf(this.props.imagesData[i - 1].id) !== -1 ? 'like active disabled' : 'like'}>Vote</div><h6>{this.props.imagesData[i - 1].title}</h6><p>Photo by {this.props.imagesData[i - 1].name}</p>

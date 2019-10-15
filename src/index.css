@@ -500,6 +500,10 @@ input.image-preview-filename {
   .mobhide {
     display: none;
   }
+  .mob-hide {
+    display: none;
+}
+.flex{display:block}
   .navbar-brand,
   .navbar-nav {
     float: none !important;
@@ -529,7 +533,7 @@ input.image-preview-filename {
     width: 100vw;
     height: 100vh;
     background: rgba(0, 0, 0, 0.9);
-    z-index: 99;
+    z-index: 9999999999999999;
   }
   .close-ico:after,
   .close-ico:before {
@@ -544,6 +548,9 @@ input.image-preview-filename {
   }
 }
 @media screen and (max-width: 960px) {
+  a.navbar-brand img {
+    width: 235px;
+}
   .register-text,
   .register-creative {
     padding-bottom: 40px;
@@ -740,9 +747,9 @@ ol.bullet-1 li {
 }
 
 .inner-pages {
-  color: #414141;
+  color: #fff;
   line-height: 28px;
-  background: #fefefe;
+  background: #111111;
   padding: 30px;
 }
 

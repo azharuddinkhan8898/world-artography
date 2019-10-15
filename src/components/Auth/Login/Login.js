@@ -130,7 +130,7 @@ export default class Login extends React.Component {
             <div className="cont text-center">
               <h3>World Artography<br/>
                 Photography Contest</h3>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+              
               <a href="#" className="btn btn-default" onClick={() => this.props.registerOpenHandler()} data-dismiss="modal" data-toggle="modal" data-target="#register">Register Now</a>
             </div>
           </div>
@@ -167,7 +167,7 @@ export default class Login extends React.Component {
                   </div>
                   <div className="form-group text-center">
 
-                      <a href="#" className="ForgetPwd" value="Login">Forget Password?</a>
+                      {/* <a href="#" className="ForgetPwd" value="Login">Forget Password?</a> */}
                   </div>
               </form>
               </div>

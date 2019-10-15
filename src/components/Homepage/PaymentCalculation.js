@@ -24,7 +24,7 @@ const ErrorAlert = (props) => {
         <div id="payment-bar">
         <span></span>
         <span></span>
-            <p>Uploaded Images ({numOfImages}X₹6700) = ₹{numOfImages * pricePerImage} via Paypal | For DCP Expeditions {dcpPrice}</p>
+            <p>Uploaded Images ({numOfImages}X₹6700) = ₹{numOfImages * pricePerImage} via Paypal | For DCP Expeditions Members {dcpPrice}</p>
             {/* <Link to={{pathname:"/payment", state:{noOfImages:numOfImages, priceImage: pricePerImage}}} className="btn btn-primary">Pay Now</Link> */}
             <button onClick={() => props.PaymentCalculationClickHandler()} className="btn btn-primary">Pay Now</button>
         </div>
