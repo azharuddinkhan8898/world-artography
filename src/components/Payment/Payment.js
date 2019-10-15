@@ -5,6 +5,7 @@ import $ from 'jquery';
 import {getDataUri} from './../utils/codeSnippet';
 import PaymentSuccessPopup from './PaymentSuccessPopup';
 import PaymentFailedPopup from  './PaymentFailedPopup';
+import TnC from './../Layout/TnC'
 
 export default class Homepage extends Component {
     state = {
@@ -16,7 +17,27 @@ export default class Homepage extends Component {
         submitDisabled:false,
         paymentSucsessShow:false,
         PaymentFailedPopupShow:false,
-        tncCheckbox:false
+        tncCheckbox:false,
+        tncPopupShow:false,
+        dcp : [
+          6325,
+          12650,
+          18974,
+          25299,
+          24999,
+        ],
+        dcpTotalPrice: 0
+    }
+
+    tncCloseHandler(){
+        this.setState({
+            tncPopupShow:false
+        })
+    }
+    tncOpenHandler(){
+        this.setState({
+            tncPopupShow:true
+        })
     }
 
     componentDidMount(){
@@ -25,7 +46,8 @@ export default class Homepage extends Component {
             this.setState({
                 noOfimagess:this.props.location.state.noOfImages,
                 pricePerImage:this.props.location.state.priceImage,
-                totalPrice:this.props.location.state.noOfImages * this.props.location.state.priceImage
+                totalPrice:this.props.location.state.noOfImages * this.props.location.state.priceImage,
+                dcpTotalPrice: this.state.dcp[this.props.location.state.noOfImages - 1]
             })
             
         }
@@ -92,7 +114,8 @@ export default class Homepage extends Component {
       }else{
         this.setState({
           submitDisabled:false,
-          paymentSucsessShow:true
+          paymentSucsessShow:true,
+          paymentType:cp
         })
         
         
@@ -142,7 +165,7 @@ export default class Homepage extends Component {
               <div className="panel-heading">
                 {/* <h4>Payments</h4> */}
                 <label className="checkbox-container"
-                  >I Agree to all <a href="/tnc" target="_blank">Terms & Conditions</a>.
+                  >I Agree to all <a onClick = {() => this.tncOpenHandler()} target="_blank">Terms & Conditions</a>.
                   <input type="checkbox" onChange = {(e) => this.checkChangeHandler(e)} />
                   <span className="checkmark"></span>
                 </label>
@@ -156,11 +179,19 @@ export default class Homepage extends Component {
                   >
                     <h4>Payment Informations</h4>
                     <ul>
+                      <li className="">
+                        <h5 className="color-white">Images Uploaded <span>{this.state.noOfimagess}</span></h5>
+                      
+                      </li>
                       <li>
-                        Images Uploaded ({this.state.noOfimagess}x{this.state.pricePerImage}) <span id="amt">{this.state.totalPrice}</span>
+                        <h5 className="color-white">For Paypal:<span id="amt">₹{this.state.totalPrice}</span></h5>
+    
                       </li>
                       {/* <li>GST (18%) <span id="gst-amt">2412</span></li> */}
-                      <li>Total Cost <span id="total-amt">{this.state.totalPrice}</span></li>
+                      <li>
+                        
+                      <h5 className="color-white">For DCP Expeditions:<span id="total-amt">₹{this.state.dcpTotalPrice}</span></h5>
+                       </li>
                     </ul>
                   </div>
                   <div className="col-md-4 pad30">
@@ -207,12 +238,12 @@ export default class Homepage extends Component {
                       <input onChange = {this.dcpChangeHndler} type="text" className="form-control" />
                     </div>
                     <React.Fragment>
-                    <small style={this.state.dcpValue === '' ? {visibility:'hidden'} : null}
+                    {/* <small style={this.state.dcpValue === '' ? {visibility:'hidden'} : null}
                       >Your entries have been accepted, however will be subject
                       to succesful vaidation of code. Succesful entries will be
                       uploaded within 24 hrs. Email notification will be
-                      sent.</small>
-                    <br /><br />
+                      sent.</small> */}
+                    <br />
                     <button style={this.state.dcpValue === '' ? {visibility:'hidden'} : null} onClick={() => this.paymentSucsess(this.state.dcpValue, 'dcp')} className={!this.state.submitDisabled ? 'btn btn-primary' : 'btn btn-primary disabled'}>Submit</button>
                     </React.Fragment>
 
@@ -225,7 +256,7 @@ export default class Homepage extends Component {
             </div>
             <div className="push"></div>
             {this.state.paymentSucsessShow ? 
-            <PaymentSuccessPopup show = {this.state.paymentSucsessShow}/>
+            <PaymentSuccessPopup paymentType = {this.state.paymentType} show = {this.state.paymentSucsessShow}/>
             :
             null
             }
@@ -234,6 +265,11 @@ export default class Homepage extends Component {
               <PaymentFailedPopup show = {this.state.PaymentFailedPopupShow}/>
               :
               null
+            }
+            { this.state.tncPopupShow ? 
+                <TnC tncCloseHandler = {() => this.tncCloseHandler()} show = {this.state.tncPopupShow}/>
+                :
+                null
             }
             </React.Fragment>
                 

@@ -17,18 +17,18 @@ body {
   height: 100%;
   margin: 0;
 }
-.color-white,
-.color-white * {
-  color: #fff;
-}
 #wrapper {
   min-height: 100%;
   /* Equal to height of footer */
   /* But also accounting for potential margin-bottom of last child */
   margin-bottom: -100px;
 }
+footer,
+.push {
+  height: 100px;
+}
 
-.disabled {
+.disabled{
   pointer-events: none;
   cursor: not-allowed;
 }
@@ -86,12 +86,10 @@ i.fas.fa-heart {
 .like {
   border: 1px solid #ccc;
   display: inline-block;
-  padding: 5px 20px;
-  border-radius: 30px!important;
+  padding: 5px 12px 5px 20px;
+  border-radius: 30px !important;
   line-height: 24px;
   cursor: pointer;
-  font-weight: 600;
-  text-transform: uppercase;
 }
 .like.active {
   border: 1px solid #f00;
@@ -162,7 +160,7 @@ body {
 }
 header {
   padding: 0 15px;
-  border-bottom: 5px solid #fff;
+  border-bottom: 1px solid #fff;
 }
 nav.mb-1.navbar.navbar-expand-lg {
   padding: 0;
@@ -171,7 +169,10 @@ nav.mb-1.navbar.navbar-expand-lg {
   margin: 10px 0;
 }
 .navbar-nav {
-  padding: 0 0 10px;
+  padding: 12px 0;
+}
+.navbar-brand {
+  padding: 0;
 }
 .navbar-brand > img {
   display: inline-block;
@@ -310,6 +311,7 @@ figcaption {
 .client-list li {
   display: inline-block;
   margin: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
   padding: 15px;
 }
 ul.client-list li img {
@@ -323,7 +325,7 @@ ul.client-list li img {
   line-height: 18px;
 }
 .client {
-  border-top: 5px solid #fff;
+  border-top: 1px solid #fff;
   padding-top: 10px;
 }
 .form-group {
@@ -351,7 +353,7 @@ label {
 }
 footer {
   color: #fff;
-  border-top: 5px solid #fff;
+  border-top: 1px solid #fff;
   padding: 11px 0;
   font-size: 13px;
 }
@@ -390,9 +392,9 @@ footer {
   color: #969696;
   border-bottom: 1px solid #333;
 }
-/* #paypal-container .panel li:last-child {
+#paypal-container .panel li:last-child {
   color: #fff;
-} */
+}
 #paypal-container .panel.panel-default {
   border-color: #3a3a3a;
 }
@@ -492,20 +494,15 @@ input.image-preview-filename {
     padding: 30px;
     height: 100%;
   }
-  header .close-ico {
-    display: none;
-  }
 }
 @media screen and (max-width: 1024px) {
-  .mobhide {
-    display: none;
-  }
   .navbar-brand,
   .navbar-nav {
     float: none !important;
   }
+  
 
-  .mob-menu {
+.mob-menu {
     display: none;
   }
   .mob-btn {
@@ -584,6 +581,7 @@ input.image-preview-filename {
   position: relative;
 }
 
+
 .payment-screen,
 .payment-screen .modal-dialog {
   margin-top: 100px;
@@ -636,13 +634,13 @@ input.image-preview-filename {
 .payment-screen .modal-header p {
   font-size: 16px;
 }
-.Activate {
+.Activate{
   padding: 50px 0px;
   text-align: center;
   color: #fff;
 }
 
-#payment-bar span {
+#payment-bar span{
   position: absolute;
   top: 0;
   left: 0;
@@ -650,19 +648,23 @@ input.image-preview-filename {
   height: 100%;
   display: block;
   box-sizing: border-box;
+  
 }
-#payment-bar span:before {
-  content: "";
+ #payment-bar span:before
+{
+  content: '';
   position: absolute;
-  width: 100%;
+  width:100%;
   height: 2px;
   background: #50dfdb;
   animation: animate 4s linear infinite;
 }
 
-#payment-bar span:nth-child(2) {
-  transform: rotate(180deg);
+ #payment-bar span:nth-child(2)
+{
+  transform:rotate(180deg);
 }
+
 
 .img-thumb .btn-remove {
   position: absolute;
@@ -697,47 +699,56 @@ ol.bullet-1 li {
   position: relative;
 }
 .img-thumb.loginpop:hover:after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  content: "";
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-  width: 100%;
-  height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+    width: 100%;
+    height: 100%;
 }
 
 .img-thumb.loginpop:hover:before {
-  content: "+";
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: #fff;
-  font-size: 39px;
-  text-align: center;
-  width: 100%;
-  height: 100%;
+    content: '+';
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #fff;
+    font-size: 39px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
 }
+
 
 @keyframes animate {
   0% {
-    transform: scaleX(0);
-    transform-origin: left;
+  transform:scaleX(0);
+  transform-origin: left;
   }
-  50% {
-    transform: scaleX(1);
-    transform-origin: left;
+  50%
+  {
+    transform:scaleX(1);
+  transform-origin: left;
   }
-  50.1% {
-    transform: scaleX(1);
-    transform-origin: right;
+  50.1%
+  {
+    transform:scaleX(1);
+  transform-origin: right;
+    
   }
+  
+  100%
+  {
+    transform:scaleX(0);
+  transform-origin: right;
+    
+  }
+  
+  
+} 
 
-  100% {
-    transform: scaleX(0);
-    transform-origin: right;
-  }
-}
 
 .inner-pages {
   color: #414141;
@@ -756,6 +767,8 @@ ol.bullet-1 li {
   text-transform: uppercase;
   font-weight: 300;
 }
+
+
 
 .checkbox-container {
   display: block;
@@ -815,16 +828,20 @@ ol.bullet-1 li {
   transform: rotate(45deg);
 }
 
+
+
+
+
 /* Azhar CSS */
 
-.errorpass {
+.errorpass{
   font-size: 14px;
-  color: #f00;
-  text-align: center;
-  margin-top: 16px;
+    color: #f00;
+    text-align: center;
+    margin-top: 16px;
 }
 
-.payment-calculation {
+.payment-calculation{
   position: fixed;
   bottom: 0px;
   left: 0px;

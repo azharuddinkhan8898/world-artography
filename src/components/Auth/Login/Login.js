@@ -27,6 +27,7 @@ export default class Login extends React.Component {
     }
   
     handleClose() {
+      console.log("dloggedIn")
       this.setState({ show: false });
       this.props.closeHandler();
     }

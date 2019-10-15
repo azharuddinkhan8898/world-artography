@@ -56,7 +56,7 @@ $decodedData = base64_decode($data);
 // $decodedData = base64_decode($encodedData);
 
 
-$code = bin2hex(random_bytes($length));
+$code = bin2hex(openssl_random_pseudo_bytes($length));
 file_put_contents('uploads/a' . $code . '.jpg', $decodedData);
 
 

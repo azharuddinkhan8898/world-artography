@@ -6,6 +6,9 @@ import PaymentCalculation from './PaymentCalculation'
 import $ from 'jquery';
 import MaxImagePopup from './MaxImagePopup';
 import PaymentConfirmation from './PaymentConfirmation'
+import Login from './../Auth/Login/Login';
+import Register from './../Auth/Register/Register';
+import RegisterConfirm from './../Auth/Register/RegisterConfirm';
 
 export default class Homepage extends Component {
     state = {
@@ -20,8 +23,63 @@ export default class Homepage extends Component {
         MaxImagePopupShow:false,
         editingTileId:'',
         PaymentConfirmationShow:false,
-        imagesLoaded:false
+        imagesLoaded:false,
+        loginShow:false,
+        registerShow:false,
+        RegisterConfirmShow:false
     }
+
+
+    loginClickHandler(){
+        this.setState({
+          loginShow:true,
+          registerShow:false
+        })
+      }
+      logincloseHandler(){
+        this.setState({
+          loginShow:false
+        })
+      }
+      registerOpenHandler(){
+        this.setState({
+          registerShow:true,
+          loginShow:false
+        })
+      }
+      registerCloseHandler(){
+        this.setState({
+          registerShow:false
+        })
+      }
+    
+      registerConfirmShowHandler(){
+        console.log("open")
+        this.setState({
+          RegisterConfirmShow:true
+        })
+      }
+    
+     
+    
+      registerConfirmCloseHandler(){
+        console.log("closed")
+        this.setState({
+          RegisterConfirmShow:false
+        })
+      }
+    
+      loginHandler = (token, name, email) => {
+        console.log(token, name, email)
+        this.setState({
+          loggedIn:true,
+          name:name,
+          email:email,
+          token:token
+        })
+      }
+
+
 
     tileClickHandler = (id) => {
         var idn = id.target.id;
@@ -114,15 +172,7 @@ export default class Homepage extends Component {
                 
             }
             else{
-                this.setState({
-                    errorLogin:"Login to upload images"
-                })
-                setTimeout(() => {
-                    this.setState({
-                        errorLogin:"",
-                        
-                    })
-                }, 3000)
+                this.loginClickHandler()
             }
         }
         else{
@@ -343,12 +393,19 @@ export default class Homepage extends Component {
             <React.Fragment>
             <div id="content">
                 <br/><div>
+                { (window.localStorage.getItem("loggedIn") == 'true' || window.localStorage.getItem("loggedIn") == true) ? 
                 <div className="col-sm-12 text-center" style={{color: '#f4d90f', 'textTransform': 'uppercase', fontWeight: 600}}>
                 {window.localStorage.getItem("totalImages") == 0 ? 'Click on Pixels to Upload Image ' : 'Total images Uploaded: ' +window.localStorage.getItem("totalImages")}
                   
-                  
-                </div>
                 <br/>
+                </div>
+                
+                :
+                null
+
+                }
+                
+                
               </div>
                 <h1 className="h3 mb-4 text-gray-800"></h1>
                 <div id="grid-wrapper" className="clearfix  text-center">
@@ -382,6 +439,27 @@ export default class Homepage extends Component {
                         :
                         null
                     }
+
+
+
+                    {this.state.loginShow ?
+                        <Login show={this.state.loginShow} loginHandler = {this.loginHandler} closeHandler = {() => this.logincloseHandler()} registerOpenHandler = {() => this.registerOpenHandler()} />
+                        :
+                        null
+                    }
+                    {this.state.registerShow ? 
+                        <Register show={this.state.registerShow} registerConfirmShowHandler = {() => this.registerConfirmShowHandler()}  loginHandler = {this.loginHandler} closeHandler = {() => this.registerCloseHandler()} loginClickHandler={() => this.loginClickHandler()}/>
+                        :
+                        null
+                    }
+
+                    {this.state.RegisterConfirmShow ? 
+                        <RegisterConfirm registerConfirmCloseHandler = {() => this.registerConfirmCloseHandler()} show={this.state.RegisterConfirmShow} />
+                        :
+                        null
+                    }
+
+                
 
                 </div>
 

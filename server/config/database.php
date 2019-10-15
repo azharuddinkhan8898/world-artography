@@ -4,10 +4,10 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 class Database{
  
     // specify your own database credentials
-    private $host = "sql300.0fees.us";
-    private $db_name = "0fe_17583977_art";
-    private $username = "0fe_17583977";
-    private $password = "panzertools";
+    private $host = "localhost";
+    private $db_name = "ssindiac_artography";
+    private $username = "ssindiac_ssindia";
+    private $password = "azhar123!";
     public $conn;
  
     // get the database connection

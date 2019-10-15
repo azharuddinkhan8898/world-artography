@@ -44,7 +44,10 @@ export default class PaymentSuccessPopup extends React.Component {
                 </div>
                 <div className="modal-body">
                     <p className="text-center">
-                    Your transaction is completed successfully.
+                    Your transaction is completed successfully.<br/>
+                    {this.props.paymentType === 'dcp' ? <small>Your entries have been accepted, however will be subject to succesful vaidation of code. Succesful entries will be uploaded within 24 hrs. Email notification will be
+                      sent.</small> : null }
+                    
                     </p>
                     <br/>
                     <a className="btn btn-success btn-block" href="/" data-dismiss="modal">
