@@ -13,9 +13,12 @@ export default class Login extends React.Component {
         show: false,
         email:'',
         password:'',
+        forgotEmail:'',
         passwordError: false,
         emailError:false,
-        loginDisabled: false
+        loginDisabled: false,
+        forgotPassShow:false,
+        forgotEmailPatError:false
       };
     }
 
@@ -88,8 +91,6 @@ export default class Login extends React.Component {
                 }
                 
               });
-
-            
             }
             else{
               this.setState({
@@ -99,12 +100,36 @@ export default class Login extends React.Component {
             }
             
           });
-
-
-
       }
-
     }
+
+    forgotPass = () => {
+      this.setState({
+        forgotPassShow:!this.state.forgotPassShow
+      })
+    }
+
+    forgotPasswordHandler = () => {
+      var isEverythingCorrect = 2;
+      if(!this.state.forgotEmail){
+        this.setState({
+          forgotEmailError:true
+        })
+      }
+      else{
+        if(!(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(this.state.forgotEmail))){
+          this.setState({
+            forgotEmailPatError:true
+          })
+        }else{
+          isEverythingCorrect--;
+        }
+        isEverythingCorrect--;
+      }
+      if(isEverythingCorrect == 0){
+        
+      }
+    } 
 
     inputHandler = (e) => {
 
@@ -113,7 +138,8 @@ export default class Login extends React.Component {
       this.setState({
         errorPass:"",
         [key]: e.target.value,
-        [key+"Error"]:false
+        [key+"Error"]:false,
+        forgotEmailPatError:false
       })
     }
   
@@ -136,7 +162,33 @@ export default class Login extends React.Component {
           </div>
           <div className="col-md-6 col login-form">
               <div className="cont">
-              <h3>Login</h3>
+              <h3>{this.state.forgotPassShow ? 'Forgot Password' : 'Login'}</h3>
+
+              {this.state.forgotPassShow ? 
+                <form autoComplete="off">
+                  <div className="form-group">
+                      <input type="text" id="forgotEmail" name="forgotEmail" className="form-control" onChange= {this.inputHandler} required/>
+                      <label className="form-control-placeholder" htmlFor="forgotEmail">Email</label>
+                      {this.state.forgotEmailError ? 
+                        <span className="error">Please enter your Email ID</span>
+                        :
+                        null
+                      }
+                      {this.state.forgotEmailPatError ? 
+                      <span className="error">This Email ID is Not valid</span>
+                      :
+                      null
+                      }
+                  </div>
+
+                  
+                  <div className="form-group">
+                      <a onClick = {() => this.forgotPasswordHandler()} className={this.state.loginDisabled ? 'btn btn-primary btn-block disabled' : 'btn btn-primary btn-block'}>Continue</a>
+                      
+                  </div>
+                  
+              </form>
+              :
               <form autoComplete="off">
                   <div className="form-group">
                       <input type="text" id="email" name="email" className="form-control" onChange= {this.inputHandler} required/>
@@ -147,7 +199,7 @@ export default class Login extends React.Component {
                         null
                       }
                   </div>
-                  <div className="form-group">
+                    <div className="form-group">
                       <input type="password" id="password" name="password" className="form-control" required onChange= {this.inputHandler}/>
                       <label className="form-control-placeholder" htmlFor="password">Password</label>
                       {this.state.passwordError ? 
@@ -156,6 +208,8 @@ export default class Login extends React.Component {
                         null
                       }
                   </div>
+
+                  
                   <div className="form-group">
                       <a className={this.state.loginDisabled ? 'btn btn-primary btn-block disabled' : 'btn btn-primary btn-block'} onClick = {() => this.signin()}>Login</a>
                       {
@@ -165,11 +219,13 @@ export default class Login extends React.Component {
                       }
                       
                   </div>
-                  <div className="form-group text-center">
-
-                      {/* <a href="#" className="ForgetPwd" value="Login">Forget Password?</a> */}
-                  </div>
+                  
               </form>
+              }
+              
+              {/* <div className="form-group text-center">
+                  <a  style={{cursor:"pointer"}} onClick={this.forgotPass} className="ForgetPwd" value="Login">{!this.state.forgotPassShow ? 'Forget Password?' : 'Login Here'}</a>
+              </div> */}
               </div>
           </div>
           </Modal>

@@ -8,6 +8,13 @@ class Database{
     private $db_name = "ssindiac_artography";
     private $username = "ssindiac_ssindia";
     private $password = "azhar123!";
+
+
+    // private $host = "localhost:8889";
+    // private $db_name = "test";
+    // private $username = "root";
+    // private $password = "root";
+    
     public $conn;
  
     // get the database connection

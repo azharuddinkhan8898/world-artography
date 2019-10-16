@@ -346,6 +346,10 @@ export default class Homepage extends Component {
                     tilesLoadingError:"",
                     imagesLoaded:true
                 })
+                // var newArr = imagesCopy.filter((el) => {
+                //     return el.email === null
+                // })
+                // $(".imageCounter").empty().append(newArr.length)
 
             }
             else{

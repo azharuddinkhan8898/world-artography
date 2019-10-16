@@ -112,11 +112,23 @@ export default class Homepage extends Component {
           })
           
       }else{
-        this.setState({
-          submitDisabled:false,
-          paymentSucsessShow:true,
-          paymentType:cp
-        })
+        var email = window.localStorage.getItem('email');
+        var name = window.localStorage.getItem('name');
+        var urll = '/server/images/imageSubmissionMail.php?email='+email+'&name='+name;
+        $.get(urll,
+          (data) => {
+            if(data.status){
+              this.setState({
+                submitDisabled:false,
+                paymentSucsessShow:true,
+                paymentType:cp
+              })
+            }
+            else{
+              
+            }
+          });
+        
         
         
     }

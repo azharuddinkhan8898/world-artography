@@ -94,8 +94,8 @@ i.fas.fa-heart {
   text-transform: uppercase;
 }
 .like.active {
-  border: 1px solid #f00;
-  color: #f00;
+  background: #ff3838;
+  color: #fff;
 }
 .like.active .fas.fa-heart {
   color: #f00;
@@ -696,6 +696,7 @@ input.image-preview-filename {
 
 ol.bullet-1 {
   padding-left: 20px;
+  list-style-type: unset;
   text-indent: 5px;
 }
 
@@ -749,7 +750,7 @@ ol.bullet-1 li {
 .inner-pages {
   color: #fff;
   line-height: 28px;
-  background: #111111;
+  background: #111 url(/images/inside-bg.png) right center no-repeat;
   padding: 30px;
 }
 
@@ -821,6 +822,19 @@ ol.bullet-1 li {
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
+.style1 input.form-control, .style1 textarea.form-control {
+  border: 1px solid #fff;
+  padding: 12px;
+  background: none;
+  color: #ffff;
+  height: auto;
+}
+
+.style1 .form-group {
+  margin: 20px 0;
+}
+
 
 /* Azhar CSS */
 

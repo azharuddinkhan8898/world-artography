@@ -272,7 +272,7 @@ export default class ImageUpload extends React.Component {
               </div>
                 <div className="col-md-9 col register-form white-bg">
                   <h3>Image Upload</h3>
-                  <p style={{    marginTop: '-15px', marginBottom: '25px',    color: "#ff4d4d",
+                  <p style={{    marginTop: '-6px', marginBottom: '25px',    color: "#ff4d4d",
     fontSize: "12px"}}>1000 pixels higher side & 667 pixel on shorter side</p>
               <form>
                 <div className="row clearfix">

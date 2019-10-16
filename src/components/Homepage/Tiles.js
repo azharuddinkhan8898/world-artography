@@ -35,6 +35,13 @@ export default class Tiles extends Component {
         }
         console.log(selector, number);
         $("[data-fancybox='" + selector + "']").eq(parseInt(number - 1)).trigger("click");
+        var id = $("[data-fancybox='" + selector + "']").eq(parseInt(number - 1)).attr("id");
+        getCookie("liked", (liked) => {
+            if(liked.split(" ").indexOf(id) !== -1){
+              $(".fancybox-caption__body").find(".like#"+ id).addClass('active')
+              $(".fancybox-caption__body").find(".like#"+ id).addClass('disabled')
+            }
+          })
         // $.fancybox.open(
         //     $("[data-fancybox='" + selector + "']").eq(parseInt(number - 1)),
         //     {

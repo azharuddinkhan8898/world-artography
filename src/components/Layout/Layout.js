@@ -10,6 +10,7 @@ import Prize from './Prize';
 import TnC from './TnC';
 import Contact from './Contact'
 import {BrowserRouter, Route, Switch, HashRouter} from "react-router-dom";
+import ForgotPassword from './../Layout/ForgotPassword'
 
 import ScrollToTop from 'react-router-scroll-top';
 
@@ -17,7 +18,8 @@ import ScrollToTop from 'react-router-scroll-top';
 export default class Layout extends React.Component{
 
     state = {
-        loginOpen: false
+        loginOpen: false,
+        imageRemaing: 0
     }
 
     // handleLoginOpen(){
@@ -27,6 +29,14 @@ export default class Layout extends React.Component{
     //     })
         
     // }
+
+
+
+    imageCounter = (e) => {
+        this.setState({
+            imageRemaing: e
+        })
+    }
     
 
     render(){
@@ -49,8 +59,7 @@ export default class Layout extends React.Component{
                 <Route path='/contact' exact component={Contact}/>
                 <Route path='/prizes' exact component={Prize}/>
                 <Route path='/tnc' exact component={TnC}/>
-
-
+                <Route path='/forgot-password' exact component={ForgotPassword}/>
                 <Route path='/activate/:token' component={Activate}/>
                 </Switch>
                 <Footer/>

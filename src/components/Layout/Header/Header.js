@@ -3,6 +3,7 @@ import {NavLink} from "react-router-dom";
 import Login from './../../Auth/Login/Login';
 import Register from './../../Auth/Register/Register';
 import RegisterConfirm from './../../Auth/Register/RegisterConfirm';
+import $ from 'jquery'
 
 export default class Header extends React.Component {
   state = {
@@ -14,7 +15,8 @@ export default class Header extends React.Component {
     email:'',
     RegisterConfirmShow:false,
     showMobileMenu: true,
-    showMobileMenuButton:false
+    showMobileMenuButton:false,
+    imageCounter: 0
   }
   loginClickHandler(){
     this.setState({
@@ -93,6 +95,34 @@ export default class Header extends React.Component {
     })
   }
   componentDidMount(){
+
+
+    const url = '/server/images/getimages.php';
+    $.get(url,
+      (data) => {
+        if(data.status){
+            var imagesCopy = data.data;
+            var newArr = imagesCopy.filter((el) => {
+                return el.email === null
+            })
+            this.setState({
+              imageCounter: newArr.length
+            })
+            //$(".imageCounter").empty().append(newArr.length)
+
+        }
+        else{
+          this.setState({
+            images:[],
+            tilesLoadingError:"Unable to load Tiles"
+          })
+        }
+        
+      });
+
+
+
+
     var loggedIn = window.localStorage.getItem("loggedIn");
     var name = window.localStorage.getItem("name");
     var email = window.localStorage.getItem("email");
@@ -135,13 +165,13 @@ export default class Header extends React.Component {
               <div className="mob-menu pull-right" style={{display: this.state.showMobileMenu ?  'block' : 'none' }}>
               <div className="clearfix mob-hide color-white">
     
-                  <div className="pull-right"><img src={"/images/payment-icons.png"} width="150px"/>
+                  <div className="pull-right"><img src={"/images/payment-icons.png"} width="150px"/><div className="pull-right" style={{margin: "11px 5px 0",border: "1px solid #fff",padding: "8px 20px",textTransform: "uppercase",fontSize: "12px",letterSpacing: "1px"}}>Image Left: <span className="imageCounter">{this.state.imageCounter}</span></div>
                   </div><div className="pull-right"><p style={{
-                  margin: "16px 25px 0px 0"}}>10,000,000 Pixels, 1₹ Per Pixel - The Worlds Best Photographers.</p></div>
+                  margin: "16px 25px 0px 0"}}>10,000,000 Pixels, ₹1 Per Pixel - The Worlds Best Photographers.</p></div>
               </div>
               <div className="close-ico" onClick={() => this.HideMobileMenuHandler()}></div>
                   <ul className="navbar-nav ml-auto main-nav pull-right" id="">
-                    <li><NavLink to="/">Grid</NavLink></li>
+                    <li><NavLink to="/"><i className="fas fa-home"></i></NavLink></li>
                     <li><NavLink to="/about">About</NavLink></li>
                     <li><NavLink to="/how-to-by-pixels">How to Buy Pixels</NavLink></li>
                     <li><NavLink to="prizes">Prizes</NavLink></li>
@@ -149,7 +179,7 @@ export default class Header extends React.Component {
                     {this.state.loggedIn ? 
                       <li><a onClick={() => this.logoutHandler()}>{this.state.name} (Logout)</a></li>
                     :
-                      null
+                      <li><a onClick={() => this.loginClickHandler()}>Login/Registration</a></li>
                     }
                     
                   </ul>
