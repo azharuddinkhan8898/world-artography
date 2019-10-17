@@ -16,7 +16,7 @@ $name = isset($_GET['name']) ? $_GET['name'] : die();
     <title>Image Submission (Do not Reply to this mail)</title>
     </head>
     <body>
-    <p>Dear user ".$name."<br/></p>
+    <p>Dear ".$name."<br/></p>
     <p>Thank you for submission of your images. Wish you good luck for the contest.</p>
     <p>In case of any query please contact us <a href='mailto:support@worldartography.com'>support@worldartography.com</a></p>
     <p>Sincerely,<br/><strong>World Artography team</strong></p>

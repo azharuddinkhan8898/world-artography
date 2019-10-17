@@ -396,12 +396,12 @@ export default class Homepage extends Component {
         return (
             <React.Fragment>
             <div id="content">
-                <br/><div>
+                <div>
                 { (window.localStorage.getItem("loggedIn") == 'true' || window.localStorage.getItem("loggedIn") == true) ? 
                 <div className="col-sm-12 text-center" style={{color: '#f4d90f', 'textTransform': 'uppercase', fontWeight: 600}}>
-                {window.localStorage.getItem("totalImages") == 0 ? 'Click on Pixels to Upload Image ' : 'Total images Uploaded: ' +window.localStorage.getItem("totalImages")}
+                {window.localStorage.getItem("totalImages") == 0 ? '' : 'Total images Uploaded: ' +window.localStorage.getItem("totalImages")}
                   
-                <br/>
+                
                 </div>
                 
                 :
@@ -469,25 +469,25 @@ export default class Homepage extends Component {
 
                 <div className="client">
                     <ul className="client-list">
-                        <li><img src="https://www.worldartography.com/wp-content/uploads/2019/09/sony.png" alt=""/></li>
-                        <li><img src="https://www.worldartography.com/wp-content/uploads/2019/09/guiness.png" alt=""/></li>
-                        <li><img src="https://www.worldartography.com/wp-content/uploads/2019/09/natgeo.png" alt=""/></li>
-                        <li><img src="https://www.worldartography.com/wp-content/uploads/2019/09/canon.png" alt=""/></li>
-                        <li><img src="https://www.worldartography.com/wp-content/uploads/2019/09/polaroid.png" alt=""/></li>
-                        <li><img src="https://www.worldartography.com/wp-content/uploads/2019/09/phillips.png" alt=""/></li>
-                        <li><img src="https://www.worldartography.com/wp-content/uploads/2019/09/pantex.png" alt=""/></li>
-                        <li><img src="https://www.worldartography.com/wp-content/uploads/2019/09/panasonic.png" alt=""/></li>
-                        <li><img src="https://www.worldartography.com/wp-content/uploads/2019/09/olympus.png" alt=""/></li>
-                        <li><img src="https://www.worldartography.com/wp-content/uploads/2019/09/nikon.png" alt=""/></li>
-                        <li><img src="https://www.worldartography.com/wp-content/uploads/2019/09/kodak.png" alt=""/></li>
-                        <li><img src="https://www.worldartography.com/wp-content/uploads/2019/09/fuji.png" alt=""/></li>
-                        <li><img src="https://www.worldartography.com/wp-content/uploads/2019/09/casio.png" alt=""/></li>
-                        <li><img src="https://www.worldartography.com/wp-content/uploads/2019/09/sharp.png" alt=""/></li>
-                        <li><img src="https://www.worldartography.com/wp-content/uploads/2019/09/samsung.png" alt=""/></li>
-                        <li><img src="https://www.worldartography.com/wp-content/uploads/2019/09/Qatar_Airways_Logo.png" alt=""/></li>
-                        <li><img src="https://www.worldartography.com/wp-content/uploads/2019/09/emirates-logo.png" alt=""/></li>
-                        <li><img src="https://www.worldartography.com/wp-content/uploads/2019/09/world-art-dubai.png" alt=""/></li>
-                        <li><img src="https://www.worldartography.com/wp-content/uploads/2019/09/dcp.png" alt=""/></li>
+                        <li><img src="/images/partners/sony.png" alt=""/></li>
+                        <li><img src="/images/partners/guiness.png" alt=""/></li>
+                        <li><img src="/images/partners/natgeo.png" alt=""/></li>
+                        <li><img src="/images/partners/canon.png" alt=""/></li>
+                        <li><img src="/images/partners/polaroid.png" alt=""/></li>
+                        <li><img src="/images/partners/phillips.png" alt=""/></li>
+                        <li><img src="/images/partners/pantex.png" alt=""/></li>
+                        <li><img src="/images/partners/panasonic.png" alt=""/></li>
+                        <li><img src="/images/partners/olympus.png" alt=""/></li>
+                        <li><img src="/images/partners/nikon.png" alt=""/></li>
+                        <li><img src="/images/partners/kodak.png" alt=""/></li>
+                        <li><img src="/images/partners/fuji.png" alt=""/></li>
+                        <li><img src="/images/partners/casio.png" alt=""/></li>
+                        <li><img src="/images/partners/sharp.png" alt=""/></li>
+                        <li><img src="/images/partners/samsung.png" alt=""/></li>
+                        <li><img src="/images/partners/Qatar_Airways_Logo.png" alt=""/></li>
+                        <li><img src="/images/partners/emirates-logo.png" alt=""/></li>
+                        <li><img src="/images/partners/world-art-dubai.png" alt=""/></li>
+                        <li><img src="/images/partners/dcp.png" alt=""/></li>
                     </ul>
                 </div>
 
