@@ -108,6 +108,15 @@ export default class Login extends React.Component {
     }
 
     forgotPass = () => {
+      //console.log($("#forgotpassword")[0])
+      if($("#loginForm")[0]){
+        $("#loginForm")[0].reset();
+      }
+      if($("#forgotpassword")[0]){
+        $("#forgotpassword")[0].reset();
+      }
+      //$("#forgotpassword")[0].reset();
+      // $("#loginForm")[0].reset();
       this.setState({
         forgotPassShow:!this.state.forgotPassShow
       })
@@ -152,7 +161,6 @@ export default class Login extends React.Component {
                 setTimeout(() => {
                     this.setState({
                         errorLogin:"",
-                        
                     })
                 }, 3000)
             }
@@ -224,7 +232,7 @@ export default class Login extends React.Component {
                   
               </form>
               :
-              <form autoComplete="off">
+              <form id="loginForm" autoComplete="off">
                   <div className="form-group">
                       <input type="text" id="email" name="email" className="form-control" onChange= {this.inputHandler} required/>
                       <label className="form-control-placeholder" htmlFor="email">Email</label>
@@ -266,7 +274,7 @@ export default class Login extends React.Component {
               }
               
               <div className="form-group text-center">
-                  <a  style={{cursor:"pointer"}} onClick={this.forgotPass} className="ForgetPwd" value="Login">{!this.state.forgotPassShow ? 'Forget Password?' : 'Login Here'}</a>
+                  <a  style={{cursor:"pointer"}} onClick={() => this.forgotPass()} className="ForgetPwd" value="Login">{!this.state.forgotPassShow ? 'Forget Password?' : 'Login Here'}</a>
               </div>
               </div>
           </div>

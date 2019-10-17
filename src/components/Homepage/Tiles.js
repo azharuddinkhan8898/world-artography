@@ -23,7 +23,9 @@ export default class Tiles extends Component {
             },
             share:  {
                 url: function (instance, item) {
-                return window.location.href;
+                    
+                
+                    return window.location.href ;
             }
         }
         });

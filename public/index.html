@@ -87,11 +87,12 @@
 
       $('body').on('click', '.like', function() {
           var id = $(this).attr('id');
+          $(this).addClass('disabled');
           // if(getCookie)
           getCookie("liked", (liked) => {
             if(liked.split(" ").indexOf(id) !== -1){
-              $(".img-thumb#" + id).find("like").addClass('active')
-              $(".img-thumb#" + id).find("like").addClass('disabled')
+              $(".img-thumb#" + id).find(".like").addClass('active')
+              $(".img-thumb#" + id).find(".like").addClass('disabled')
             }
             else{
               const url1 = '/server/images/updateLikes.php';
@@ -108,8 +109,8 @@
                     console.log(e)
                     $(this).addClass('active')
                     $(this).addClass('disabled')
-                    $(".img-thumb#" + id).find("like").addClass('active')
-                    $(".img-thumb#" + id).find("like").addClass('disabled')
+                    $(".img-thumb#" + id).find(".like").addClass('active')
+                    $(".img-thumb#" + id).find(".like").addClass('disabled')
                   })
                 })
                 

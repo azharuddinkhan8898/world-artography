@@ -95,7 +95,7 @@ export default class Header extends React.Component {
     })
   }
   componentDidMount(){
-
+    
 
     const url = '/server/images/getimages.php';
     $.get(url,
@@ -132,6 +132,11 @@ export default class Header extends React.Component {
         showMobileMenu:false,
         showMobileMenuButton: true
       })
+      $(".linkClick").click(() => {
+        this.setState({
+          showMobileMenu:false
+        })
+      })
     }
     if(loggedIn && loggedIn === 'true'){
       
@@ -163,7 +168,6 @@ export default class Header extends React.Component {
                 null
               }
               
-              
               <div className="mob-menu pull-right" style={{display: this.state.showMobileMenu ?  'block' : 'none' }}>
               <div className="clearfix mob-hide color-white">
     
@@ -174,11 +178,11 @@ export default class Header extends React.Component {
               </div>
               <div className="close-ico" onClick={() => this.HideMobileMenuHandler()}></div>
                   <ul className="navbar-nav ml-auto main-nav pull-right" id="">
-                    <li><NavLink to="/">Homepage</NavLink></li>
-                    <li><NavLink to="/about">About</NavLink></li>
-                    <li><NavLink to="/how-to-buy-pixels">How to Buy Pixels</NavLink></li>
-                    <li><NavLink to="prizes">Prizes</NavLink></li>
-                    <li><NavLink to="contact">Contact</NavLink></li>
+                    <li><NavLink className="linkClick" to="/">Homepage</NavLink></li>
+                    <li><NavLink className="linkClick" to="/about">About</NavLink></li>
+                    <li><NavLink className="linkClick" to="/how-to-buy-pixels">How to Buy Pixels</NavLink></li>
+                    <li><NavLink className="linkClick" to="prizes">Prizes</NavLink></li>
+                    <li><NavLink className="linkClick" to="contact">Contact</NavLink></li>
                     {this.state.loggedIn ? 
                       <li><a onClick={() => this.logoutHandler()}>{this.state.name} (Logout)</a></li>
                     :
