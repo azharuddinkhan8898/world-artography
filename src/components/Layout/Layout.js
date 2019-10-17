@@ -10,7 +10,8 @@ import Prize from './Prize';
 import TnC from './TnC';
 import Contact from './Contact'
 import {BrowserRouter, Route, Switch, HashRouter} from "react-router-dom";
-import ForgotPassword from './../Layout/ForgotPassword'
+import ForgotPassword from './../Layout/ForgotPassword';
+import HowToBuyPixels from './HowToBuyPixels'
 
 import ScrollToTop from 'react-router-scroll-top';
 
@@ -59,8 +60,9 @@ export default class Layout extends React.Component{
                 <Route path='/contact' exact component={Contact}/>
                 <Route path='/prizes' exact component={Prize}/>
                 <Route path='/tnc' exact component={TnC}/>
-                <Route path='/forgot-password' exact component={ForgotPassword}/>
-                <Route path='/activate/:token' component={Activate}/>
+                <Route path='/how-to-buy-pixels' exact component={HowToBuyPixels}/>
+                <Route path='/forgot-password/:token' exact component={ForgotPassword}/>
+                <Route path='/activate/:token' exact component={Activate}/>
                 </Switch>
                 <Footer/>
                 <ScrollToTop/>

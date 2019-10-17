@@ -150,11 +150,11 @@ export default class Header extends React.Component {
       
       <header>
           <nav className="navbar info-color">
-              <a className="navbar-brand">
-              <NavLink to="/">
+
+              <NavLink className="navbar-brand" to="/">
                 <img src={"/images/logo.svg"} width="320px"/>
                 </NavLink>
-              </a>
+
 
 
               {this.state.showMobileMenuButton ? 
@@ -176,7 +176,7 @@ export default class Header extends React.Component {
                   <ul className="navbar-nav ml-auto main-nav pull-right" id="">
                     <li><NavLink to="/">Homepage</NavLink></li>
                     <li><NavLink to="/about">About</NavLink></li>
-                    <li><NavLink to="/how-to-by-pixels">How to Buy Pixels</NavLink></li>
+                    <li><NavLink to="/how-to-buy-pixels">How to Buy Pixels</NavLink></li>
                     <li><NavLink to="prizes">Prizes</NavLink></li>
                     <li><NavLink to="contact">Contact</NavLink></li>
                     {this.state.loggedIn ? 

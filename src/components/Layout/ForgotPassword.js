@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import $ from 'jquery';
 
 class ForgotPassword extends Component {
     constructor(props) {
@@ -10,6 +11,8 @@ class ForgotPassword extends Component {
             password2Error:false,
             passwordEqualError:false,
             passwordPatError:false,
+            resetSusscess:false,
+            resetDisable:false
          }
     }
 
@@ -48,7 +51,30 @@ class ForgotPassword extends Component {
             }
         }
         if(isEverythingCorrect == 0){
-            console.log("submit")
+            this.setState({
+                resetDisable:true
+            })
+            const url = '/server/user/resetPassword.php';
+            const data = {
+                token: this.props.match.params.token,
+                password: this.state.password2
+            }
+            console.log(data)
+            $.post(url,
+                data,
+            (data,status) => {
+                console.log(data,status )
+                if(status){
+                    this.setState({
+                        resetDisable:false,
+                        resetSusscess:true
+                    })
+                    // this.setState({
+                    //     activate:true,
+                    //     msg:'Your account is now activated, please click below link to login.'
+                    // })
+                }
+            });
         }
     }
 
@@ -69,6 +95,13 @@ class ForgotPassword extends Component {
         return ( 
             <div className="container-fluid inner-pages">
             <div style={{maxWidth:"420px",width:"100%",margin:"0 auto",padding:"50px 25px"}}>
+            {this.state.resetSusscess ?
+            <React.Fragment>
+                <h4 style = {{textAlign: "center",background: "#006b00",padding: "20px", marginBottom:"30px"}}>Password reset successfully.</h4>
+                <a type="text" href='/' className="btn btn-default btn-block">Continue</a>
+                </React.Fragment>
+            :
+            <React.Fragment>
             <h1>Reset Password</h1>
             <form className="style1">
                 <div className="row">
@@ -106,11 +139,16 @@ class ForgotPassword extends Component {
                     </div>
                     <div className="col-md-12">
                         <div className="form-group">
-                            <a type="text" onClick={() => this.forgotPass()} className="btn btn-default btn-block">Submit</a>
+                            <a type="text" onClick={() => this.forgotPass()} className= {this.state.resetDisable ? 'btn btn-default btn-block disabled' : 'btn btn-default btn-block'}>Submit</a>
                         </div>
                     </div>
                 </div>
             </form>
+            </React.Fragment>
+            }
+            
+
+            
         </div>
             </div>
          );

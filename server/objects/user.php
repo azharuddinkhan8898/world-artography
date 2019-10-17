@@ -290,6 +290,45 @@ class User{
     }
 
 
+    // forgotPassword user
+    function forgotPassword(){
+        // select all query
+        $query = "SELECT
+                    `id`, `email`, `name`, `token`, `active`
+                FROM
+                    " . $this->table_name . " 
+                WHERE
+                    email='".$this->email."'";
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+        // execute query
+        $stmt->execute();
+        return $stmt;
+    }
+
+
+    function resetPassword(){
+        $query = "UPDATE users SET password=:password WHERE token=:token";
+        // prepare query
+        $stmt = $this->conn->prepare($query);
+        // sanitize
+        $this->token=htmlspecialchars(strip_tags($this->token));
+        $this->password=htmlspecialchars(strip_tags($this->password));
+        
+
+
+        // bind values
+        $stmt->bindParam(":token", $this->token);
+        $stmt->bindParam(":password", $this->password);
+    
+        if($stmt->execute()){
+            $this->id = $this->conn->lastInsertId();
+            return true;
+        }
+        return false;
+    }
+
+
 
 
 

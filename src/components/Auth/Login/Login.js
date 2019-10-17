@@ -1,6 +1,7 @@
 import React from 'react';
 import {Modal} from 'react-bootstrap'
 import $ from 'jquery';
+import ErrorAlert from './../../utils/ErrorAlert';
 
 export default class Login extends React.Component {
     constructor(props, context) {
@@ -18,7 +19,10 @@ export default class Login extends React.Component {
         emailError:false,
         loginDisabled: false,
         forgotPassShow:false,
-        forgotEmailPatError:false
+        forgotEmailPatError:false,
+        forgotPassDisable:false,
+        errorPass:'',
+        errorLogin:""
       };
     }
 
@@ -110,6 +114,7 @@ export default class Login extends React.Component {
     }
 
     forgotPasswordHandler = () => {
+
       var isEverythingCorrect = 2;
       if(!this.state.forgotEmail){
         this.setState({
@@ -127,7 +132,37 @@ export default class Login extends React.Component {
         isEverythingCorrect--;
       }
       if(isEverythingCorrect == 0){
-        
+        this.setState({
+          forgotPassDisable:true
+        })
+        console.log(this.state.forgotEmail)
+        const url = '/server/user/forgotPassword.php?email='+ this.state.forgotEmail;
+        $.get(url,
+          (data1) => {
+            console.log(data1)
+            this.setState({
+              forgotPassDisable:false
+            })
+            if(data1.status){
+                console.log(data1.data);
+                $("#forgotpassword")[0].reset();
+                this.setState({
+                  errorLogin:"Please check your mail to reset your password."
+                })
+                setTimeout(() => {
+                    this.setState({
+                        errorLogin:"",
+                        
+                    })
+                }, 3000)
+            }
+            else{
+              console.log("Email ID not registered.")
+              this.setState({
+                errorPass:"Email ID not registered."
+              })
+            }
+          });
       }
     } 
 
@@ -165,7 +200,7 @@ export default class Login extends React.Component {
               <h3>{this.state.forgotPassShow ? 'Forgot Password' : 'Login'}</h3>
 
               {this.state.forgotPassShow ? 
-                <form autoComplete="off">
+                <form id="forgotpassword" autoComplete="off">
                   <div className="form-group">
                       <input type="text" id="forgotEmail" name="forgotEmail" className="form-control" onChange= {this.inputHandler} required/>
                       <label className="form-control-placeholder" htmlFor="forgotEmail">Email</label>
@@ -183,7 +218,7 @@ export default class Login extends React.Component {
 
                   
                   <div className="form-group">
-                      <a onClick = {() => this.forgotPasswordHandler()} className={this.state.loginDisabled ? 'btn btn-primary btn-block disabled' : 'btn btn-primary btn-block'}>Continue</a>
+                      <a onClick = {() => this.forgotPasswordHandler()} className={this.state.forgotPassDisable ? 'btn btn-primary btn-block disabled' : 'btn btn-primary btn-block'}>Continue</a>
                       
                   </div>
                   
@@ -212,23 +247,31 @@ export default class Login extends React.Component {
                   
                   <div className="form-group">
                       <a className={this.state.loginDisabled ? 'btn btn-primary btn-block disabled' : 'btn btn-primary btn-block'} onClick = {() => this.signin()}>Login</a>
-                      {
-                        this.state.errorPass ? <p className="errorpass">{this.state.errorPass}</p>
-                        :
-                        null
-                      }
+                      
                       
                   </div>
                   
               </form>
               }
+              {
+                this.state.errorPass ? <p className="errorpass">{this.state.errorPass}</p>
+                :
+                null
+              }
+
+              {
+                this.state.errorPass ? <p className="errorpass">{this.state.errorPass}</p>
+                :
+                null
+              }
               
-              {/* <div className="form-group text-center">
+              <div className="form-group text-center">
                   <a  style={{cursor:"pointer"}} onClick={this.forgotPass} className="ForgetPwd" value="Login">{!this.state.forgotPassShow ? 'Forget Password?' : 'Login Here'}</a>
-              </div> */}
+              </div>
               </div>
           </div>
           </Modal>
+          <ErrorAlert msg = {this.state.errorLogin}/>
         </div>
       );
     }
