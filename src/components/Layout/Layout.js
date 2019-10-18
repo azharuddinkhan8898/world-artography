@@ -11,7 +11,8 @@ import TnC from './TnC';
 import Contact from './Contact'
 import {BrowserRouter, Route, Switch, HashRouter} from "react-router-dom";
 import ForgotPassword from './../Layout/ForgotPassword';
-import HowToBuyPixels from './HowToBuyPixels'
+import HowToBuyPixels from './HowToBuyPixels';
+import Admin from './../Admin/Admin'
 
 import ScrollToTop from 'react-router-scroll-top';
 
@@ -39,7 +40,6 @@ export default class Layout extends React.Component{
         })
     }
     
-
     render(){
         return(
 

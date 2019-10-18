@@ -4,16 +4,16 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 class Database{
  
     // specify your own database credentials
-    private $host = "localhost";
-    private $db_name = "ssindiac_artography";
-    private $username = "ssindiac_ssindia";
-    private $password = "azhar123!";
+    // private $host = "localhost";
+    // private $db_name = "ssindiac_artography";
+    // private $username = "ssindiac_ssindia";
+    // private $password = "azhar123!";
 
 
-    // private $host = "localhost:8889";
-    // private $db_name = "test";
-    // private $username = "root";
-    // private $password = "root";
+    private $host = "localhost:8889";
+    private $db_name = "test";
+    private $username = "root";
+    private $password = "root";
     
     public $conn;
  

@@ -416,7 +416,7 @@ export default class Homepage extends Component {
                         :
                         <div className="imagesLoader text-center" style={{textAlign:"center", margin:"10px 0px 30px 0px",fontSize:"16px",color:"#fff"}}>
                             <img className="pixel-loader" src="/images/loader.png" alt=""/>
-                            <p>Loading Pixels...</p>
+                            <p>Loading Pixel Grid...</p>
                         </div>
                     }
                 </div>

@@ -330,7 +330,28 @@ class User{
 
 
 
+    function getDcpData(){
+        $query = "SELECT * FROM images WHERE (dcpcoupon <> '' )";
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+        // execute query
+        $stmt->execute();
+        if($stmt){
+            return $stmt;
+        } 
+    }
 
+    function getSingleDcpData(){
+        // echo $this->dcp
+        $query = "SELECT * FROM images, users WHERE images.email = users.email AND images.dcpcoupon='".$this->dcp."'";
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+        // execute query
+        $stmt->execute();
+        if($stmt){
+            return $stmt;
+        } 
+    }
 
     
     // a function to check if email already exists
