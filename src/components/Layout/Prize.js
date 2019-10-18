@@ -17,6 +17,7 @@ const Prize = () => {
           <li>All the images from the website will feature in magazines/newspapers around London Europe, Asia, and America throughout 2020</li>
           <li>Magazine Affiliation To Use Images: BBC WILDLIFE, WILD PLANET, WWM, OUTDOOR PHOTOGRAPHY MAGAZINE, BIRDS &amp; BLOOM, ADVENTURE &amp; WILDLIFE, NAT GEO &amp; SMITHSONIA MAGAZINE</li>
           <li>International media coverage for winners across all categories.</li>
+          <li>On fulfilment of 5000 Images on the Pixel Grid All Entrants will receive a Commendation Medal from Guinness World Book of Records.</li>
           <li>All entries will be accredited with a Framed Sony World Artography Certificate, with all the affiliated logos as featured footer &amp; website.</li>
           <li>On Successful completion of the Pixel Grid, EACH image featured  will receive £100.</li>
         </ul>

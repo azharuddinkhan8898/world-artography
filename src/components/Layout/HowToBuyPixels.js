@@ -4,7 +4,7 @@ const HowToBuyPixels = () => {
   return (
     <React.Fragment>
       <div className="container-fluid inner-pages">
-        <h1 className="h3 mb-4 text-gray-800">How to buy pixels</h1>
+        <h1 className="h3 mb-4 text-gray-800">3 Quick Steps to Buy Pixels and Submit your images for the competition</h1>
         <p>The contest is based on a concept of buying pixels from the Grid to submit image/s for the competition. One image will have a fix resolution of 6700 pixels (100 pixels on Longer side and 67 pixels on shorter side), where cost of one pixel will be ₹ 1, thus entry fees for single image will be ₹ 6700.<br />
           Maximum 5 images per Entrant can be submitted.</p>
 

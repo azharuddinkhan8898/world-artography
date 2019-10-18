@@ -175,7 +175,7 @@ export default class Header extends React.Component {
                 <div className="pull-right" style={{ margin: "11px 5px 0", border: "1px solid #fff", padding: "8px 20px", textTransform: "uppercase", fontSize: "12px", letterSpacing: "1px" }}><span className="imageCounter">{this.state.imageCounter}</span> Remaining</div>
                 <div className="pull-right"><p style={{
                   margin: "16px 25px 0px 0"
-                }}><strong>10,000,000 Pixels, ₹ 1 Per Pixel - The World's Best Photographers.</strong></p></div>
+                }}><strong>10,000,000 Pixels  ₹ 1 Per Pixel  The World's Best Photographers</strong></p></div>
               </div>
               <div className="close-ico" onClick={() => this.HideMobileMenuHandler()}></div>
               <ul className="navbar-nav ml-auto main-nav pull-right" id="">
