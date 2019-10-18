@@ -309,7 +309,7 @@ export default class ImageUpload extends React.Component {
                 <div className="col-md-4 col-sm-6 col-xs-12">
                     <div className="form-group">
                         <select className="form-control" name="category" onChange={this.inputHandler}>
-                        <option>Select</option>
+                          <option>Select Category</option>
                           <option>Wildlife & Nature</option>
                           <option>Landscape</option>
                           <option>Travel & Street</option>
@@ -317,10 +317,10 @@ export default class ImageUpload extends React.Component {
                           <option>Astro / Aerial Photography</option>
                         </select>
                         {
-                            this.state.categoryError ? 
-                            <span className="error">{this.state.errorText}</span>
-                            :
-                            null
+                          this.state.categoryError ? 
+                          <span className="error">{this.state.errorText}</span>
+                          :
+                          null
                         }
                     </div>
                   </div>

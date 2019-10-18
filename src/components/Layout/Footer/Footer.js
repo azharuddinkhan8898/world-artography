@@ -14,23 +14,23 @@ export default class Footer extends React.Component{
     componentDidMount(){
         var oldURL = "";
         var this2 = this;
-        var currentURL = window.location.href;
-        function checkURLchange(currentURL){
-            if(currentURL != oldURL){
-                //console.log(window.location.pathname)
-                this2.setState({
-                    location: window.location.pathname
-                })
-                oldURL = currentURL;
-            }
+        // var currentURL = window.location.href;
+        // function checkURLchange(currentURL){
+        //     if(currentURL != oldURL){
+        //         //console.log(window.location.pathname)
+        //         this2.setState({
+        //             location: window.location.pathname
+        //         })
+        //         oldURL = currentURL;
+        //     }
 
-            oldURL = window.location.href;
-            setInterval(function() {
-                checkURLchange(window.location.href);
-            }, 1000);
-        }
+        //     oldURL = window.location.href;
+        //     setInterval(function() {
+        //         checkURLchange(window.location.href);
+        //     }, 1000);
+        // }
 
-        checkURLchange();
+        // checkURLchange();
     }
     tncOpenHandler(){
         this.setState({
@@ -44,13 +44,13 @@ export default class Footer extends React.Component{
                     <div className="container my-auto">
                         <div className="copyright text-center my-auto">
                             <span>World Artography &copy; 2019. All Rights Reserved. We are not responsible for the content of external sites. <br/>World Artography is NOT responsible for Images featured on homepage are copyright of their respective owners.<br/><br/>
-                            {this.state.location == '/' ? 
+                            {/* {this.state.location == '/' ?  */}
                             <React.Fragment>
-                            <a style={{cursor:'pointer'}} onClick = {() => this.tncOpenHandler()}>Terms and conditions</a><br/><br/>
+                            <a className="footer-tnc" style={{cursor:'pointer'}} onClick = {() => this.tncOpenHandler()}>Terms and conditions</a><br/><br/>
                             </React.Fragment>
-                            :
+                            {/* :
                             null
-                            }
+                            } */}
                             
                             
                             <br/></span>
