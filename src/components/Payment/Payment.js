@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { PayPalButton } from "react-paypal-button-v2";
 import  { Redirect } from 'react-router-dom';
 import $ from 'jquery';
+import ErrorAlert from './../utils/ErrorAlert';
 import {getDataUri} from './../utils/codeSnippet';
 import PaymentSuccessPopup from './PaymentSuccessPopup';
 import PaymentFailedPopup from  './PaymentFailedPopup';
@@ -26,7 +27,8 @@ export default class Homepage extends Component {
           25299,
           24999,
         ],
-        dcpTotalPrice: 0
+        dcpTotalPrice: 0,
+        errorLogin:"",
     }
 
     tncCloseHandler(){
@@ -71,15 +73,17 @@ export default class Homepage extends Component {
 
     paymentSucsess = (id, cp) => {
 
-      this.setState({
-        submitDisabled:true
-      })
+      
 
       if(JSON.parse(window.localStorage.getItem("images")) !== null && JSON.parse(window.localStorage.getItem("images")).length !== 0)
       var data = JSON.parse(window.localStorage.getItem("images"))
 
       const url = '/server/images/uploadData.php';
-      if(this.imagesUploaded < data.length){
+      if(data && data != null){
+        this.setState({
+          submitDisabled:true
+        })
+        if(this.imagesUploaded < data.length){
           console.log(this.imagesUploaded)
           getDataUri(data[this.imagesUploaded].url, (dataUri) => {
               
@@ -132,6 +136,19 @@ export default class Homepage extends Component {
         
         
     }
+      }
+      else{
+        this.setState({
+          errorLogin:"Select images from homepage to upload."
+        })
+        setTimeout(() => {
+            this.setState({
+                errorLogin:"",
+                
+            })
+        }, 3000)
+      }
+      
 
 
       // getDataUri(data[0].url, (dataUri) => {
@@ -256,7 +273,13 @@ export default class Homepage extends Component {
                       uploaded within 24 hrs. Email notification will be
                       sent.</small> */}
                     <br />
-                    <button style={this.state.dcpValue === '' ? {visibility:'hidden'} : null} onClick={() => this.paymentSucsess(this.state.dcpValue, 'dcp')} className={!this.state.submitDisabled ? 'btn btn-primary' : 'btn btn-primary disabled'}>Submit</button>
+                    {this.state.submitDisabled ? 
+                      <div class="payment-loader"></div>
+                      :
+                      <button style={this.state.dcpValue === '' ? {visibility:'hidden'} : null} onClick={() => this.paymentSucsess(this.state.dcpValue, 'dcp')} className={!this.state.submitDisabled ? 'btn btn-primary' : 'btn btn-primary disabled'}>Submit</button>
+                    }
+                    
+                    
                     </React.Fragment>
 
                     
@@ -283,6 +306,7 @@ export default class Homepage extends Component {
                 :
                 null
             }
+            <ErrorAlert msg = {this.state.errorLogin}/>
             </React.Fragment>
                 
         )

@@ -398,10 +398,8 @@ export default class Homepage extends Component {
             <div id="content">
                 <div>
                 { (window.localStorage.getItem("loggedIn") == 'true' || window.localStorage.getItem("loggedIn") == true) ? 
-                <div className="col-sm-12 text-center" style={{color: '#f4d90f', 'textTransform': 'uppercase', fontWeight: 600}}>
+                <div className="text-center" style={{color: '#f4d90f', 'textTransform': 'uppercase', fontWeight: 600, marginTop:"10px"}}>
                 {window.localStorage.getItem("totalImages") == 0 ? '' : 'Total images Uploaded: ' +window.localStorage.getItem("totalImages")}
-                  
-                
                 </div>
                 
                 :
@@ -416,7 +414,10 @@ export default class Homepage extends Component {
                     {this.state.imagesLoaded ? 
                         <Tiles removeTileHandler = {(e) => this.removeTileHandler(e)}  tileClickHandler = { (i) => this.tileClickHandler(i)} imagesData = {this.state.images}/>
                         :
-                        null
+                        <div className="imagesLoader text-center" style={{textAlign:"center", margin:"10px 0px 30px 0px",fontSize:"16px",color:"#fff"}}>
+                            <img className="pixel-loader" src="/images/loader.png" alt=""/>
+                            <p>Loading Pixels...</p>
+                        </div>
                     }
                 </div>
                     <ErrorAlert msg = {this.state.errorLogin}/>

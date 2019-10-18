@@ -55,6 +55,7 @@
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js"></script> -->
   <script src="https://kit.fontawesome.com/8eab6cc604.js" crossorigin="anonymous"></script>
   <script>
+    document.addEventListener('contextmenu', event => event.preventDefault())
     $(function(){
       $(".likeLogin").show()
       function setCookie(cname, cvalue, exdays = 30, callback) {
@@ -83,6 +84,23 @@
         }
         
       }
+      if(window.location.pathname == '/'){
+          $(".footer-tnc").show();
+        }
+        else{
+          $(".footer-tnc").hide();
+        }
+
+      $('body').on('click', '.linkClick', function(){
+        setTimeout(function(){
+          if(window.location.pathname == '/'){
+          $(".footer-tnc").show();
+        }
+        else{
+          $(".footer-tnc").hide();
+        }
+        }, 10)
+      })
 
 
       $('body').on('click', '.like', function() {

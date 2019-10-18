@@ -835,6 +835,43 @@ ol.bullet-1 li {
   margin: 20px 0;
 }
 
+.pixel-loader{
+  width: 100px;
+  animation: pixel-loader 3s infinite linear;
+}
+
+@keyframes pixel-loader{
+  100%{
+    transform: rotate(359deg);
+  }
+}
+
+.footer-tnc{
+  display: none;
+}
+
+
+.payment-loader {
+  border: 5px solid #f3f3f3;
+  border-radius: 50% !important;
+  border-top: 5px solid #4e73df;
+  width: 30px;
+  height: 30px;
+  -webkit-animation: payment-loader 2s linear infinite; /* Safari */
+  animation: payment-loader 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes payment-loader {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes payment-loader {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 
 /* Azhar CSS */
 
