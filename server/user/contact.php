@@ -13,7 +13,7 @@ $contact = $_POST['contact'];
 $subject = $_POST['subject'];
 $messagee = $_POST['message'];
 
-$to = 'info@worldartography.com';
+$to = 'admin@worldartography.com';
 $subject = "Contact details";
 
 $message = "
