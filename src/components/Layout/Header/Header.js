@@ -191,7 +191,7 @@ export default class Header extends React.Component {
                 {this.state.loggedIn ?
                   <li><a onClick={() => this.logoutHandler()}>{this.state.name} (Logout)</a></li>
                   :
-                  <li><a onClick={() => this.loginClickHandler()}>Login/Registration</a></li>
+                  <li><a onClick={() => this.loginClickHandler()}  className="linkClick">Login/Registration</a></li>
                 }
 
               </ul>

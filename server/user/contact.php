@@ -21,7 +21,7 @@ $message = "
     <body>
         <table rules='all' style='border-color: #000;border:1px solid #000' cellpadding='10'>
             <tr style='background:#000;'>
-                <td colspan='2'><img src='http://www.ssindiacosmetics.com/images/logo.svg' width='280' alt='World Artography' /></td>
+                <td colspan='2'><img src='https://www.worldartography.com/images/logo.svg' width='280' alt='World Artography' /></td>
             </tr>
             <tr>
                 <td><strong>Name:</strong></td>

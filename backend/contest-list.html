@@ -16,18 +16,14 @@
     <link
       rel="stylesheet"
       href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"
-    /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    />
     </head>
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="css/adminlte.min.css" />
+    <link rel="stylesheet" href="css/custom.css" />
     <!-- Google Font: Source Sans Pro -->
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
     </head>
-    <link
-      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
-      rel="stylesheet"
-    />
     <link
       rel="stylesheet"
       href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"
@@ -167,7 +163,7 @@
                 <div class="card card-primary">
                   <div class="card-header">DCP Expendition List</div>
                   <div class="card-body">
-                    <table class="table dataTable" id="dataTableDcp">
+                    <table class="table table-bordered dataTable" id="dataTableDcp">
                       <thead>
                         <tr>
                           <th>Coupon Code</th>
@@ -224,7 +220,7 @@
           }
         }
 
-        const url = 'http://localhost:8888/Self/Project/world%20artography/code/react-app/server/admin/getDcpData.php';
+        const url = '/server/admin/getDcpData.php';
         console.log(url)
         $.get(url,
         (data) => {
@@ -276,6 +272,7 @@
                           <td><a href="dcp-details.html?dcp=${el.coupon}">View</a></td>
                         </tr>`;
             $("#dataTableDcp tbody").append(html);
+            $(".dataTable").dataTable();
           })
 
         });

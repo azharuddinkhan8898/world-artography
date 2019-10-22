@@ -5,7 +5,7 @@ const HowToBuyPixels = () => {
     <React.Fragment>
       <div className="container-fluid inner-pages">
         <h1 className="h3 mb-4 text-gray-800">3 Quick Steps to Buy Pixels and Submit your images for the competition</h1>
-        <p>The contest is based on a concept of buying pixels from the Grid to submit image/s for the competition. One image will have a fix resolution of 6700 pixels (100 pixels on Longer side and 67 pixels on shorter side), where cost of one pixel will be ₹ 1, thus entry fees for single image will be ₹ 6700.<br />
+        <p>The contest is based on a concept of buying pixels from the Grid to submit image/s for the competition. Each image will have a fix resolution of 6700 pixels (100 pixels on Longer side and 67 pixels on shorter side), where cost of one pixel will be ₹ 1, thus entry fees for single image will be ₹ 6700.<br />
           Maximum 5 images per Entrant can be submitted.</p>
 
         <p><strong>1. CLICK THE EMPTY MULTI PIXEL BOX TO UPLOAD YOUR IMAGE(S)</strong></p>
@@ -33,7 +33,7 @@ const HowToBuyPixels = () => {
         <p>On selection of any empty grid, IMAGE UPLOAD pop-up will appear</p>
 
         <p><strong>Select Image of appropriate size</strong><br />
-          It is stated above, that the image with resolution of 6700 pixels will only be accepted. However, for better display, this image submission form is designed to accept image only in resolution of 1000 pixels on higher side and 667 pixels on a shorter side. Grid is designed to convert the image from 667,000 pixels to 6700 pixels, however no other dimension will be accepted other than 1000x667 / 667x1000 on this form.</p>
+          It is stated above, that the image with resolution of 6700 pixels will only be accepted. However, for better display, this image submission form is designed to accept image only in resolution of 1000 pixels on longer side and 667 pixels on a shorter side. Grid is designed to convert the image from 667,000 pixels to 6700 pixels, however no other dimension will be accepted other than 1000x667 / 667x1000 on this form.</p>
 
         <p><strong>Select Category</strong><br />
           Select the category from the drop-down list. Entrant can submit 5 images in total. Entrant has to utilize this limit amongst given categories.</p>
@@ -47,12 +47,12 @@ const HowToBuyPixels = () => {
 
 
         <p><strong>Image Title Provide Appropriate Title to the image (Mandatory)</strong></p>
-        <p><strong>Camera Make of the Camera</strong></p>
-        <p><strong>Lens Make of the Lens</strong></p>
-        <p><strong>Aperture Aperture value used</strong></p>
-        <p><strong>Shutter Speed Shutter speed used</strong></p>
-        <p><strong>ISO ISO value used</strong></p>
-        <p><strong>Other remarks Additional details about the image such as stacking, HDR, composite etc can be provided (applicable especially for landscape images)</strong></p>
+        <p>Camera Make of the Camera</p>
+        <p>Lens Make of the Lens</p>
+        <p>Aperture Aperture value used</p>
+        <p>Shutter Speed Shutter speed used</p>
+        <p>ISO ISO value used</p>
+        <p>Other remarks Additional details about the image such as stacking, HDR, composite etc can be provided (applicable especially for landscape images)</p>
 
         <p>On Submission of one image, system will bring back the entrant to the Grid.</p>
 
@@ -71,7 +71,7 @@ const HowToBuyPixels = () => {
 
         <p>Payment Option:</p>
 
-        <p>Entrant has to select the check box and read the Terms & Conditions associated with the contest.</p>
+          <p>Entrant has to select the check box and read the Terms & Conditions associated with the contest.</p>
 
         <p>Payment panel will display;</p>
         <ul className="bullet-1">

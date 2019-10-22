@@ -170,9 +170,9 @@ if($user->signup()){
     <p>Dear ".$name."<br/></p>
     <p>You have registered with World Artography Photography Contest.</p>
     <p>Your account is: <strong>".$to."</strong></p>
-    <p>To complete registration, activate your account, click the following link: <a href='http://www.ssindiacosmetics.com/activate/".$user->token."'><b>ACTIVATE THE ACCOUNT</b></p>
+    <p>To complete registration, activate your account, click the following link: <a href='https://www.worldartography.com/#/activate/".$user->token."'><b>ACTIVATE THE ACCOUNT</b></p>
     
-    <p><a href='http://www.ssindiacosmetics.com/how-to-by-pixels/'><b>Click here</b></a> to know, How to Upload Images<br/></p>
+    <p><a href='https://www.worldartography.com/#/how-to-buy-pixels/'><b>Click here</b></a> to know, How to Upload Images<br/></p>
     <p>Sincerely,<br/><strong>World Artography team</strong></p>
     </body>
     </html>

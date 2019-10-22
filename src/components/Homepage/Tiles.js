@@ -23,14 +23,21 @@ export default class Tiles extends Component {
             },
             share:  {
                 url: function (instance, item) {
-                    
-                
-                    return window.location.href ;
+                    console.log(instance, item);
+                    var button = instance.$trigger;
+                    var fancyboxData = button.attr("data-fancybox");
+                    var indexEl = button.index($("[data-fancybox='"+fancyboxData+"']"));
+
+
+                    var link = window.location.href.replace("#","#/#");
+                    var finalLink = link + '-' + (indexEl + 1);
+                    return finalLink ;
             }
         }
         });
+
         var array = document.location.hash.split("-");
-        var selector = array[0].replace("#", "");
+        var selector = array[0].replace("#/#", "");
         var number = 0;
         if (array.length > 1) {
             var number = parseInt(array[array.length - 1]);
@@ -121,7 +128,7 @@ export default class Tiles extends Component {
             for(var i=1; i<=10000; i++){
                 
                 if(this.props.imagesData[i - 1].email != null){
-                    var capHtml = "<div class='like'>Like <i class='fas fa-heart' aria-hidden='true'></i></div><h6>"+this.props.imagesData[i - 1].title+"</h6><p>Image by "+this.props.imagesData[i - 1].name+"</p>";
+                    var capHtml = "<button class='like' style='background:none'>Like <i class='fas fa-heart' aria-hidden='true'></i></button><h6>"+this.props.imagesData[i - 1].title+"</h6><p>Image by "+this.props.imagesData[i - 1].name+"</p>";
 
                     if(this.props.imagesData[i - 1].url.search('blob') !== -1){
                         images.push(<div key={i - 1}  className="img-thumb" id={i}  style={{background:`url(${ this.props.imagesData[i - 1].url}) center center no-repeat`,backgroundSize:`cover`}}><div onClick={(e) => this.props.removeTileHandler(e)} id={this.props.imagesData[i - 1].id} className="btn-remove">X</div></div>)

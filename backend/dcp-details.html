@@ -434,7 +434,6 @@
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- AdminLTE App -->
     <script src="js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
@@ -452,7 +451,7 @@
       $(function(){
         var coupon = getUrlVars()['dcp'];
         console.log(coupon)
-        const url = 'http://localhost:8888/Self/Project/world%20artography/code/react-app/server/admin/getSingleDcpData.php?dcp='+coupon;
+        const url = '/server/admin/getSingleDcpData.php?dcp='+coupon;
         console.log(url)
         $.get(url,
         (data) => {
@@ -563,8 +562,8 @@
                 var html = `
                 <div class="img-info">
                   <div class="row clearfix">
-                    <div class="col-md-12">
-                      <img src="/server/images/uploads/${element.url}" width="100%" height="350px" style="border:1px solid #333">
+                    <div class="col-md-12 text-center">
+                      <img src="/server/images/${element.url}" style="max-width:100%;border:1px solid #333">
                     </div>
                   </div>
                   <div class="row">
@@ -661,175 +660,6 @@
                 <hr />`
                 $(".body-row").append(commentHtml)
 
-
-              //   <div class="img-info">
-              //     <div class="row clearfix">
-              //       <div class="col-md-12">
-              //         <img
-              //           src=""
-              //           width="100%"
-              //           height="350px"
-              //           style="border:1px solid #333"
-              //         />
-              //       </div>
-              //     </div>
-              //     <div class="row">
-              //       <div class="col-md-4">
-              //         <div class="form-group">
-              //           <input type="text" id="insta" class="form-control" />
-              //           <label class="form-control-placeholder" for="insta"
-              //             >Image Category</label
-              //           >
-              //         </div>
-              //       </div>
-              //       <div class="col-md-4">
-              //         <div class="form-group">
-              //           <input type="text" id="insta" class="form-control" />
-              //           <label class="form-control-placeholder" for="insta"
-              //             >Image Title</label
-              //           >
-              //         </div>
-              //       </div>
-              //       <div class="col-md-4">
-              //         <div class="form-group">
-              //           <input type="text" id="insta" class="form-control" />
-              //           <label class="form-control-placeholder" for="insta"
-              //             >Camera</label
-              //           >
-              //         </div>
-              //       </div>
-              //       <div class="col-md-4">
-              //         <div class="form-group">
-              //           <input type="text" id="insta" class="form-control" />
-              //           <label class="form-control-placeholder" for="insta"
-              //             >Lens</label
-              //           >
-              //         </div>
-              //       </div>
-              //       <div class="col-md-4">
-              //         <div class="form-group">
-              //           <input type="text" id="insta" class="form-control" />
-              //           <label class="form-control-placeholder" for="insta"
-              //             >Aperture</label
-              //           >
-              //         </div>
-              //       </div>
-              //       <div class="col-md-4">
-              //         <div class="form-group">
-              //           <input type="text" id="insta" class="form-control" />
-              //           <label class="form-control-placeholder" for="insta"
-              //             >Shutter Speed</label
-              //           >
-              //         </div>
-              //       </div>
-              //       <div class="col-md-4">
-              //         <div class="form-group">
-              //           <input type="text" id="insta" class="form-control" />
-              //           <label class="form-control-placeholder" for="insta"
-              //             >ISO</label
-              //           >
-              //         </div>
-              //       </div>
-              //       <div class="col-md-8">
-              //         <div class="form-group">
-              //           <input type="text" id="insta" class="form-control" />
-              //           <label class="form-control-placeholder" for="insta"
-              //             >Other Remarks</label
-              //           >
-              //         </div>
-              //       </div>
-              //     </div>
-              //   </div>
-              //   <hr />
-              //   <div class="img-info">
-              //     <div class="row clearfix">
-              //       <div class="col-md-12">
-              //         <img
-              //           src=""
-              //           width="100%"
-              //           height="350px"
-              //           style="border:1px solid #333"
-              //         />
-              //       </div>
-              //     </div>
-              //     <div class="row">
-              //       <div class="col-md-4">
-              //         <div class="form-group">
-              //           <input type="text" id="insta" class="form-control" />
-              //           <label class="form-control-placeholder" for="insta"
-              //             >Image Category</label
-              //           >
-              //         </div>
-              //       </div>
-              //       <div class="col-md-4">
-              //         <div class="form-group">
-              //           <input type="text" id="insta" class="form-control" />
-              //           <label class="form-control-placeholder" for="insta"
-              //             >Image Title</label
-              //           >
-              //         </div>
-              //       </div>
-              //       <div class="col-md-4">
-              //         <div class="form-group">
-              //           <input type="text" id="insta" class="form-control" />
-              //           <label class="form-control-placeholder" for="insta"
-              //             >Camera</label
-              //           >
-              //         </div>
-              //       </div>
-              //       <div class="col-md-4">
-              //         <div class="form-group">
-              //           <input type="text" id="insta" class="form-control" />
-              //           <label class="form-control-placeholder" for="insta"
-              //             >Lens</label
-              //           >
-              //         </div>
-              //       </div>
-              //       <div class="col-md-4">
-              //         <div class="form-group">
-              //           <input type="text" id="insta" class="form-control" />
-              //           <label class="form-control-placeholder" for="insta"
-              //             >Aperture</label
-              //           >
-              //         </div>
-              //       </div>
-              //       <div class="col-md-4">
-              //         <div class="form-group">
-              //           <input type="text" id="insta" class="form-control" />
-              //           <label class="form-control-placeholder" for="insta"
-              //             >Shutter Speed</label
-              //           >
-              //         </div>
-              //       </div>
-              //       <div class="col-md-4">
-              //         <div class="form-group">
-              //           <input type="text" id="insta" class="form-control" />
-              //           <label class="form-control-placeholder" for="insta"
-              //             >ISO</label
-              //           >
-              //         </div>
-              //       </div>
-              //       <div class="col-md-8">
-              //         <div class="form-group">
-              //           <input type="text" id="insta" class="form-control" />
-              //           <label class="form-control-placeholder" for="insta"
-              //             >Other Remarks</label
-              //           >
-              //         </div>
-              //       </div>
-              //     </div>
-              //   </div>
-              //   <hr />
-              //   <div class="row clearfix">
-              //     <div class="col-md-6">
-              //       <textarea
-              //         rows="5"
-              //         placeholder="Enter Rejection Reason"
-              //         class="form-control"
-              //       ></textarea>
-              //     </div>
-              //   </div>
-              // </div>`
               
         });
       })

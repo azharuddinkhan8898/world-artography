@@ -38,7 +38,7 @@ if($stmt->rowCount() > 0){
         <p>Dear ".$name."<br/></p>
         <p>You have requested for password reset.</p>
         <p>Your account is: <strong>".$to."</strong></p>
-        <p>To reset your password, click the following link: <a href='http://www.ssindiacosmetics.com/forgot-password/".$row['token']."'><b>RESET PASSWORD</b></p>
+        <p>To reset your password, click the following link: <a href='https://www.worldartography.com/#/forgot-password/".$row['token']."'><b>RESET PASSWORD</b></p>
         
         
         <p>Sincerely,<br/><strong>World Artography team</strong></p>

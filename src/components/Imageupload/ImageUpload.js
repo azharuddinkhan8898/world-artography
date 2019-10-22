@@ -77,7 +77,7 @@ export default class ImageUpload extends React.Component {
     }
 
     uploadImage = () => {
-      var isEverythingCorrect = 9;
+      var isEverythingCorrect = 4;
       if(!this.state.url){
         this.setState({
             urlError:true
@@ -109,7 +109,7 @@ export default class ImageUpload extends React.Component {
         isEverythingCorrect--;
       }
 
-      if(!this.state.camera){
+      /*if(!this.state.camera){
         this.setState({
             cameraError:true
         })
@@ -147,7 +147,7 @@ export default class ImageUpload extends React.Component {
         })
       }else{
         isEverythingCorrect--;
-      }
+      }*/
 
       if(isEverythingCorrect === 0){
         // const url = 'http://10.140.160.53:8888/Self/Project/world%20artography/code/react-app/server/images/uploadData.php';
@@ -273,7 +273,7 @@ export default class ImageUpload extends React.Component {
                 <div className="col-md-9 col register-form white-bg">
                   <h3>Image Upload</h3>
                   <p style={{    marginTop: '-6px', marginBottom: '25px',    color: "#ff4d4d",
-    fontSize: "12px"}}>1000 pixels higher side & 667 pixel on shorter side</p>
+    fontSize: "12px"}}>1000 pixels longer side &amp; 667 pixel on shorter side</p>
               <form>
                 <div className="row clearfix">
                   <div className="col-md-4 col-sm-6 col-xs-12">
@@ -310,9 +310,9 @@ export default class ImageUpload extends React.Component {
                     <div className="form-group">
                         <select className="form-control" name="category" onChange={this.inputHandler}>
                           <option>Select Category</option>
-                          <option>Wildlife & Nature</option>
+                          <option>Wildlife &amp; Nature</option>
                           <option>Landscape</option>
-                          <option>Travel & Street</option>
+                          <option>Travel &amp; Street</option>
                           <option>Portraits</option>
                           <option>Astro / Aerial Photography</option>
                         </select>
