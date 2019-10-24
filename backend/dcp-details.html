@@ -407,11 +407,11 @@
                 </div>
               </div> -->
               <!-- /.card-body -->
-              <div class="card-footer">
+              <!-- <div class="card-footer">
                 <button type="button" class="btn btn-primary">Approve</button>
                 <button type="button" class="btn btn-danger">Reject</button>
                 <button type="button" class="btn btn-default">Back</button>
-              </div>
+              </div> -->
             </div>
           </div>
           <!-- /.container-fluid -->
@@ -451,7 +451,7 @@
       $(function(){
         var coupon = getUrlVars()['dcp'];
         console.log(coupon)
-        const url = '/server/admin/getSingleDcpData.php?dcp='+coupon;
+        const url = 'http://localhost:8888/Self/Project/world%20artography/code/react-app/server/admin/getSingleDcpData.php?dcp='+coupon;
         console.log(url)
         $.get(url,
         (data) => {
@@ -646,19 +646,89 @@
               innerHTml.forEach((el) => {
                 $(".body-row").append(el)
               })
-
-              var commentHtml = `
+              var commentHtml;
+              //console.log(data.data[0].approved)
+              if(data.data[0].approved !== 'true'){
+                commentHtml = `
               <div class="row clearfix">
                   <div class="col-md-6">
                     <textarea
                       rows="5"
                       placeholder="Enter Rejection Reason"
                       class="form-control"
+                      id="reason"
                     ></textarea>
                   </div>
                 </div>
-                <hr />`
+                <hr />
+                <div class="card-footer">
+                  <button type="button" id="approve" data-coupon="${data.data[0].dcpcoupon}" class="btn btn-primary">Approve</button>
+                  <button type="button" id="reject" data-coupon="${data.data[0].dcpcoupon}" class="btn btn-danger">Reject</button>
+                  <a href="./contest-list.html" type="button" class="btn btn-default">Back</a>
+                </div>
+                `
+              }
+              else{
+                commentHtml = ``;
+              }
+              
                 $(".body-row").append(commentHtml)
+
+                $("#approve").click(function(){
+                  $("#approve, #reject").attr("disabled", "disabled");
+                  const url = 'http://localhost:8888/Self/Project/world%20artography/code/react-app/server/admin/approve.php';
+
+                  const data = {
+                    dcpcoupon: $(this).attr("data-coupon"),
+                    email: data.data[0].email
+                  }
+                  console.log(url, data)
+                  $.post(url,data,
+                  (data) => {
+                    if(data.status){
+                      let html = `
+                      <p class="text-success">This this approved</p>
+                      `;
+                      $(".card-footer").after(html);
+                    }else{
+                      $("#approve, #reject").removeAttr("disabled");
+                    }
+                  });
+                })
+
+                $("#reject").click(function(){
+                  if($("#reason").val() == ""){
+                    $("#reason").after(`<span class="error" id="errorText" style="color:red">This is required for rejection.</span>`)
+                  }
+                  else{
+                    $("#approve, #reject").attr("disabled", "disabled");
+                    const url = 'http://localhost:8888/Self/Project/world%20artography/code/react-app/server/admin/reject.php';
+
+                    const data = {
+                      dcpcoupon: $(this).attr("data-coupon"),
+                      email: data.data[0].email,
+                      reason: $("#reason").val()
+                    }
+                    console.log(url, data)
+                    $.post(url,data,
+                    (data) => {
+                      if(data.status){
+                        let html = `
+                        <p class="text-success">This this approved</p>
+                        `;
+                        $(".card-footer").after(html);
+                      }else{
+                        $("#approve, #reject").removeAttr("disabled");
+                      }
+                    });
+                  }
+                  
+                })
+
+                $("#reason").on('input',function(){
+                  console.log("sfs")
+                  $("#errorText").remove()
+                })
 
               
         });

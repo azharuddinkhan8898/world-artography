@@ -3,17 +3,23 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 class Database{
  
-    // specify your own database credentials
+    // Testing server
     // private $host = "localhost";
     // private $db_name = "ssindiac_artography";
     // private $username = "ssindiac_ssindia";
     // private $password = "azhar123!";
 
-
+    //Live database
     private $host = "localhost";
     private $db_name = "worldart_photography";
     private $username = "worldart_admin";
     private $password = "Intermind123*";
+
+    // Local server
+    // private $host = "localhost:8889";
+    // private $db_name = "test";
+    // private $username = "root";
+    // private $password = "root";
     
     public $conn;
  

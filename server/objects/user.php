@@ -353,6 +353,38 @@ class User{
         } 
     }
 
+
+    function approve(){
+        $query = "UPDATE images SET approved='true' WHERE dcpcoupon=:dcpcoupon";
+        // prepare query
+        $stmt = $this->conn->prepare($query);
+        // sanitize
+        $this->dcpcoupon=htmlspecialchars(strip_tags($this->dcpcoupon));
+        // bind values
+        $stmt->bindParam(":dcpcoupon", $this->dcpcoupon);
+        if($stmt->execute()){
+            $this->id = $this->conn->lastInsertId();
+            return true;
+        }
+        return false;
+    }
+
+
+    function reject(){
+        $query = "UPDATE images SET approved='true' WHERE dcpcoupon=:dcpcoupon";
+        // prepare query
+        $stmt = $this->conn->prepare($query);
+        // sanitize
+        $this->dcpcoupon=htmlspecialchars(strip_tags($this->dcpcoupon));
+        // bind values
+        $stmt->bindParam(":dcpcoupon", $this->dcpcoupon);
+        if($stmt->execute()){
+            $this->id = $this->conn->lastInsertId();
+            return true;
+        }
+        return false;
+    }
+
     
     // a function to check if email already exists
     function isAlreadyExist(){
