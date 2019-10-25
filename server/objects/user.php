@@ -371,7 +371,7 @@ class User{
 
 
     function reject(){
-        $query = "UPDATE images SET approved='true' WHERE dcpcoupon=:dcpcoupon";
+        $query = "UPDATE images SET email=null,name=null, category=null, title=null, camera=null, lens=null, aperture=null, shutter=null, iso=null, other=null, url=null, approved=null, dcpcoupon=null, paypalTranId=null, active=null, likes=0 WHERE dcpcoupon=:dcpcoupon";
         // prepare query
         $stmt = $this->conn->prepare($query);
         // sanitize
@@ -383,6 +383,17 @@ class User{
             return true;
         }
         return false;
+    }
+
+    function getUsersData(){
+        $query = "SELECT * FROM users";
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+        // execute query
+        $stmt->execute();
+        if($stmt){
+            return $stmt;
+        } 
     }
 
     

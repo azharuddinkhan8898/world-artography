@@ -456,11 +456,12 @@
         $.get(url,
         (data) => {
           console.log(data)
-
+          if(data.status){
+          var jsonData = data.data;
           var html = `
           <div class="card-header">
             <h3 class="card-title">
-              ${data.data[0].name} - Payment by DCP - Coupon Code ${data.data[0].dcpcoupon}
+              ${jsonData[0].name} - Payment by DCP - Coupon Code ${jsonData[0].dcpcoupon}
             </h3>
           </div>
           <div class="card-body">
@@ -472,7 +473,7 @@
                         type="text"
                         id="name"
                         class="form-control"
-                        value="${data.data[0].name}"
+                        value="${jsonData[0].name}"
                         readonly
                       />
                       <label class="form-control-placeholder" for="name"
@@ -486,7 +487,7 @@
                         type="text"
                         id="email"
                         class="form-control"
-                        value="${data.data[0].email}"
+                        value="${jsonData[0].email}"
                         readonly
                       />
                       <label class="form-control-placeholder" for="name"
@@ -501,7 +502,7 @@
                         type="text"
                         id="email"
                         class="form-control"
-                        value="${data.data[0].country}"
+                        value="${jsonData[0].country}"
                         readonly
                       />
                       <label class="form-control-placeholder" for="name"
@@ -512,7 +513,7 @@
                   <div class="col-lg-3">
                     <div class="form-group">
                       <input type="text" id="insta" class="form-control"
-                      value="${data.data[0].instagram}"
+                      value="${jsonData[0].instagram}"
                       readonly
                       />
                       <label class="form-control-placeholder" for="insta"
@@ -526,7 +527,7 @@
                   <div class="col-lg-3">
                     <div class="form-group">
                       <input type="text" id="fb" class="form-control"
-                      value="${data.data[0].facebook}"
+                      value="${jsonData[0].facebook}"
                       readonly
                        />
                       <label class="form-control-placeholder" for="fb"
@@ -537,7 +538,7 @@
                   <div class="col-lg-3">
                     <div class="form-group">
                       <input type="text" id="web" class="form-control"
-                      value="${data.data[0].website}"
+                      value="${jsonData[0].website}"
                       readonly
                       />
                       <label class="form-control-placeholder" for="web"
@@ -558,7 +559,7 @@
 
               var innerHTml = [];
 
-              data.data.forEach(element => {
+              jsonData.forEach(element => {
                 var html = `
                 <div class="img-info">
                   <div class="row clearfix">
@@ -647,8 +648,8 @@
                 $(".body-row").append(el)
               })
               var commentHtml;
-              //console.log(data.data[0].approved)
-              if(data.data[0].approved !== 'true'){
+              //console.log(jsonData[0].approved)
+              if(jsonData[0].approved !== 'true'){
                 commentHtml = `
               <div class="row clearfix">
                   <div class="col-md-6">
@@ -662,9 +663,9 @@
                 </div>
                 <hr />
                 <div class="card-footer">
-                  <button type="button" id="approve" data-coupon="${data.data[0].dcpcoupon}" class="btn btn-primary">Approve</button>
-                  <button type="button" id="reject" data-coupon="${data.data[0].dcpcoupon}" class="btn btn-danger">Reject</button>
-                  <a href="./contest-list.html" type="button" class="btn btn-default">Back</a>
+                  <button type="button" id="approve" data-coupon="${jsonData[0].dcpcoupon}" class="btn btn-primary">Approve</button>
+                  <button type="button" id="reject" data-coupon="${jsonData[0].dcpcoupon}" class="btn btn-danger">Reject</button>
+                  <a href="./contest-list.html" id="back" type="button" class="btn btn-default">Back</a>
                 </div>
                 `
               }
@@ -680,7 +681,8 @@
 
                   const data = {
                     dcpcoupon: $(this).attr("data-coupon"),
-                    email: data.data[0].email
+                    email: jsonData[0].email,
+                    name: jsonData[0].name
                   }
                   console.log(url, data)
                   $.post(url,data,
@@ -690,12 +692,12 @@
                       <p class="text-success">This this approved</p>
                       `;
                       $(".card-footer").after(html);
+                      
                     }else{
                       $("#approve, #reject").removeAttr("disabled");
                     }
                   });
                 })
-
                 $("#reject").click(function(){
                   if($("#reason").val() == ""){
                     $("#reason").after(`<span class="error" id="errorText" style="color:red">This is required for rejection.</span>`)
@@ -706,17 +708,22 @@
 
                     const data = {
                       dcpcoupon: $(this).attr("data-coupon"),
-                      email: data.data[0].email,
-                      reason: $("#reason").val()
+                      email: jsonData[0].email,
+                      reason: $("#reason").val(),
+                      name: jsonData[0].name
                     }
                     console.log(url, data)
                     $.post(url,data,
                     (data) => {
+                      console.log(data)
                       if(data.status){
                         let html = `
-                        <p class="text-success">This this approved</p>
+                        <p class="text-danger">This this Rejected, you will be redirected to the listing page in 5 seconds or click back.</p>
                         `;
                         $(".card-footer").after(html);
+                        setTimeout(function(){
+                          window.location.href = './contest-list.html';
+                        }, 5000)
                       }else{
                         $("#approve, #reject").removeAttr("disabled");
                       }
@@ -730,7 +737,7 @@
                   $("#errorText").remove()
                 })
 
-              
+        }  
         });
       })
     </script>

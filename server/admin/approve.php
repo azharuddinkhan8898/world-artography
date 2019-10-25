@@ -17,12 +17,51 @@ $db = $database->getConnection();
 
 $user = new User($db);
 $user->dcpcoupon = $_POST['dcpcoupon'];
+$user->email = $_POST['email'];
+$user->name = $_POST['name'];
 // create the user
 if($user->approve()){
+
+    $to = $user->email;
+    $name = $user->name;
+
+    $subject = "World Artography DCP Expeditions Approval";
+
+    $message = "
+    <html>
+    <head>
+    <title>World Artography</title>
+    </head>
+    <body>
+    <p>Dear ".$name."<br/></p>
+    <p>Your DCP Expeditions coupon ".$user->dcpcoupon." is approved.</p>
+    <p><a href='https://www.worldartography.com/'><b>Click here</b></a> to check your images.<br/></p>
+    <p>Sincerely,<br/><strong>World Artography team</strong></p>
+    </body>
+    </html>
+    ";
+
+    // Always set content-type when sending HTML email
+   $headers = "MIME-Version: 1.0" . "\r\n";
+   $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+   // More headers
+   $headers .= 'From: <info@worldartography.com>' . "\r\n";
+
+   $retval = mail($to,$subject,$message,$headers);
+   if($retval){
     $user_arr=array(
         "status" => true,
         "message" => "Successfully updated!"
     );
+   }
+   else{
+    $user_arr=array(
+        "status" => false,
+        "message" => "Email not sent"
+    );
+   }
+    
 }
 else{
     $user_arr=array(
