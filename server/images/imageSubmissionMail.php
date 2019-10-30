@@ -19,6 +19,7 @@ $name = isset($_GET['name']) ? $_GET['name'] : die();
     <p>Dear ".$name."<br/></p>
     <p>Thank you for submission of your images. Wish you good luck for the contest.</p>
     <p>In case of any query please contact us <a href='mailto:support@worldartography.com'>support@worldartography.com</a></p>
+    <p><i>P.S.: Entries submitted by DCP Expeditions members, will be available for viewing, voting and sharing post successful validation within 24 hours.</i></p>
     <p>Sincerely,<br/><strong>World Artography team</strong></p>
     </body>
     </html>
