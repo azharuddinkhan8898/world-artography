@@ -29,7 +29,8 @@ if($stmt->rowCount() > 0){
             "id" => $row['id'],
             "email" => $row['email'],
             "name" => $row['name'],
-            "token" => $row['token']
+            "token" => $row['token'],
+            "admin" => $row['admin']
         );
     }
     else{

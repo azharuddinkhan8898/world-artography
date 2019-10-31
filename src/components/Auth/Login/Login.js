@@ -63,7 +63,7 @@ export default class Login extends React.Component {
 
     if (isEverythingCorrect === 0) {
       const url =
-        "/server/user/login.php?email=" +
+        "http://localhost:8888/Self/Project/world%20artography/code/react-app/server/user/login.php?email=" +
         this.state.email +
         "&password=" +
         this.state.password;
@@ -83,11 +83,13 @@ export default class Login extends React.Component {
           window.localStorage.setItem("name", data.name);
           window.localStorage.setItem("email", data.email);
           window.localStorage.setItem("loggedIn", true);
+          window.localStorage.setItem("loggedIn", true);
+          window.localStorage.setItem(window.btoa("aatestd"),window.btoa(data.token + "###" + data.admin) );
           this.props.loginHandler(data.token, data.name, data.email);
           this.setState({
             loginDisabled: false
           });
-          const url = "/server/images/countimages.php?email=" + data.email;
+          const url = "http://localhost:8888/Self/Project/world%20artography/code/react-app/server/images/countimages.php?email=" + data.email;
           $.get(url, data1 => {
             if (data1.status) {
               console.log(data1.data);

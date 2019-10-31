@@ -30,6 +30,8 @@ Header add Access-Control-Allow-Methods "PUT, GET, POST, DELETE, OPTIONS"
 
 ALTER TABLE images ADD url VARCHAR( 255 ) after email
 
+ALTER TABLE users ADD admin VARCHAR( 255 ) after active
+
 
 $query = "UPDATE images SET email=:email,name=:name, category=:category, title=:title, camera=:camera, lens=:lens, aperture=:aperture, shutter=:shutter, iso=:iso, other=:other, created=:created, url=:url WHERE id=:id";
 

@@ -74,6 +74,7 @@ export default class Header extends React.Component {
     window.localStorage.setItem("name", '');
     window.localStorage.setItem("email", '');
     window.localStorage.setItem("token", '');
+    window.localStorage.removeItem("YWF0ZXN0ZA==");
     this.setState({
       loggedIn: false,
       name: '',
@@ -127,6 +128,11 @@ export default class Header extends React.Component {
     var name = window.localStorage.getItem("name");
     var email = window.localStorage.getItem("email");
     var token = window.localStorage.getItem("token");
+    var aatestd = window.atob(window.localStorage.getItem(window.btoa("aatestd"))).split("###")[1];
+    console.log(aatestd)
+    this.setState({
+      aatestd: aatestd
+    })
     if (window.innerWidth <= 1024) {
       this.setState({
         showMobileMenu: false,
@@ -188,10 +194,18 @@ export default class Header extends React.Component {
                 <li><NavLink className="linkClick" to="/how-to-buy-pixels">How to Buy Pixels</NavLink></li>
                 <li><NavLink className="linkClick" to="prizes">Prizes</NavLink></li>
                 <li><NavLink className="linkClick" to="contact">Contact</NavLink></li>
+                
+                
                 {this.state.loggedIn ?
                   <li><a onClick={() => this.logoutHandler()}>{this.state.name} (Logout)</a></li>
                   :
                   <li><a onClick={() => this.loginClickHandler()}  className="linkClick">Login/Registration</a></li>
+                }
+
+                {this.state.aatestd === 'true' ? 
+                <li><a className="linkClick" target="_blank" href="/admin/dashboard.html">Admin</a></li>
+                :
+                null
                 }
 
               </ul>
