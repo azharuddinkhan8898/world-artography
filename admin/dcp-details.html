@@ -1,167 +1,144 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>AdminLTE 3 | Blank Page</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
-    />
-    <!-- Ionicons -->
-    <link
-      rel="stylesheet"
-      href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"
-    />
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="css/adminlte.min.css" />
-    <link rel="stylesheet" href="css/custom.css" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Nunito:400,700,800&display=swap"
-      rel="stylesheet"
-    />
-    <script>
-        var aatestd = window.atob(window.localStorage.getItem(window.btoa("aatestd"))).split("###")[1];
-        //var aatestd = "dxvfsgv";
-        console.log(aatestd)
-        if(aatestd !== 'true'){
-          //window.location.replace("http://www.w3schools.com");
-          window.location.href = "/";
-        }
-      </script>
-  </head>
-  <body class="hold-transition sidebar-mini">
-    <!-- Site wrapper -->
-    <div class="wrapper">
-      <!-- Navbar -->
-      <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-        <!-- Left navbar links -->
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" data-widget="pushmenu" href="#"
-              ><i class="fas fa-bars"></i
-            ></a>
-          </li>
-        </ul>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>AdminLTE 3 | Blank Page</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <!-- Right navbar links -->
-        <ul class="navbar-nav ml-auto">
-          <!-- Notifications Dropdown Menu -->
-          <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="#">
-              <i class="far fa-bell"></i>
-              <span class="badge badge-warning navbar-badge">15</span>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="css/adminlte.min.css" />
+  <link rel="stylesheet" href="css/custom.css" />
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,700,800&display=swap" rel="stylesheet" />
+  <script>
+    var aatestd = window.atob(window.localStorage.getItem(window.btoa("aatestd"))).split("###")[1];
+    //var aatestd = "dxvfsgv";
+    console.log(aatestd)
+    if (aatestd !== 'true') {
+      //window.location.replace("http://www.w3schools.com");
+      window.location.href = "/";
+    }
+  </script>
+</head>
+
+<body class="hold-transition sidebar-mini">
+  <!-- Site wrapper -->
+  <div class="wrapper">
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+      <!-- Left navbar links -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+        </li>
+      </ul>
+
+      <!-- Right navbar links -->
+      <ul class="navbar-nav ml-auto">
+        <!-- Notifications Dropdown Menu -->
+        <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="#">
+            <i class="far fa-bell"></i>
+            <span class="badge badge-warning navbar-badge">15</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+            <span class="dropdown-item dropdown-header">15 Notifications</span>
+            <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item">
+              <i class="fas fa-envelope mr-2"></i> 4 new messages
+              <span class="float-right text-muted text-sm">3 mins</span>
             </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-              <span class="dropdown-item dropdown-header"
-                >15 Notifications</span
-              >
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <i class="fas fa-envelope mr-2"></i> 4 new messages
-                <span class="float-right text-muted text-sm">3 mins</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <i class="fas fa-users mr-2"></i> 8 friend requests
-                <span class="float-right text-muted text-sm">12 hours</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <i class="fas fa-file mr-2"></i> 3 new reports
-                <span class="float-right text-muted text-sm">2 days</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item dropdown-footer"
-                >See All Notifications</a
-              >
-            </div>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              data-widget="control-sidebar"
-              data-slide="true"
-              href="#"
-            >
-              <i class="fas fa-th-large"></i> Logout
+            <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item">
+              <i class="fas fa-users mr-2"></i> 8 friend requests
+              <span class="float-right text-muted text-sm">12 hours</span>
             </a>
-          </li>
-        </ul>
-      </nav>
-      <!-- /.navbar -->
+            <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item">
+              <i class="fas fa-file mr-2"></i> 3 new reports
+              <span class="float-right text-muted text-sm">2 days</span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
+            <i class="fas fa-th-large"></i> Logout
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- /.navbar -->
 
-      <!-- Main Sidebar Container -->
-      <aside class="main-sidebar sidebar-dark-primary elevation-4">
-        <!-- Brand Logo -->
-        <a href="../../index3.html" class="brand-link">
-          <!--img src="../../dist/img/AdminLTELogo.png"
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a href="../../index3.html" class="brand-link">
+        <!--img src="../../dist/img/AdminLTELogo.png"
            alt="AdminLTE Logo"
            class="brand-image img-circle elevation-3"
            style="opacity: .8"-->
-          <span class="brand-text font-weight-bold">World Artography</span>
-        </a>
+        <span class="brand-text font-weight-bold">World Artography</span>
+      </a>
 
-        <!-- Sidebar -->
-        <div class="sidebar">
-          <!-- Sidebar Menu -->
-          <nav class="mt-2">
-              <ul
-              class="nav nav-pills nav-sidebar flex-column"
-              data-widget="treeview"
-              role="menu"
-              data-accordion="false"
-            >
-              <li class="nav-item">
-                <a href="./dashboard.html" class="nav-link">
-                  <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>
-                    Dashboard
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./contest-list.html" class="nav-link">
-                  <i class="nav-icon far fa-calendar-alt"></i>
-                  <p>
-                      DCP Expendition List
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./user-list.html" class="nav-link">
-                  <i class="nav-icon far fa-calendar-alt"></i>
-                  <p>
-                      Users List
-                  </p>
-                </a>
-              </li>
-              
-            </ul>
-          </nav>
-          <!-- /.sidebar-menu -->
-        </div>
-        <!-- /.sidebar -->
-      </aside>
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-item">
+              <a href="./dashboard.html" class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Dashboard
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./contest-list.html" class="nav-link">
+                <i class="nav-icon far fa-calendar-alt"></i>
+                <p>
+                  DCP Expendition List
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./user-list.html" class="nav-link">
+                <i class="nav-icon far fa-calendar-alt"></i>
+                <p>
+                  Users List
+                </p>
+              </a>
+            </li>
 
-      <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-          <div class="container-fluid">
-            <div class="row mb-2">
-              <div class="col-sm-12">
-                <h1>Candidate Profile</h1>
-              </div>
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-12">
+              <h1>Candidate Profile</h1>
             </div>
-            <div class="card card-primary" id="dcpDetailsWrapper">
-              
-              <!-- /.card-header -->
-              <!-- <div class="card-body">
+          </div>
+          <div class="card card-primary" id="dcpDetailsWrapper">
+
+            <!-- /.card-header -->
+            <!-- <div class="card-body">
                 <div class="row">
                   <div class="col-lg-3">
                     <div class="form-group">
@@ -408,59 +385,59 @@
                   </div>
                 </div>
               </div> -->
-              <!-- /.card-body -->
-              <!-- <div class="card-footer">
+            <!-- /.card-body -->
+            <!-- <div class="card-footer">
                 <button type="button" class="btn btn-primary">Approve</button>
                 <button type="button" class="btn btn-danger">Reject</button>
                 <button type="button" class="btn btn-default">Back</button>
               </div> -->
-            </div>
           </div>
-          <!-- /.container-fluid -->
-        </section>
-      </div>
-      <!-- /.content-wrapper -->
-
-      <footer class="main-footer">
-        <strong>Copyright &copy; 2019.</strong> All rights reserved.
-      </footer>
-
-      <!-- Control Sidebar -->
-      <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-      </aside>
-      <!-- /.control-sidebar -->
+        </div>
+        <!-- /.container-fluid -->
+      </section>
     </div>
-    <!-- ./wrapper -->
+    <!-- /.content-wrapper -->
 
-    <!-- jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <!-- AdminLTE App -->
-    <script src="js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
+    <footer class="main-footer">
+      <strong>Copyright &copy; 2019.</strong> All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>
+  <!-- ./wrapper -->
+
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <!-- AdminLTE App -->
+  <script src="js/adminlte.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
 
 
 
-    <script>
-      function getUrlVars() {
-          var vars = {};
-          var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-              vars[key] = value;
-          });
-          return vars;
-      }
-      $(function(){
-        var coupon = getUrlVars()['dcp'];
-        console.log(coupon)
-        const url = 'http://localhost:8888/Self/Project/world%20artography/code/react-app/server/admin/getSingleDcpData.php?dcp='+coupon;
-        console.log(url)
-        $.get(url,
+  <script>
+    function getUrlVars() {
+      var vars = {};
+      var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+      });
+      return vars;
+    }
+    $(function () {
+      var coupon = getUrlVars()['dcp'];
+      console.log(coupon)
+      const url = '/server/admin/getSingleDcpData.php?dcp=' + coupon;
+      console.log(url)
+      $.get(url,
         (data) => {
           console.log(data)
-          if(data.status){
-          var jsonData = data.data;
-          var html = `
+          if (data.status) {
+            var jsonData = data.data;
+            var html = `
           <div class="card-header">
             <h3 class="card-title">
               ${jsonData[0].name} - Payment by DCP - Coupon Code ${jsonData[0].dcpcoupon}
@@ -556,13 +533,13 @@
                 </div>
               `;
 
-              $("#dcpDetailsWrapper").prepend(html)
+            $("#dcpDetailsWrapper").prepend(html)
 
 
-              var innerHTml = [];
+            var innerHTml = [];
 
-              jsonData.forEach(element => {
-                var html = `
+            jsonData.forEach(element => {
+              var html = `
                 <div class="img-info">
                   <div class="row clearfix">
                     <div class="col-md-12 text-center">
@@ -642,17 +619,17 @@
                 </div>
 
                 `
-                innerHTml.push(html)
-              });
-              
-              console.log(innerHTml)
-              innerHTml.forEach((el) => {
-                $(".body-row").append(el)
-              })
-              var commentHtml;
-              //console.log(jsonData[0].approved)
-              if(jsonData[0].approved !== 'true'){
-                commentHtml = `
+              innerHTml.push(html)
+            });
+
+            console.log(innerHTml)
+            innerHTml.forEach((el) => {
+              $(".body-row").append(el)
+            })
+            var commentHtml;
+            //console.log(jsonData[0].approved)
+            if (jsonData[0].approved !== 'true') {
+              commentHtml = `
               <div class="row clearfix">
                   <div class="col-md-6">
                     <textarea
@@ -670,81 +647,82 @@
                   <a href="./contest-list.html" id="back" type="button" class="btn btn-default">Back</a>
                 </div>
                 `
-              }
-              else{
-                commentHtml = ``;
-              }
-              
-                $(".body-row").append(commentHtml)
+            }
+            else {
+              commentHtml = ``;
+            }
 
-                $("#approve").click(function(){
-                  $("#approve, #reject").attr("disabled", "disabled");
-                  const url = 'http://localhost:8888/Self/Project/world%20artography/code/react-app/server/admin/approve.php';
+            $(".body-row").append(commentHtml)
 
-                  const data = {
-                    dcpcoupon: $(this).attr("data-coupon"),
-                    email: jsonData[0].email,
-                    name: jsonData[0].name
-                  }
-                  console.log(url, data)
-                  $.post(url,data,
-                  (data) => {
-                    if(data.status){
-                      let html = `
+            $("#approve").click(function () {
+              $("#approve, #reject").attr("disabled", "disabled");
+              const url = '/server/admin/approve.php';
+
+              const data = {
+                dcpcoupon: $(this).attr("data-coupon"),
+                email: jsonData[0].email,
+                name: jsonData[0].name
+              }
+              console.log(url, data)
+              $.post(url, data,
+                (data) => {
+                  if (data.status) {
+                    let html = `
                       <p class="text-success">This this approved</p>
                       `;
+                    $(".card-footer").after(html);
+
+                  } else {
+                    $("#approve, #reject").removeAttr("disabled");
+                  }
+                });
+            })
+            $("#reject").click(function () {
+              if ($("#reason").val() == "") {
+                $("#reason").after(`<span class="error" id="errorText" style="color:red">This is required for rejection.</span>`)
+              }
+              else {
+                $("#approve, #reject").attr("disabled", "disabled");
+                const url = '/server/admin/reject.php';
+
+                const data = {
+                  dcpcoupon: $(this).attr("data-coupon"),
+                  email: jsonData[0].email,
+                  reason: $("#reason").val(),
+                  name: jsonData[0].name
+                }
+                console.log(url, data)
+                $.post(url, data,
+                  (data) => {
+                    console.log(data)
+                    if (data.status) {
+                      let html = `
+                        <p class="text-danger">This this Rejected, you will be redirected to the listing page in 5 seconds or click back.</p>
+                        `;
                       $(".card-footer").after(html);
-                      
-                    }else{
+                      setTimeout(function () {
+                        window.location.href = './contest-list.html';
+                      }, 5000)
+                    } else {
                       $("#approve, #reject").removeAttr("disabled");
                     }
                   });
-                })
-                $("#reject").click(function(){
-                  if($("#reason").val() == ""){
-                    $("#reason").after(`<span class="error" id="errorText" style="color:red">This is required for rejection.</span>`)
-                  }
-                  else{
-                    $("#approve, #reject").attr("disabled", "disabled");
-                    const url = 'http://localhost:8888/Self/Project/world%20artography/code/react-app/server/admin/reject.php';
+              }
 
-                    const data = {
-                      dcpcoupon: $(this).attr("data-coupon"),
-                      email: jsonData[0].email,
-                      reason: $("#reason").val(),
-                      name: jsonData[0].name
-                    }
-                    console.log(url, data)
-                    $.post(url,data,
-                    (data) => {
-                      console.log(data)
-                      if(data.status){
-                        let html = `
-                        <p class="text-danger">This this Rejected, you will be redirected to the listing page in 5 seconds or click back.</p>
-                        `;
-                        $(".card-footer").after(html);
-                        setTimeout(function(){
-                          window.location.href = './contest-list.html';
-                        }, 5000)
-                      }else{
-                        $("#approve, #reject").removeAttr("disabled");
-                      }
-                    });
-                  }
-                  
-                })
+            })
 
-                $("#reason").on('input',function(){
-                  console.log("sfs")
-                  $("#errorText").remove()
-                })
+            $("#reason").on('input', function () {
+              console.log("sfs")
+              $("#errorText").remove()
+            })
 
-        }  
+          }
         });
-      })
-    </script>
+    })
+  </script>
 
 
 
-  </body>
+</body>
+
 </html>

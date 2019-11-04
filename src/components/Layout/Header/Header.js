@@ -194,18 +194,18 @@ export default class Header extends React.Component {
                 <li><NavLink className="linkClick" to="/how-to-buy-pixels">How to Buy Pixels</NavLink></li>
                 <li><NavLink className="linkClick" to="prizes">Prizes</NavLink></li>
                 <li><NavLink className="linkClick" to="contact">Contact</NavLink></li>
-                
-                
+
+
                 {this.state.loggedIn ?
                   <li><a onClick={() => this.logoutHandler()}>{this.state.name} (Logout)</a></li>
                   :
-                  <li><a onClick={() => this.loginClickHandler()}  className="linkClick">Login/Registration</a></li>
+                  <li><a onClick={() => this.loginClickHandler()} className="linkClick">Login/Registration</a></li>
                 }
 
-                {this.state.aatestd === 'true' ? 
-                <li><a className="linkClick" target="_blank" href="/admin/dashboard.html">Admin</a></li>
-                :
-                null
+                {this.state.aatestd === 'true' ?
+                  <li><a className="linkClick" target="_blank" href="/admin/dashboard.html">Admin</a></li>
+                  :
+                  null
                 }
 
               </ul>

@@ -63,7 +63,7 @@ export default class Login extends React.Component {
 
     if (isEverythingCorrect === 0) {
       const url =
-        "http://localhost:8888/Self/Project/world%20artography/code/react-app/server/user/login.php?email=" +
+        "/server/user/login.php?email=" +
         this.state.email +
         "&password=" +
         this.state.password;
@@ -84,12 +84,12 @@ export default class Login extends React.Component {
           window.localStorage.setItem("email", data.email);
           window.localStorage.setItem("loggedIn", true);
           window.localStorage.setItem("loggedIn", true);
-          window.localStorage.setItem(window.btoa("aatestd"),window.btoa(data.token + "###" + data.admin) );
+          window.localStorage.setItem(window.btoa("aatestd"), window.btoa(data.token + "###" + data.admin));
           this.props.loginHandler(data.token, data.name, data.email);
           this.setState({
             loginDisabled: false
           });
-          const url = "http://localhost:8888/Self/Project/world%20artography/code/react-app/server/images/countimages.php?email=" + data.email;
+          const url = "/server/images/countimages.php?email=" + data.email;
           $.get(url, data1 => {
             if (data1.status) {
               console.log(data1.data);
@@ -263,57 +263,57 @@ export default class Login extends React.Component {
                   </div>
                 </form>
               ) : (
-                <form id="loginForm" autoComplete="off">
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      id="email"
-                      name="email"
-                      className="form-control"
-                      onChange={this.inputHandler}
-                      required
-                    />
-                    <label className="form-control-placeholder" htmlFor="email">
-                      Email
+                  <form id="loginForm" autoComplete="off">
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        id="email"
+                        name="email"
+                        className="form-control"
+                        onChange={this.inputHandler}
+                        required
+                      />
+                      <label className="form-control-placeholder" htmlFor="email">
+                        Email
                     </label>
-                    {this.state.emailError ? (
-                      <span className="error">Please enter your Email ID</span>
-                    ) : null}
-                  </div>
-                  <div className="form-group">
-                    <input
-                      type="password"
-                      id="password"
-                      name="password"
-                      className="form-control"
-                      required
-                      onChange={this.inputHandler}
-                    />
-                    <label
-                      className="form-control-placeholder"
-                      htmlFor="password"
-                    >
-                      Password
+                      {this.state.emailError ? (
+                        <span className="error">Please enter your Email ID</span>
+                      ) : null}
+                    </div>
+                    <div className="form-group">
+                      <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        className="form-control"
+                        required
+                        onChange={this.inputHandler}
+                      />
+                      <label
+                        className="form-control-placeholder"
+                        htmlFor="password"
+                      >
+                        Password
                     </label>
-                    {this.state.passwordError ? (
-                      <span className="error">Please enter your password</span>
-                    ) : null}
-                  </div>
+                      {this.state.passwordError ? (
+                        <span className="error">Please enter your password</span>
+                      ) : null}
+                    </div>
 
-                  <div className="form-group">
-                    <a
-                      className={
-                        this.state.loginDisabled
-                          ? "btn btn-primary btn-block disabled"
-                          : "btn btn-primary btn-block"
-                      }
-                      onClick={() => this.signin()}
-                    >
-                      Login
+                    <div className="form-group">
+                      <a
+                        className={
+                          this.state.loginDisabled
+                            ? "btn btn-primary btn-block disabled"
+                            : "btn btn-primary btn-block"
+                        }
+                        onClick={() => this.signin()}
+                      >
+                        Login
                     </a>
-                  </div>
-                </form>
-              )}
+                    </div>
+                  </form>
+                )}
               {this.state.errorPass ? (
                 <p className="errorpass">{this.state.errorPass}</p>
               ) : null}
