@@ -94,6 +94,19 @@ class User{
         
     }
 
+
+    function getactiveimages(){
+        $query = "SELECT * FROM images WHERE url IS NOT NULL";
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+        // execute query
+        $stmt->execute();
+        if($stmt){
+            return $stmt;
+        }
+        
+    }
+
     function getActiveImage(){
         // select all query
         $query = "SELECT `id`, `activeCreated`, `active` FROM images WHERE id='".$this->id."'";

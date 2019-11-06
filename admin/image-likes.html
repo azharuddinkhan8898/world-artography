@@ -121,13 +121,13 @@
             </li>
 
             <li class="nav-item">
-              <a href="./image-likes.html" class="nav-link">
-                <i class="nav-icon far fa-calendar-alt"></i>
-                <p>
-                  Image likes
-                </p>
-              </a>
-            </li>
+                <a href="./image-likes.html" class="nav-link">
+                  <i class="nav-icon far fa-calendar-alt"></i>
+                  <p>
+                    Image likes
+                  </p>
+                </a>
+              </li>
 
           </ul>
         </nav>
@@ -148,18 +148,16 @@
             <!-- ./col -->
             <div class="col-sm-12">
               <div class="card card-primary">
-                <div class="card-header">DCP Expendition List</div>
+                <div class="card-header">Image likes</div>
                 <div class="card-body">
                   <table class="table table-bordered dataTable" id="dataTableDcp">
                     <thead>
                       <tr>
-                        <th>Coupon Code</th>
                         <th>Name</th>
                         <th>Email Id</th>
-                        <!-- <th>Mobile Number</th> -->
-                        <th>No. of Images</th>
-                        <th>Status</th>
-                        <th>View</th>
+                        <th>Image Title</th>
+                        <th>Likes</th>
+                        <th>View image</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -195,75 +193,53 @@
   <!-- AdminLTE App -->
   <script src="js/adminlte.min.js"></script>
   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script>
-
     $(function () {
 
-      function search(nameKey, myArray) {
-        for (var i = 0; i < myArray.length; i++) {
-          if (myArray[i].name === nameKey) {
-            return myArray[i];
-          }
-        }
-      }
+      
 
-      const url = '/server/admin/getDcpData.php';
+      const url = '/server/images/getactiveimages.php';
       console.log(url)
       $.get(url,
         (data) => {
           console.log(data)
-          var finalData = data.data;
-          var uniqueDcp = [];
-          var flags = {}, output = [], l = finalData.length, i;
-          for (i = 0; i < l; i++) {
-            if (flags[finalData[i].dcpcoupon] == 0) continue;
-            flags[finalData[i].dcpcoupon] = 0;
-            uniqueDcp.push(finalData[i].dcpcoupon);
+          if (data.status) {
+            var jsonData = data;
+    
+
+    function compare( a, b ) {
+    if ( a.likes < b.likes ){
+        return -1;
+    }
+    if ( a.likes > b.likes ){
+        return 1;
+    }
+    return 0;
+    }
+
+    jsonData.data.sort( compare );
+    jsonData.data.reverse();
+    jsonData.data.forEach((el) => {
+        var html = `
+            <tr>
+                <th>${el.name}</th>
+                <th>${el.email}</th>
+                <th>${el.title}</th>
+                <th>${el.likes}</th>
+                <th><a target="_blank" href="https://worldartography.com/server/images/${el.url}">View image</a></th>
+            </tr>
+        `;
+        $("#dataTableDcp tbody").append(html);
+    })
           }
 
 
-          var array = finalData.map((el) => {
-            flags[el.dcpcoupon] = flags[el.dcpcoupon] + 1;
-          })
-          //console.log(flags, uniqueDcp)
-
-          var finalArray = [];
-          uniqueDcp.forEach((el, i) => {
-            var obj = {};
-            obj.coupon = el;
-            //var arr = search(el, finalData);
-            let objj = finalData.find(o => o.dcpcoupon === el);
-            obj.name = objj.name;
-            obj.email = objj.email;
-            obj.numberImages = flags[el];
-            obj.status = objj.approved;
-            finalArray.push(obj)
-          })
-          console.log(finalArray)
-          finalArray.forEach((el, i) => {
-            var html = `<tr>
-                          <td>${el.coupon}</td>
-                          <td>${el.name}</td>
-                          <td>${el.email}</td>
-                          
-                          <td>${el.numberImages}</td>
-                          <td>
-
-                            ${el.status == 'false' ?
-                ''
-                :
-                '<span class="label label-success">Approved</span>'
-              }
-
-                          </td>
-                          <td><a href="dcp-details.html?dcp=${el.coupon}">View</a></td>
-                        </tr>`;
-            $("#dataTableDcp tbody").append(html);
-            $(".dataTable").dataTable();
-          })
-
         });
+
+
+    
     });
       // $(document).ready(function() {
       //   $(".dataTable").dataTable();
