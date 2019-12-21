@@ -366,6 +366,18 @@ class User{
         } 
     }
 
+    function getSingleEmailData(){
+        // echo $this->dcp
+        $query = "SELECT * FROM images, users WHERE images.email = users.email AND images.email='".$this->email."'";
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+        // execute query
+        $stmt->execute();
+        if($stmt){
+            return $stmt;
+        } 
+    }
+
 
     function approve(){
         $query = "UPDATE images SET approved='true' WHERE dcpcoupon=:dcpcoupon";
@@ -384,13 +396,30 @@ class User{
 
 
     function reject(){
-        $query = "UPDATE images SET email=null,name=null, category=null, title=null, camera=null, lens=null, aperture=null, shutter=null, iso=null, other=null, url=null, approved=null, dcpcoupon=null, paypalTranId=null, active=null, likes=0 WHERE dcpcoupon=:dcpcoupon";
+        $query = "UPDATE images SET email=null, name=null, category=null, title=null, camera=null, lens=null, aperture=null, shutter=null, iso=null, other=null, url=null, approved=null, dcpcoupon=null, paypalTranId=null, active=null, likes=0 WHERE images.dcpcoupon=:dcpcoupon";
         // prepare query
         $stmt = $this->conn->prepare($query);
         // sanitize
         $this->dcpcoupon=htmlspecialchars(strip_tags($this->dcpcoupon));
         // bind values
         $stmt->bindParam(":dcpcoupon", $this->dcpcoupon);
+        if($stmt->execute()){
+            $this->id = $this->conn->lastInsertId();
+            return true;
+        }
+        return false;
+    }
+
+    function delete(){
+        
+        $query = "UPDATE images SET email=null, name=null, category=null, title=null, camera=null, lens=null, aperture=null, shutter=null, iso=null, other=null, url=null, approved=null, dcpcoupon=null, paypalTranId=null, active=null, likes=0 WHERE images.url=:url";
+        // prepare query
+        $stmt = $this->conn->prepare($query);
+        // sanitize
+        $this->url=htmlspecialchars(strip_tags($this->url));
+        // bind values
+        $stmt->bindParam(":url", $this->url);
+        
         if($stmt->execute()){
             $this->id = $this->conn->lastInsertId();
             return true;

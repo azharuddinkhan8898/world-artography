@@ -15,6 +15,15 @@
   <link rel="stylesheet" href="css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <script>
+    var aatestd = window.atob(window.localStorage.getItem(window.btoa("aatestd"))).split("###")[1];
+    //var aatestd = "dxvfsgv";
+    console.log(aatestd)
+    if (aatestd !== 'true') {
+      //window.location.replace("http://www.w3schools.com");
+      window.location.href = "/";
+    }
+  </script>
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -117,6 +126,15 @@
               <i class="nav-icon far fa-calendar-alt"></i>
               <p>
                 Image likes
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="./image-verify.html" class="nav-link">
+              <i class="nav-icon far fa-calendar-alt"></i>
+              <p>
+                Image Verification
               </p>
             </a>
           </li>

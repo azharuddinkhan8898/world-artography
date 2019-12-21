@@ -10,16 +10,16 @@ class Database{
     // private $password = "azhar123!";
 
     //Live database
-    private $host = "localhost";
-    private $db_name = "worldart_photography";
-    private $username = "worldart_admin";
-    private $password = "Intermind123*";
+    // private $host = "localhost";
+    // private $db_name = "worldart_photography";
+    // private $username = "worldart_admin";
+    // private $password = "Intermind123*";
 
     // Local server
-    // private $host = "localhost:8889";
-    // private $db_name = "test";
-    // private $username = "root";
-    // private $password = "root";
+    private $host = "localhost:8889";
+    private $db_name = "test";
+    private $username = "root";
+    private $password = "root";
     
     public $conn;
  

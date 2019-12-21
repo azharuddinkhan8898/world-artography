@@ -128,14 +128,15 @@
                 </p>
               </a>
             </li>
+
             <li class="nav-item">
-              <a href="./image-verify.html" class="nav-link">
-                <i class="nav-icon far fa-calendar-alt"></i>
-                <p>
-                  Image Verification
-                </p>
-              </a>
-            </li>
+                <a href="./image-verify.html" class="nav-link">
+                  <i class="nav-icon far fa-calendar-alt"></i>
+                  <p>
+                    Image Verification
+                  </p>
+                </a>
+              </li>
 
           </ul>
         </nav>
@@ -156,15 +157,16 @@
             <!-- ./col -->
             <div class="col-sm-12">
               <div class="card card-primary">
-                <div class="card-header">Users List</div>
+                <div class="card-header">Image Verification</div>
                 <div class="card-body">
                   <table class="table table-bordered dataTable" id="dataTableDcp">
                     <thead>
                       <tr>
                         <th>Name</th>
                         <th>Email Id</th>
-                        <th>Status</th>
-                        <th>Created at</th>
+                        <!-- <th>Mobile Number</th> -->
+                        <th>No. of Images</th>
+                        <th>View</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -200,9 +202,9 @@
   <!-- AdminLTE App -->
   <script src="js/adminlte.min.js"></script>
   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script>
+
     $(function () {
 
       function search(nameKey, myArray) {
@@ -213,38 +215,62 @@
         }
       }
 
-      const url = '/server/admin/getUsersData.php';
+      const url = '/server/images/getimages.php';
       console.log(url)
       $.get(url,
         (data) => {
           console.log(data)
-          if (data.status) {
-            var finalArray = data.data.reverse();
-            $(".card-header").append(` (${finalArray.length} users - New users are on top)`)
-
-            finalArray.forEach((el, i) => {
-              var html = `<tr>
-                          <td>${el.name}</td>
-                          <td>${el.email}</td>
-                          <td>
-
-                            ${el.active == '' || el.active == null ?
-                  ''
-                  :
-                  '<span class="label label-success">Active</span>'
-                }
-
-                          </td>
-                          <td>${moment(el.created).format("DD-MM-YYYY HH:MM:SS")}</td>
-                        </tr>`;
-              $("#dataTableDcp tbody").append(html);
-              
-            })
-            $(".dataTable").dataTable();
+          var finalData = data.data;
+          var uniqueEmail = [];
+          var flags = {}, output = [], l = finalData.length, i;
+          for (i = 0; i < l; i++) {
+            if(finalData[i].email != null){
+                if (flags[finalData[i].email] == 0) continue;
+                flags[finalData[i].email] = 0;
+                uniqueEmail.push(finalData[i].email);
+            }
           }
 
+          console.log(uniqueEmail)
+          console.log(flags)
+          var array = finalData.map((el) => {
+            if(el.email != null){
+                console.log(el.email)
+                flags[el.email] = flags[el.email] + 1;
+            }
+          })
+        //   console.log(array)
+        console.log(flags)
 
+          var finalArray = [];
+          uniqueEmail.forEach((el, i) => {
+            var obj = {};
+            obj.email = el;
+            //var arr = search(el, finalData);
+            let objj = finalData.find(o => o.email === el);
+            //console.log(objj)
+            obj.name = objj.name;
+            obj.email = objj.email;
+            obj.numberImages = flags[el];
+            obj.status = objj.approved;
+            console.log(obj)
+            finalArray.push(obj)
+          })
+          console.log(finalArray)
+          finalArray.forEach((el, i) => {
+            var html = `<tr>
+                          <td>${el.name}</td>
+                          <td>${el.email}</td>
+                          
+                          <td>${el.numberImages}</td>
+                          <td><a href="image-verify-details.html?email=${el.email}">View</a></td>
+                        </tr>`;
+            $("#dataTableDcp tbody").append(html);
+            
+          })
+          $(".dataTable").dataTable();
         });
+        
     });
       // $(document).ready(function() {
       //   $(".dataTable").dataTable();
