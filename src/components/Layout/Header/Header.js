@@ -203,7 +203,7 @@ export default class Header extends React.Component {
                 }
 
                 {this.state.aatestd === 'true' ?
-                  <li><a className="linkClick" target="_blank" href="/admin/dashboard.html">Admin</a></li>
+                  <li><a className="linkClick" href="/admin/dashboard.html">Admin</a></li>
                   :
                   null
                 }
