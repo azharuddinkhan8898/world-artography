@@ -488,7 +488,7 @@ export default class Homepage extends Component {
                         <li><img src="/images/partners/Qatar_Airways_Logo.png" alt=""/></li>
                         <li><img src="/images/partners/emirates-logo.png" alt=""/></li>
                         <li><img src="/images/partners/world-art-dubai.png" alt=""/></li>
-                        <li><img src="/images/partners/dcp.png" alt=""/></li>
+                        {/* <li><img src="/images/partners/dcp.png" alt=""/></li> */}
                     </ul>
                 </div>
 
