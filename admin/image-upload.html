@@ -73,7 +73,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a
+            <a id="logout"
               class="nav-link"
               data-widget="control-sidebar"
               data-slide="true"
@@ -248,5 +248,18 @@
     <!-- AdminLTE App -->
     <script src="js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
+    <script>
+      $(function(){
+        $("#logout").click(function(){
+          window.localStorage.setItem('loggedIn', false);
+          window.localStorage.setItem("name", '');
+          window.localStorage.setItem("email", '');
+          window.localStorage.setItem("token", '');
+          window.localStorage.removeItem("YWF0ZXN0ZA==");
+          window.localStorage.setItem("totalImages", 0);
+          window.close();
+        })
+      })
+    </script>
   </body>
 </html>
