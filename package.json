@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@fancyapps/fancybox": "^3.5.7",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "react": "^16.10.2",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.10.2",
